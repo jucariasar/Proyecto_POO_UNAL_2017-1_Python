@@ -1,4 +1,4 @@
-from empleado import Empleado
+
 
 class Administrativo(Empleado):
 	def __init__(self, ident, nombre, apellido, numElementPrest, roll, contador, email, grado):

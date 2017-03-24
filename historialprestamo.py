@@ -10,10 +10,12 @@ class HistorialPrestamo:
         self._codElemento = codElemento
         self._fechaPrestamo = fechaPrestamo
         self._fechaDevolucion = fechaDevolucion
+        
     def getIdEmpleado(self):
         return self._idEmpleado
     def setIdEmpleado(self,ident):
         self._idEmpleado=ident
+        
     def getNomEmpleado(self):
         return self._nomEmpleado
     def setNomEmpleado(self,nom):

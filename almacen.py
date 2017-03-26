@@ -7,7 +7,7 @@ from elemento import Elemento
 from historialprestamo import HistorialPrestamo
 
 class Almacen:
-	def __init__(self):
-		self._empleados = []
-		self._elementos = []
-		self._historial = []
+    def __init__(self):
+        self._empleados = []
+        self._elementos = []
+        self._historial = []

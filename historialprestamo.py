@@ -40,3 +40,7 @@ class HistorialPrestamo:
         return self._fechaDevolucion
     def setFechaDevolucion(self,fechaD):
         self._fechaDevolucion=fechaD
+
+    def __str__(self):
+        retrun ("Nombre del Empleado: " + self.getNomEmpleado() + '\n' + "N° Identificacion: " + str(self.getIdEmpleado()) + '\n' + "Nombre del Elemento: " + self.getNomElemento() + '\n' + "Codigo Elemento: " + str(self.getCodElemento()) + '\n' + "Fecha Prestamo: " + str(self.getFechaPrestamo()) + '\n' + "Fecha Devolucion: " + str(self.getFechaDevolucion()))
+        

@@ -39,4 +39,8 @@ class Elemento:
     def setEstadoActual (self, estadoActual):
         self._estadoActual = estadoActual
 
-    # def toString(self):
+    def __str__(self):
+        return ("Codigo del Elemento: " + str(self.getCodigo()) + 
+            "\n Nombre del Elemento: " + self.getNombre() + "\n La ubicacion del Elemento es:  " + self.getUbicacion() +
+            "\n Fecha de prestamo: " + self.getFechaPrestamo() +  "\n Cantidad de veces prestado: " + str(self.getContador()) + 
+            "\n Estado del Elemento: " + self.getEstadoActual())

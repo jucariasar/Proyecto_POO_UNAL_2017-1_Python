@@ -8,3 +8,6 @@ class Administrativo(Empleado):
 		return self._grado
 	def setGrado (self, grado):
 		self._grado = grado
+	def __str__(self):
+		return (super().__str__()+'\n'+ "Grado: "+ self.getGrado())
+		

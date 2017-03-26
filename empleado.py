@@ -56,4 +56,4 @@ class Empleado:
 	def __str__(self):
 		return("Nombre del Empleado: " + self.getNombre() + " " + self.getApellido() + 
 			"\nN° Identificacion: " + str(self.getIdent()) + "\nRoll: " + self.getRoll() +
-			"\nN° de Elementos Prestados: " + str(self.getNumElementPres()))
+			"\nN° de Elementos Prestados: " + str(self.getNumElementPres())+'\n'+"E-mail: "+self.getEmail())

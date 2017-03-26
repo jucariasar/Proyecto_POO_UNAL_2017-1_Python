@@ -6,3 +6,14 @@ class AdministradorAlmacen(Administrativo):
 		super().__init__(ident, nombre, apellido, numElementPrest, roll, contador, email, grado)
 		self._usuario = usuario
 		self._password = password
+	def getUsuario(self):
+		return self._usuario
+	def setUsuario(self,usuario):
+		self._usuario=usuario
+		
+	def getPassword(self):
+		return self._Password
+	def setPassword(self,password):
+		self._password=password
+		
+	

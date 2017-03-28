@@ -23,16 +23,12 @@ class Almacen:
     def ingresarAlSistema(self):
     	email = input("Ingrese su E-mail: ")
     	cc = int(input("Ingrese su Documento: "))
-
     	empTemp = Empleado().buscarEmpleadoPorId(self._empleados, cc)
-        
     	if empTemp != None and isinstance(empTemp, AdministradorAlmacen):
             if(empTemp.getEmail() == email):
                 self.menuAdministradorAlmacen(empTemp)
-	elif (empTemp != None and isinstance(empTemp, Empleado):
-	    if(empTemp.getEmail() == email):
-	        self.menuEmpleado(empTemp)
-
+        elif (empTemp !=None):
+            self.menuEmpleado
 
     def menuAdministradorAlmacen(self, admin):
         print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
@@ -103,6 +99,7 @@ class Almacen:
     	e5.setEmail("lo@metalmecanica.com")
     	e5.setTipo("Mecanico")
     	self._empleados.append(e5)
+
 
 
     def salir(self):

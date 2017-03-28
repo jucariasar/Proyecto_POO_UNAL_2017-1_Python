@@ -29,6 +29,9 @@ class Almacen:
     	if empTemp != None and isinstance(empTemp, AdministradorAlmacen):
             if(empTemp.getEmail() == email):
                 self.menuAdministradorAlmacen(empTemp)
+	elif (empTemp != None and isinstance(empTemp, Empleado):
+	    if(empTemp.getEmail() == email):
+	        self.menuEmpleado(empTemp)
 
 
     def menuAdministradorAlmacen(self, admin):

@@ -8,6 +8,7 @@ from historialprestamo import HistorialPrestamo
 import sys
 import os
 
+
 class Almacen:
     def __init__(self):
         self._empleados = []
@@ -21,8 +22,28 @@ class Almacen:
 
     def ingresarAlSistema(self):
     	email = input("Ingrese su E-mail: ")
-    	cc = input("Ingrese su Documento: ")
+    	cc = int(input("Ingrese su Documento: "))
 
+    	empTemp = Empleado().buscarEmpleadoPorId(self._empleados, cc)
+        
+    	if empTemp != None and isinstance(empTemp, AdministradorAlmacen):
+            if(empTemp.getEmail() == email):
+                self.menuAdministradorAlmacen(empTemp)
+
+
+    def menuAdministradorAlmacen(self, admin):
+        print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
+        print("Ingrese su Usuario y despues su Contraseña")
+        user = input("Ingrese su Usuario: ")
+        paswd = input("Ingrese su Contraseña: ")
+
+    def menuEmpleado(self, admin):
+        print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
+        print("1. Consultar Elementos Disponibles.")
+        print("2. Consultar Elementos Prestados.")
+        print("3. Reservar Elementos para Prestar.")
+        print("4. Modificar Reserva de Elementos.")
+        print("5. Cancelar Reserva de Elementos.")
 
     def crearDatosFicticios(self):
 
@@ -31,7 +52,7 @@ class Almacen:
     	e1.setNombre("Pablo")
     	e1.setApellido("Castrillon")
     	e1.setNumElementPres(0)
-    	e1.setRoll("AdministradorAlmacen")
+    	e1.setRoll(Empleado().tiposEmpleado['1'])
     	e1.setEmail("pc@unal.edu.co")
     	e1.setGrado(10)
     	e1.setUsuario("pcastrillon")
@@ -43,7 +64,7 @@ class Almacen:
     	e2.setNombre("Jaider")
     	e2.setApellido("Peralta")
     	e2.setNumElementPres(0)
-    	e2.setRoll("AdministradorAlmacen")
+    	e2.setRoll(Empleado().tiposEmpleado['1'])
     	e2.setEmail("jp@unal.edu.co")
     	e2.setGrado(10)
     	e2.setUsuario("jperalta")
@@ -55,7 +76,7 @@ class Almacen:
     	e3.setNombre("Yeison")
     	e3.setApellido("Ortiz")
     	e3.setNumElementPres(0)
-    	e3.setRoll("Administrativo")
+    	e3.setRoll(Empleado().tiposEmpleado['2'])
     	e3.setEmail("jo@unal.edu.co")
     	e3.setGrado(10)
     	self._empleados.append(e3)
@@ -65,7 +86,7 @@ class Almacen:
     	e4.setNombre("Carlos")
     	e4.setApellido("Tamayo")
     	e4.setNumElementPres(0)
-    	e4.setRoll("IngenieroTecnico")
+    	e4.setRoll(Empleado().tiposEmpleado['3'])
     	e4.setEmail("jtam@metalmecanica.com")
     	e4.setArea("Produccion")
     	self._empleados.append(e4)
@@ -75,7 +96,7 @@ class Almacen:
     	e5.setNombre("Luis")
     	e5.setApellido("Ospina")
     	e5.setNumElementPres(0)
-    	e5.setRoll("Operario")
+    	e5.setRoll(Empleado().tiposEmpleado['4'])
     	e5.setEmail("lo@metalmecanica.com")
     	e5.setTipo("Mecanico")
     	self._empleados.append(e5)

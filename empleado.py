@@ -1,7 +1,7 @@
 
 
 class Empleado:
-	def __init__(self, ident, nombre, apellido, numElementPrest, roll, email):
+	def __init__(self, ident=0, nombre="", apellido="", numElementPrest=0, roll=0, email=""):
 		self._ident = ident
 		self._nombre = nombre
 		self._apellido = apellido

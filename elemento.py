@@ -3,14 +3,17 @@ from empleado import Empleado
 
 
 class Elemento:
-    def __init__(self, codigo=0, nombre="", ubicacion="", fechaPrestamo="", valor=0, estadoActual=""):
+    estados = {'1':'Disponible',      ## Diccionario estatico para estandarizar los estados
+    '2':'Prestado','3':'Reservado'}   ## de los elementos (Camilo Agrego esta linea)
+
+    def __init__(self, codigo=0, nombre="", ubicacion="", fechaPrestamo=None, valor=0, estadoActual=""):
         self._codigo = codigo
         self._nombre = nombre
         self._ubicacion = ubicacion
         self._fechaPrestamo = fechaPrestamo
         self._contador = 0
         self._valor = valor
-        self._estadoActual = estadoActual #Puede ser Disponible, Prestado o Reservado
+        self._estadoActual = estadoActual # Los tipos definidos en el diccionario estatico de estados
     def getCodigo (self):
         return self._codigo
     def setCodigo(self, codigo):

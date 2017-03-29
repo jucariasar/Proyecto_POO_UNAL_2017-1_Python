@@ -211,6 +211,8 @@ class Almacen:
         elemento4.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento4)
 
+        print ("Datos leidos con exito")
+
 
     def salir(self):
     	print("Muchas gracias por utilizar la aplicacion")

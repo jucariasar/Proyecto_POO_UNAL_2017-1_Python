@@ -6,6 +6,7 @@ from administradoralmacen import AdministradorAlmacen
 from elemento import Elemento
 from historialprestamo import HistorialPrestamo
 import sys
+import time
 
 
 class Almacen:
@@ -31,6 +32,10 @@ class Almacen:
             self.menuEmpleado(emp)
         else:
             print("E-mail o Documento Invalido")
+            # probando algo con un delay y regerso al menu en caso de error 
+            time.sleep(10)
+            a.menu()
+
 
      
     def autenticacionAdministradorAlmacen(self, admin):

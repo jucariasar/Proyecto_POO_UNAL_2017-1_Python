@@ -20,21 +20,46 @@ class Almacen:
         "3":self.salir
         }
 
-    def ingresarAlSistema(self):
-    	email = input("Ingrese su E-mail: ")
-    	cc = int(input("Ingrese su Documento: "))
-    	empTemp = Empleado().buscarEmpleadoPorId(self._empleados, cc)
-    	if empTemp != None and isinstance(empTemp, AdministradorAlmacen):
-            if(empTemp.getEmail() == email):
-                self.menuAdministradorAlmacen(empTemp)
-        elif (empTemp !=None):
-            self.menuEmpleado
 
-    def menuAdministradorAlmacen(self, admin):
+    def ingresarAlSistema(self):
+        email = input("Ingrese su E-mail: ")
+        cc = int(input("Ingrese su Documento: "))
+        emp = Empleado().buscarEmpleadoPorId(self._empleados, cc)
+        if emp != None and isinstance(emp, AdministradorAlmacen):
+            if emp.getEmail() == email:
+                self.autenticacionAdministradorAlmacen(emp)
+        elif emp != None:
+            self.menuEmpleado(self, emp)
+        else:
+            print("E-mail o Documento Invalido")
+     
+    def autenticacionAdministradorAlmacen(self, admin):
         print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
         print("Ingrese su Usuario y despues su Contraseña")
         user = input("Ingrese su Usuario: ")
         paswd = input("Ingrese su Contraseña: ")
+        if admin.getUsuario() == user and admin.getPassword() == paswd:
+            self.menuAdministradorAlmacen(admin)
+        else:
+            print("Usuario y/o passwor incorrecto.")
+
+    def menuAdministradorAlmacen(self, admin):
+        print("Menu de Usuario Administrador del Almacen:")
+        print("1. Ir al menu de consultas.")
+        print("2. Ir al menu de Registros / Borrados.")
+        print("3. Prestar / Recibir.")
+        print("4. Salir.") # Falta programar estas funcionalidad bien
+        op = input("¿Que desea hacer?: ")
+        if op == 1:
+            self.menu1AdministradorAlmacen()
+        elif op == 2:
+            self.menu2AdministradorAlmacen()
+        elif op == 3:
+            self.menu3AdministradorAlmacen()
+        elif op == 4:
+            pass
+        else:
+            print("%s %s" % (op, "No es una opcion valida"))
 
     def menuEmpleado(self, admin):
         print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
@@ -43,6 +68,34 @@ class Almacen:
         print("3. Reservar Elementos para Prestar.")
         print("4. Modificar Reserva de Elementos.")
         print("5. Cancelar Reserva de Elementos.")
+
+    def menu1AdministradorAlmacen():
+        print("\n¿Que consulta desea realizar?")
+        print("\n1. Consultar Inventario de Elementos.")
+        print("2. Consultar Base de Datos de Empleados.")
+        print("3. Consultar el Elemento mas Prestado.")
+        print("4. Consultar los 5 Elementos mas Prestados.")
+        print("5. Consultar Empleado con mas Elementos Prestados.")
+        print("6. Consultar Empleados con mas Valor Prestado.")
+        print("7. Consultar el Empleado que mas Presta.")
+        print("8. Consultar el Roll que mas Presta.")
+        print("9. Volver al Menu Anterior.")
+        op = input("\nIngrese su opcion: ")
+
+    def menu2AdministradorAlmacen():
+        print("\n¿Que desea hacer?")
+        print("\n1. Registrar Empleado.")
+        print("2. Registrar Elemento.")
+        print("3. Eliminar Empleado.")
+        print("4. Eliminar Elemento.")
+        print("5. Volver al Menu Anterior.")
+        op = input("\nIngrese su opcion: ")
+
+    def menu3AdministradorAlmacen():
+        print("\n¿Que desea hacer?")
+        print("1. Prestar Elementos.")
+        print("2. Recibir Elementos.")
+        print("3. Volver al Menu Anterior.")
 
     def crearDatosFicticios(self):
 
@@ -99,7 +152,6 @@ class Almacen:
     	e5.setEmail("lo@metalmecanica.com")
     	e5.setTipo("Mecanico")
     	self._empleados.append(e5)
-
 
 
     def salir(self):

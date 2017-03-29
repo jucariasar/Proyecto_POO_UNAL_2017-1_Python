@@ -12,7 +12,7 @@ class AdministradorAlmacen(Administrativo):
         self._usuario=usuario
         
     def getPassword(self):
-        return self._Password
+        return self._password
     def setPassword(self,password):
         self._password=password
         

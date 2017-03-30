@@ -1,3 +1,4 @@
+#PRUEBA DE POO
 from empleado import Empleado
 from administrativo import Administrativo
 from ingenierotecnico import IngenieroTecnico

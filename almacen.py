@@ -26,16 +26,15 @@ class Almacen:
         email = input("\nIngrese su E-mail: ")
         cc = int(input("Ingrese su Documento: "))
         emp = Empleado().buscarEmpleadoPorId(self._empleados, cc)
-        if emp != None and isinstance(emp, AdministradorAlmacen):
-            if emp.getEmail() == email:
+        if emp != None and emp.getEmail() == email:
+            if isinstance(emp,AdministradorAlmacen):
                 self.autenticacionAdministradorAlmacen(emp)
-        elif emp != None:
-            self.menuEmpleado(emp)
+            else: 
+                self.menuEmpleado(emp)
         else:
             print("E-mail o Documento Invalido")
             # probando algo con un delay y regerso al menu en caso de error 
-            time.sleep(10)
-            a.menu()
+            
 
 
      

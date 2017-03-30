@@ -43,6 +43,15 @@ class Elemento:
     def setEstadoActual (self, estadoActual):
         self._estadoActual = estadoActual
 
+    @staticmethod
+    def ElementosDisponibles(listado):
+        for e in listado:
+            
+            if(str(e.getEstadoActual()) == 'Disponible'):
+               print(e.getNombre())
+
+
+
     def __str__(self):
         return ("Codigo del Elemento: " + str(self.getCodigo()) + 
             "\n Nombre del Elemento: " + self.getNombre() + "\n La ubicacion del Elemento es:  " + self.getUbicacion() +

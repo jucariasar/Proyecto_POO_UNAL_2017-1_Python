@@ -80,7 +80,8 @@ class Almacen:
         print("6. Cerrar Sesion de Usuario.")
         op = input("\nIngrese su opcion: ")
         # Resta implementar las funcionalidades
-
+        if op == "1":
+            Elemento().ElementosDisponibles(self._elementos)
 
 
     def menu1AdministradorAlmacen(self):
@@ -191,7 +192,7 @@ class Almacen:
 
         elemento2 = Elemento()
         elemento2.setCodigo(35)
-        elemento2.setNombre("Monito LED")
+        elemento2.setNombre("Monitor LED")
         elemento2.setUbicacion("B4")
         elemento2.setFechaPrestamo(None)
         elemento2.setValor(125)

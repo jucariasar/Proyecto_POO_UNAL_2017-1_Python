@@ -23,12 +23,20 @@ class Almacen:
 
 
     def ingresarAlSistema(self):
+        opt = True # Probando
         email = input("\nIngrese su E-mail: ")
         cc = int(input("Ingrese su Documento: "))
         emp = Empleado().buscarEmpleadoPorId(self._empleados, cc)
         if emp != None and emp.getEmail() == email:
             if isinstance(emp,AdministradorAlmacen):
-                self.autenticacionAdministradorAlmacen(emp)
+                print("\nCon que Roll Desea Ingresar:\n")
+                print("1. Como Administrador del Almacen.")
+                print("2. Como Empleado NO Administrador.")
+                opt = int(input("\nIngrese su Opcion: "))
+                if opt == 1:
+                    self.autenticacionAdministradorAlmacen(emp)
+                else:
+                    self.menuEmpleado(emp)
             else: 
                 self.menuEmpleado(emp)
         else:

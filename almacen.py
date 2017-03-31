@@ -23,7 +23,6 @@ class Almacen:
 
 
     def ingresarAlSistema(self):
-        opt = True # Probando
         email = input("\nIngrese su E-mail: ")
         cc = int(input("Ingrese su Documento: "))
         emp = Empleado().buscarEmpleadoPorId(self._empleados, cc)

@@ -47,12 +47,8 @@ class Elemento:
     def ElementosDisponibles(listado):
         for e in listado:
             
-            if(str(e.getEstadoActual()) == '1'):
+            if(str(e.getEstadoActual()) == Elemento().estados['1']):
                print(e.getNombre())
-
-
-    
-
 
 
     def __str__(self):

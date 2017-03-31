@@ -23,24 +23,36 @@ class Almacen:
 
 
     def ingresarAlSistema(self):
-        email = input("\nIngrese su E-mail: ")
-        cc = int(input("Ingrese su Documento: "))
-        emp = Empleado().buscarEmpleadoPorId(self._empleados, cc)
-        if emp != None and emp.getEmail() == email:
-            if isinstance(emp,AdministradorAlmacen):
-                print("\nCon que Roll Desea Ingresar:\n")
-                print("1. Como Administrador del Almacen.")
-                print("2. Como Empleado NO Administrador.")
-                opt = int(input("\nIngrese su Opcion: "))
-                if opt == 1:
-                    self.autenticacionAdministradorAlmacen(emp)
-                else:
+        salir = False
+        while(salir == False):
+
+            email = input("\nIngrese su E-mail: ")
+            cc = int(input("Ingrese su Documento: "))
+            emp = Empleado().buscarEmpleadoPorId(self._empleados, cc)
+            if emp != None and emp.getEmail() == email:
+                if isinstance(emp,AdministradorAlmacen):
+                    salir2 = False
+                    while(salir2 == False):
+                        print("\nCon que Roll Desea Ingresar:\n")
+                        print("1. Como Administrador del Almacen.")
+                        print("2. Como Empleado NO Administrador.")
+                        opt = int(input("\nIngrese su Opcion: "))
+                        if opt == 1:
+                            self.autenticacionAdministradorAlmacen(emp)
+                            salir = True
+                            salir2 = True
+                        elif opt == 2:
+                            self.menuEmpleado(emp)
+                            salir = True
+                            salir2 = True
+                        else:
+                            print("\n%d %s" % (opt, "No es una opcion Valida"))
+                else: 
                     self.menuEmpleado(emp)
-            else: 
-                self.menuEmpleado(emp)
-        else:
-            print("E-mail o Documento Invalido")
-            # probando algo con un delay y regerso al menu en caso de error 
+                    salir = True
+            else:
+                print("\nE-mail y/o Documento Invalido\n")
+                # probando algo con un delay y regerso al menu en caso de error 
             
 
 
@@ -58,22 +70,27 @@ class Almacen:
 
 
     def menuAdministradorAlmacen(self, admin):
-        print("\nMenu de Usuario Administrador del Almacen:")
-        print("\n1. Ir al Menu de Consultas.")
-        print("2. Ir al Menu de Registros / Borrados.")
-        print("3. Prestar / Recibir.")
-        print("4. Salir.") # Falta programar estas funcionalidad bien
-        op = input("\nIngrese su Opcion: ")
-        if op == "1":
-            self.menu1AdministradorAlmacen()
-        elif op == "2":
-            self.menu2AdministradorAlmacen()
-        elif op == "3":
-            self.menu3AdministradorAlmacen()
-        elif op == "4":
-            pass
-        else:
-            print("%s %s" % (op, "No es una opcion valida"))
+        salir = False
+        while(salir == False):
+            print("\nMenu de Usuario Administrador del Almacen:")
+            print("\n1. Ir al Menu de Consultas.")
+            print("2. Ir al Menu de Registros / Borrados.")
+            print("3. Prestar / Recibir.")
+            print("4. Salir.") # Falta programar estas funcionalidad bien
+            op = input("\nIngrese su Opcion: ")
+            if op == "1":
+                self.menu1AdministradorAlmacen()
+                salir = True
+            elif op == "2":
+                self.menu2AdministradorAlmacen()
+                salir = True
+            elif op == "3":
+                self.menu3AdministradorAlmacen()
+                salir = True
+            elif op == "4":
+                salir = True
+            else:
+                print("%s %s" % (op, "No es una opcion valida"))
 
 
     def menuEmpleado(self, admin):
@@ -89,21 +106,45 @@ class Almacen:
         # Resta implementar las funcionalidades
         if op == "1":
             Elemento().ElementosDisponibles(self._elementos)
+            input()
 
 
     def menu1AdministradorAlmacen(self):
-        print("\n¿Que consulta desea realizar?\n")
-        print("1. Consultar Inventario de Elementos.")
-        print("2. Consultar Base de Datos de Empleados.")
-        print("3. Consultar el Elemento mas Prestado.")
-        print("4. Consultar los 5 Elementos mas Prestados.")
-        print("5. Consultar Empleado con mas Elementos Prestados.")
-        print("6. Consultar Empleados con mas Valor Prestado.")
-        print("7. Consultar el Empleado que mas Presta.")
-        print("8. Consultar el Roll que mas Presta.")
-        print("9. Volver al Menu Anterior.")
-        op = input("\nIngrese su opcion: ")
+        salir = False
+        while(salir == False):
+            print("\n¿Que consulta desea realizar?\n")
+            print("1. Consultar Inventario de Elementos.")
+            print("2. Consultar Base de Datos de Empleados.")
+            print("3. Consultar el Elemento mas Prestado.")
+            print("4. Consultar los 5 Elementos mas Prestados.")
+            print("5. Consultar Empleado con mas Elementos Prestados.")
+            print("6. Consultar Empleados con mas Valor Prestado.")
+            print("7. Consultar el Empleado que mas Presta.")
+            print("8. Consultar el Roll que mas Presta.")
+            print("9. Volver al Menu Anterior.")
+            op = input("\nIngrese su opcion: ")
         # Resta implementar las funcionalidades
+
+            if(op == 1):
+                pass
+            elif(op == 2):
+                pass
+            elif(op == 3):
+                pass
+            elif(op == 4):
+                pass
+            elif(op == 5):
+                pass
+            elif(op == 6):
+                pass
+            elif(op == 7):
+                pass
+            elif(op == 8):
+                pass
+            elif(op == 9):
+                pass
+            else:
+                print("\n%s %s" % (op, "No es una opcio valida"))
 
 
     def menu2AdministradorAlmacen(self):

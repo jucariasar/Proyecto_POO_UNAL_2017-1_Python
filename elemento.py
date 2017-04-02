@@ -50,9 +50,50 @@ class Elemento:
             if(str(e.getEstadoActual()) == Elemento().estados['1']):
                print(e.getNombre())
 
+    @staticmethod
+    def InventarioElementos(listado):
+        print("El inventario actual de elementos es: ")
+        for e in listado:
+            print(e.str_Inventario())
 
+    @staticmethod
+    def MasPrestado(listado):
+        favorito=0
+        elem=""
+        for e in listado:
+            if (e.getContador()>favorito):
+                favorito=e.getContador()
+                elem=e
+        if(elem!=""):
+            print("El elemento mas prestado es: ")
+            print ("\n"+str(elem.getNombre())+" >> "+"N° veces prestado: "+str(elem.getContador()))
+        else:
+            print("Ningun elemento ha sido prestado")
+    @staticmethod
+    def CincoMasPrestados(listado):
+        print("Los 5 elementos mas prestados son: ")
+        i=5
+        while(i>0):
+            favorito=0
+            elem=""
+            for e in listado:
+                if (e.getContador()>favorito):
+                    favorito=e.getContador()
+                    elem=e
+            if(elem!=""):
+                print ("\n"+str(elem.getNombre())+" >> "+"N° veces prestado: "+str(elem.getContador()))
+                listado.remove(elem)
+            else:
+                print("Ningun elemento ha sido prestado")
+            i=i-1
+        
+    
     def __str__(self):
-        return ("Codigo del Elemento: " + str(self.getCodigo()) + 
-            "\n Nombre del Elemento: " + self.getNombre() + "\n La ubicacion del Elemento es:  " + self.getUbicacion() +
-            "\n Fecha de prestamo: " + self.getFechaPrestamo() +  "\n Cantidad de veces prestado: " + str(self.getContador()) + 
-            "\n Estado del Elemento: " + self.getEstadoActual())
+        return ("\n Nombre del Elemento: " + str(self.getNombre())+ 
+             "\n Codigo del Elemento: " + str(self.getCodigo())+ "\n La ubicacion del Elemento es:  " + str(self.getUbicacion()) +
+            "\n Fecha de prestamo: " + str(self.getFechaPrestamo()) +  "\n Cantidad de veces prestado: " + str(self.getContador()) + 
+            "\n Estado del Elemento: " + str(self.getEstadoActual()))
+    def str_Inventario(self):
+        return ("\n Nombre del Elemento: " + str(self.getNombre())+ "\n Codigo del Elemento: " +
+         str(self.getCodigo())+ "\n La ubicacion del Elemento es:  " + str(self.getUbicacion()) +
+             "\n Estado del Elemento: " + str(self.getEstadoActual()))

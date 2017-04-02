@@ -2,8 +2,9 @@ from empleado import Empleado
 from elemento import Elemento
 
 class HistorialPrestamo:
-    def __init__(self, idEmpleado, nomEmpleado, nomElemento, codElemento, 
-    fechaPrestamo, fechaDevolucion):
+    historial = []
+    def __init__(self, idEmpleado=0, nomEmpleado="", nomElemento="", codElemento=0, 
+    fechaPrestamo=None, fechaDevolucion=None):
         self._idEmpleado = idEmpleado
         self._nomEmpleado = nomEmpleado
         self._nomElemento = nomElemento
@@ -36,7 +37,7 @@ class HistorialPrestamo:
     def setFechaPrestamo(self,fechaP):
         self._fechaPrestamo=fechaP
 
-    def getFechaDevolucion(self):
+    def getFechaDevolucion(self): 
         return self._fechaDevolucion
     def setFechaDevolucion(self,fechaD):
         self._fechaDevolucion=fechaD
@@ -47,4 +48,13 @@ class HistorialPrestamo:
          "Nombre del Elemento: " + self.getNomElemento() + '\n' + "Codigo Elemento: " + 
          str(self.getCodElemento()) + '\n' + "Fecha Prestamo: " + 
          str(self.getFechaPrestamo()) + '\n' + "Fecha Devolucion: " + str(self.getFechaDevolucion()))
-        
+
+    @staticmethod
+    def agregar(emp, element):
+        h = HistorialPrestamo()
+        h.setIdEmpleado(emp.getIdent())
+        h.setNomEmpleado(emp.getNombre())
+        h.setNomElemento(element.getNombre())
+        h.setCodElemento(element.getCodigo())
+        #h.setFechaPrestamo("") ## Hay que consultar y organizar
+        HistrialPrestamo().historial.append(h)

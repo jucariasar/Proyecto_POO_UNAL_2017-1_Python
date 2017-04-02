@@ -11,10 +11,11 @@ import time
 
 salirTotal = False
 class Almacen:
+
     def __init__(self):
         self._empleados = []
         self._elementos = []
-        self._historial = []
+        #self._historial = [] Se paso como estatico para la clase historial
         self._seleccion ={
         "1":self.crearDatosFicticios,
         "2":self.ingresarAlSistema,
@@ -54,7 +55,6 @@ class Almacen:
                 print("\nE-mail y/o Documento Invalido\n")
                 # probando algo con un delay y regerso al menu en caso de error 
             
-
 
      
     def autenticacionAdministradorAlmacen(self, admin):
@@ -142,7 +142,7 @@ class Almacen:
             elif(op == 8):
                 pass
             elif(op == 9):
-                salirTotal = False
+                Almacen().salirTotal = False
                 salir = True
             else:
                 print("\n%s %s" % (op, "No es una opcio valida"))
@@ -160,12 +160,43 @@ class Almacen:
 
 
     def menu3AdministradorAlmacen(self):
-        print("\n¿Que desea hacer?\n")
-        print("1. Prestar Elementos.")
-        print("2. Recibir Elementos.")
-        print("3. Volver al Menu Anterior.")
-        op = input("\nIngrese su opcion: ")
-        # Resta implementar las funcionalidades
+        salir = False
+        while salir == False:
+
+            print("\n¿Que desea hacer?\n")
+            print("1. Prestar Elementos.")
+            print("2. Recibir Elementos.")
+            print("3. Volver al Menu Anterior.")
+            op = input("\nIngrese su opcion: ")
+
+            if op == "1":
+                i = int(input("Ingrese la identificacion del Usuario: "))
+                emp = Empleado.buscarEmpleadoPorId(self._empleados, i)
+                if emp != None:
+                    if (Elemento().verificarReserva(emp._elementos)):
+                        print("El usuario actualmente tiene elemento(s) reservado(s): ")
+                        print("Desea: ")
+                        print("1. Asentar la reserva.")
+                        print("2. Prestar nuevos elementos.")
+                        op2 = input("Escoja su opcion: ")
+
+                        if opt2 == "1":
+                            Elemento().asentarReserva(emp._elementos) # Programar método estatico
+                        elif opt2 == "2":
+                            Elemento().prestarElementos(self._elementos, emp) # Programar método estatico
+                    else:
+                        Elemento().prestarElementos(self._elementos, emp)
+                else:
+                    print("El usuario no se encuentra registrado")
+
+            elif op == "2":
+                pass
+            elif op == "3":
+                Almacen().salirTotal = False
+                salir = True
+            else:
+                print("%s %s" % (op, "No es una opcion Valida"))
+        
 
     def crearDatosFicticios(self):
 

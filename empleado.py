@@ -56,6 +56,12 @@ class Empleado:
 	def setEmail(self, email):
 		self._email = email
 
+	def getElementos(self):
+		return self._elementos
+
+	def setElementos(self, e):
+		self.append._elementos(e)
+
 	def __str__(self):
 		return("Nombre del Empleado: " + self.getNombre() + " " + self.getApellido() + 
 			"\nN° Identificacion: " + str(self.getIdent()) + "\nRoll: " + self.getRoll() +
@@ -72,5 +78,3 @@ class Empleado:
 			if (e.getIdent() == i):
 				return e
 		return None
-
-

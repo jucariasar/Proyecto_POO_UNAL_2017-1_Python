@@ -32,6 +32,10 @@ class AdministradorAlmacen(Administrativo):
                empleado = Administrativo()
                
         
+        empleado.setIdent(int(input("Ingrese el id del Administrador:")))
+        empleado.setNombre(str(input("Ingrese el nombre del Administrador:"))) 
+        empleado.setApellido(str(input("Ingrese el apellido del Admnistrador:")))
+        empleado.setEmail(str(input("Ingrese el correo del Administrador:")))
         empleado.setGrado(str(input("Establezca el grado del Administrador: ")))
         listEmpleados.append(empleado)
 

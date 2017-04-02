@@ -156,7 +156,26 @@ class Almacen:
         print("4. Eliminar Elemento.")
         print("5. Volver al Menu Anterior.")
         op = input("\nIngrese su opcion: ")
-        # Resta implementar las funcionalidades
+        if op == "1":
+           self.menuRegistrarEmpleado()
+        elif op == "2":
+           Elemento().registrarElemento(self)
+            
+    
+    def menuRegistrarEmpleado(self):
+        print("\n¿Qué tipo de empleado desea registrar?\n")
+        print("1.Empleado Administrativo.")
+        print("2.Empleado Operario.")
+        print("3.Ingeniero Tecnico.")
+        op = input("\nIngrese su opcion: ")
+        if op == '1':
+           AdministradorAlmacen().registrarEmpleado(self._empleados)
+        elif op == '2' :
+            Operario().registrarEmpleado(self._empleados)
+        else:
+            IngenieroTecnico().registrarEmpleado(self._empleados)  
+
+        
 
 
     def menu3AdministradorAlmacen(self):

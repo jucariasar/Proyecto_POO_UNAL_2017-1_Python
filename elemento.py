@@ -50,6 +50,18 @@ class Elemento:
             if(str(e.getEstadoActual()) == Elemento().estados['1']):
                print(e.getNombre())
 
+    @staticmethod
+    def registrarElemento(self):
+        elemento = Elemento()
+       
+        elemento.setCodigo(int(input("\nIngrese codigo del elemento:")))
+        elemento.setNombre(str(input("Ingrese nombre del elemento:")))
+        elemento.setUbicacion(str(input("Ingrese la ubicacion del elemento:")))
+        elemento.setValor(int(input("Ingrese valor economico del elemento:")))
+        elemento.setEstadoActual(Elemento().estados['1'])
+        self._elementos.append(elemento)
+    
+
 
     def __str__(self):
         return ("Codigo del Elemento: " + str(self.getCodigo()) + 

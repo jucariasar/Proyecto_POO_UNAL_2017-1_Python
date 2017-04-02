@@ -17,5 +17,23 @@ class AdministradorAlmacen(Administrativo):
         self._password=password
         
     
+    @staticmethod
+    def registrarEmpleado(listEmpleados):
+        
+        print("\n¿Empleado Administrador del almacen?")
+        print("1. Si.")
+        print("2. No.")
+        op = input("\nIngrese su opcion: ")
+        if op == '1':
+               empleado = AdministradorAlmacen()
+               empleado.setUsuario(str(input("Establezca el usuario:")))
+               empleado.setPassword(str(input("Establezca el password:")))
+        else:
+               empleado = Administrativo()
+               
+        
+        empleado.setGrado(str(input("Establezca el grado del Administrador: ")))
+        listEmpleados.append(empleado)
+
     def __str__(self):
         retrun (super().__str__()+'\n'+"Usuario: "+self.getUsuario()+'\n'+"Password: "+self.getPassword())

@@ -41,77 +41,98 @@ class Elemento:
     def getEstadoActual (self):
         return self._estadoActual
     def setEstadoActual (self, estadoActual):
-        if (estadoActual != Elemento().estados ['1'] or
-            estadoActual != Elemento().estados ['2'] or
-            estadoActual != Elemento().estados ['3'] or)
+        if (estadoActual != Elemento().estados ['1'] and
+            estadoActual != Elemento().estados ['2'] and
+            estadoActual != Elemento().estados ['3'] ):
             print("Estado no reconocido")
-        else
+        else:
             self._estadoActual = estadoActual
 
     @staticmethod
     def ElementosDisponibles(listado):
+        print("Los elemntos disponibles son: ")
         for e in listado:
-            
             if(str(e.getEstadoActual()) == Elemento().estados['1']):
-<<<<<<< HEAD
-<<<<<<< HEAD
-               print(e.getNombre())
+               print(e.str_Inventario())
 
     @staticmethod
     def InventarioElementos(listado):
         print("El inventario actual de elementos es: ")
         for e in listado:
             print(e.str_Inventario())
-=======
-=======
->>>>>>> origin/Version_1_PAblo
-               elemdis = [e.getCodigo]
-               print(e.str_Inventario())
+
     @staticmethod
     def ElementosPrestados(listado):
+        print ("Los elementos prestados por el usuario son: ")
+        c = 0
         for e in listado:
             if(str(e.getEstadoActual()) == Elemento().estados['2']):
-               print(e.str_Inventario())
+                print(e.str_Inventario())
+                c = c + 1
+        if (c == 0):
+            print("\n El usuario no tiene elementos prestados")
+
     @staticmethod
     def ReservarElementos(listado):
-        print (ElementosDisponibles(listado))
-        re = input ("Ingrese codigo del elemento que desea prestar: ")
+        Elemento().ElementosDisponibles(listado)
+        re = int(input ("Ingrese codigo del elemento que desea reservar: "))
+        elemdis=[]
+        for e in listado:
+            elemdis.append(e.getCodigo())
+        E=False   
         for k in elemdis:
-            if (re == k):
-                print ("Elemento Encotrado con Exito")
-                op = input ("Desea Reservar?  (S/N)"  )
-                if (op == S):
+            if (k==re):
+                print ("\n Elemento Encotrado con Exito")
+                op = str(input ("\n Desea Reservar?  (S/N): "))
+                if (op == "S"):
                     for e in listado:
-                        if (re == e.getCodigo):
-                            e.setEstadoActual() = Elemento().estado['3']
-                            print ("Elemento Reservado con exito")
+                        if (re == e.getCodigo()):
+                            e.setEstadoActual(Elemento().estados['3']) 
+                            print ("\n Elemento Reservado con exito")
+                            E=True
                             break
-                    break
+                elif(op=="N"):
+                    print("\n Ok")
+            
+                else:
+                    print("\n Opcion erronea")
+        if(E==False):
+            print("\n Elemento no encontrado")  
+            
                 
             
-     @staticmethod
-     def ModificarReserva (listado):
-         for e in listado:
+    @staticmethod
+    def ModificarReserva (listado):
+        E = False
+        elemres=[]
+        print("Sus elementos reservados son: ")
+        for e in listado:
             if(str(e.getEstadoActual()) == Elemento().estados['3']):
-               elemres = [e.getCodigo]
-               print(e.str_Inventario())
+                elemres.append(e.getCodigo())
+                print(e.str_Inventario())
                
-         cr = input ("Ingrese codigo del elemento al cual desea modificar la reserva: ")
-         for k in elemdis:
+        cr = int(input ("\n Ingrese codigo del elemento al cual desea modificar la reserva: "))
+        for k in elemres:
             if (cr == k):
-                print ("Elemento Encotrado con Exito")
-                op = input ("Desea Cancelar Reservar?  (S/N)"  )
-                if (op == S):
+                print ("\n Elemento Encotrado con Exito")
+                op = input ("\n Desea Cancelar Reservar?  (S/N): "  )
+                if (op == "S"):
                     for e in listado:
-                        if (re == e.getCodigo):
-                            e.setEstadoActual() = Elemento().estado['1']
-                            print ("Reserva cancelada  con exito")
+                        if (cr == e.getCodigo()):
+                            e.setEstadoActual( Elemento().estados['1']) 
+                            print ("\n Reserva cancelada  con éxito")
+                            
                             break
-                    break       
-<<<<<<< HEAD
-         
-        
->>>>>>> origin/Version_1_PAblo
+
+                elif(op=="N"):
+                    print("\n Ok")
+                    break
+                else:
+                    print("\n Opción erronea")
+                    break
+                E=True
+        if(E==False):
+            print("\n Elemento no encontrado")                   
 
     @staticmethod
     def MasPrestado(listado):
@@ -144,8 +165,7 @@ class Elemento:
                 print("Ningun elemento ha sido prestado")
             i=i-1
         
-=======
->>>>>>> origin/Version_1_PAblo
+
     
 
     def __str__(self):
@@ -153,3 +173,8 @@ class Elemento:
             "\n Nombre del Elemento: " + self.getNombre() + "\n La ubicacion del Elemento es:  " + self.getUbicacion() +
             "\n Fecha de prestamo: " + self.getFechaPrestamo() +  "\n Cantidad de veces prestado: " + str(self.getContador()) + 
             "\n Estado del Elemento: " + self.getEstadoActual())
+
+    def str_Inventario(self):
+        return ("\n Nombre del Elemento: " + str(self.getNombre())+ "\n Codigo del Elemento: " +
+         str(self.getCodigo())+ "\n La ubicacion del Elemento es:  " + str(self.getUbicacion()) +
+             "\n Estado del Elemento: " + str(self.getEstadoActual())+'\n')

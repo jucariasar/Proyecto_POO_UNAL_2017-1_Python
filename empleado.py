@@ -66,7 +66,7 @@ class Empleado:
             "\n N° Identificacion: " + str(self.getIdent()) + "\n Roll: " + str(self.getRoll()) +
             "\n E-mail: "+str(self.getEmail()))
     @staticmethod
-    def MasPrestado(listado):
+    def MasElemPrestados(listado):
         elempres=0
         emp=""
         for e in listado:
@@ -78,6 +78,13 @@ class Empleado:
             print ("\n"+str(emp.getNombre())+" "+str(emp.getApellido()) + " >> "+"N° elementos prestado: "+str(emp.getNumElementPres()))
         else:
             print("Ningun empleado ha prestado elementos")
+
+    #@staticmethod
+    #def MasValorPrestado(listado):
+
+
+
+
 
     @staticmethod
     def ListadoEmpleados(listado):

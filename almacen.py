@@ -94,29 +94,30 @@ class Almacen:
 
 
     def menuEmpleado(self, admin):
-        print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
-        print("¿Que desea hacer?\n")
-        print("1. Consultar Elementos Disponibles.")
-        print("2. Consultar Elementos Prestados.")
-        print("3. Reservar Elementos para Prestar.")
-        print("4. Modificar Reserva de Elementos.")
-        print("5. Cancelar Reserva de Elementos.")
-        print("6. Cerrar Sesion de Usuario.")
-        op = input("\nIngrese su opcion: ")
-        # Resta implementar las funcionalidades
-        if op == "1":
-            Elemento().ElementosDisponibles(self._elementos)
-            input()
-        elif(op == 2):
-            Elemento().ElementosPrestados(self._elementos)
-        elif(op == 3):
-            Elemento().ReservarElementos(self._elementos)
-        elif(op == 4):
-            pass
-        elif(op == 5):
-            pass
-        else(op == 6):
-            pass
+        i=1
+        while(i==1):
+            print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
+            print("¿Que desea hacer?\n")
+            print("1. Consultar Elementos Disponibles.")
+            print("2. Consultar Elementos Prestados.")
+            print("3. Reservar Elementos para Prestar.")
+            print("4. Modificar Reserva de Elementos.")
+            print("5. Cerrar Sesion de Usuario.")
+        
+            op = input("\nIngrese su opcion: ")
+            # Resta implementar las funcionalidades
+            if (op == "1"):
+                Elemento().ElementosDisponibles(self._elementos)
+            elif(op =="2"):
+                Elemento().ElementosPrestados(self._elementos)
+            elif(op == "3"):
+                Elemento().ReservarElementos(self._elementos)
+            elif(op == "4"):
+                Elemento().ModificarReserva(self._elementos)
+            elif(op == "5"):
+                break
+            else:
+                print("Opcion erronea")
 
     def menu1AdministradorAlmacen(self):
         salir = False
@@ -127,7 +128,7 @@ class Almacen:
             print("3. Consultar el Elemento mas Prestado.")
             print("4. Consultar los 5 Elementos mas Prestados.")
             print("5. Consultar Empleado con mas Elementos Prestados.")
-            print("6. Consultar Empleados con mas Valor Prestado.")
+            print("6. Consultar Empleado con mas Valor Prestado.")
             print("7. Consultar el Empleado que mas Presta.")
             print("8. Consultar el Roll que mas Presta.")
             print("9. Volver al Menu Anterior.")
@@ -142,9 +143,9 @@ class Almacen:
             elif(op == 4):
                 Elemento().CincoMasPrestados(self._elementos)
             elif(op == 5):
-                pass
+                Empleado().MasElemPrestados(self._empleados)
             elif(op == 6):
-                pass
+                Empleado().MasValorPrestado(self._empleados)
             elif(op == 7):
                 pass
             elif(op == 8):

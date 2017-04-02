@@ -9,7 +9,7 @@ from historialprestamo import HistorialPrestamo
 import sys
 import time
 
-
+salirTotal = False
 class Almacen:
     def __init__(self):
         self._empleados = []
@@ -71,7 +71,7 @@ class Almacen:
 
     def menuAdministradorAlmacen(self, admin):
         salir = False
-        while(salir == False):
+        while(salir == False or salirTotal == False):
             print("\nMenu de Usuario Administrador del Almacen:")
             print("\n1. Ir al Menu de Consultas.")
             print("2. Ir al Menu de Registros / Borrados.")
@@ -122,7 +122,7 @@ class Almacen:
             print("7. Consultar el Empleado que mas Presta.")
             print("8. Consultar el Roll que mas Presta.")
             print("9. Volver al Menu Anterior.")
-            op = input("\nIngrese su opcion: ")
+            op = int(input("\nIngrese su opcion: "))
         # Resta implementar las funcionalidades
 
             if(op == 1):
@@ -142,7 +142,8 @@ class Almacen:
             elif(op == 8):
                 pass
             elif(op == 9):
-                pass
+                salirTotal = False
+                salir = True
             else:
                 print("\n%s %s" % (op, "No es una opcio valida"))
 

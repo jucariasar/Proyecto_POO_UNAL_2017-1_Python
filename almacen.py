@@ -226,17 +226,7 @@ class Almacen:
         e5.setTipo("Mecanico")
         self._empleados.append(e5)
 
-        e6 = AdministradorAlmacen()
-        e6.setIdent(19)
-        e6.setNombre("Jaider")
-        e6.setApellido("Peralta")
-        e6.setNumElementPres(0)
-        e6.setRoll(Empleado().tiposEmpleado['1'])
-        e6.setEmail("jp")
-        e6.setGrado(10)
-        e6.setUsuario("jp")
-        e6.setPassword("0000")
-        self._empleados.append(e6)
+        
 
 
         # Se crean varios elementos y se agregan a la lista _elementos
@@ -249,7 +239,7 @@ class Almacen:
         elemento1.setValor(250)
         elemento1.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento1)
-        elemento1.setContador(10)
+        
 
         elemento2 = Elemento()
         elemento2.setCodigo(35)
@@ -259,7 +249,7 @@ class Almacen:
         elemento2.setValor(125)
         elemento2.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento2)
-        elemento2.setContador(4)
+        
 
         elemento3 = Elemento()
         elemento3.setCodigo(45)
@@ -279,7 +269,7 @@ class Almacen:
         elemento4.setValor(230)
         elemento4.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento4)
-        elemento4.setContador(4)
+        
 
         elemento5 = Elemento()
         elemento5.setCodigo(26)
@@ -289,7 +279,7 @@ class Almacen:
         elemento5.setValor(251)
         elemento5.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento5)
-        elemento5.setContador(11)
+        
 
         elemento6 = Elemento()
         elemento6.setCodigo(27)
@@ -299,7 +289,7 @@ class Almacen:
         elemento6.setValor(250)
         elemento6.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento6)
-        elemento6.setContador(12)
+        
 
         print ("Datos leidos con exito")
 

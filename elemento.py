@@ -97,7 +97,8 @@ class Elemento:
                             break
                     break       
          
-        
+       @staticmethod
+       def 
 
     def __str__(self):
         return ("Codigo del Elemento: " + str(self.getCodigo()) + 

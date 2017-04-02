@@ -131,17 +131,16 @@ class Almacen:
             print("7. Consultar el Empleado que mas Presta.")
             print("8. Consultar el Roll que mas Presta.")
             print("9. Volver al Menu Anterior.")
-            op = int(input("\nIngrese su opcion: "))
-        # Resta implementar las funcionalidades
-
+            op = int(input("\nIngrese su opcion: "+'\n'))
+        
             if(op == 1):
-                pass
+                Elemento().InventarioElementos(self._elementos)
             elif(op == 2):
-                pass
+                Empleado().ListadoEmpleados(self._empleados)
             elif(op == 3):
-                pass
+                Elemento().MasPrestado(self._elementos)
             elif(op == 4):
-                pass
+                Elemento().CincoMasPrestados(self._elementos)
             elif(op == 5):
                 pass
             elif(op == 6):
@@ -236,6 +235,8 @@ class Almacen:
         e5.setTipo("Mecanico")
         self._empleados.append(e5)
 
+        
+
 
         # Se crean varios elementos y se agregan a la lista _elementos
 
@@ -247,6 +248,7 @@ class Almacen:
         elemento1.setValor(250)
         elemento1.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento1)
+        
 
         elemento2 = Elemento()
         elemento2.setCodigo(35)
@@ -256,6 +258,7 @@ class Almacen:
         elemento2.setValor(125)
         elemento2.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento2)
+        
 
         elemento3 = Elemento()
         elemento3.setCodigo(45)
@@ -265,6 +268,7 @@ class Almacen:
         elemento3.setValor(120)
         elemento3.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento3)
+        elemento3.setContador(3)
 
         elemento4 = Elemento()
         elemento4.setCodigo(85)
@@ -274,6 +278,27 @@ class Almacen:
         elemento4.setValor(230)
         elemento4.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento4)
+        
+
+        elemento5 = Elemento()
+        elemento5.setCodigo(26)
+        elemento5.setNombre("Mouse")
+        elemento5.setUbicacion("M7")
+        elemento5.setFechaPrestamo(None)
+        elemento5.setValor(251)
+        elemento5.setEstadoActual(Elemento().estados['1'])
+        self._elementos.append(elemento5)
+        
+
+        elemento6 = Elemento()
+        elemento6.setCodigo(27)
+        elemento6.setNombre("Lapiz")
+        elemento6.setUbicacion("T8")
+        elemento6.setFechaPrestamo(None)
+        elemento6.setValor(250)
+        elemento6.setEstadoActual(Elemento().estados['1'])
+        self._elementos.append(elemento6)
+        
 
         print ("Datos leidos con exito")
 

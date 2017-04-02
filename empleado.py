@@ -65,6 +65,19 @@ class Empleado:
         return("\n Nombre del Empleado: " + str(self.getNombre()) + " " + str(self.getApellido()) + 
             "\n N° Identificacion: " + str(self.getIdent()) + "\n Roll: " + str(self.getRoll()) +
             "\n E-mail: "+str(self.getEmail()))
+    @staticmethod
+    def MasPrestado(listado):
+        elempres=0
+        emp=""
+        for e in listado:
+            if (e.getNumElementPres()>elempres):
+                elempres=e.getNumElementPres()
+                emp=e
+        if(emp!=""):
+            print("El empleado con mas elementos prestados es: ")
+            print ("\n"+str(emp.getNombre())+" "+str(emp.getApellido()) + " >> "+"N° elementos prestado: "+str(emp.getNumElementPres()))
+        else:
+            print("Ningun empleado ha prestado elementos")
 
     @staticmethod
     def ListadoEmpleados(listado):

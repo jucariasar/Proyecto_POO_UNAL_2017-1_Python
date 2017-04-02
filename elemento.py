@@ -54,6 +54,7 @@ class Elemento:
             
             if(str(e.getEstadoActual()) == Elemento().estados['1']):
 <<<<<<< HEAD
+<<<<<<< HEAD
                print(e.getNombre())
 
     @staticmethod
@@ -62,6 +63,8 @@ class Elemento:
         for e in listado:
             print(e.str_Inventario())
 =======
+=======
+>>>>>>> origin/Version_1_PAblo
                elemdis = [e.getCodigo]
                print(e.str_Inventario())
     @staticmethod
@@ -105,6 +108,7 @@ class Elemento:
                             print ("Reserva cancelada  con exito")
                             break
                     break       
+<<<<<<< HEAD
          
         
 >>>>>>> origin/Version_1_PAblo
@@ -140,13 +144,12 @@ class Elemento:
                 print("Ningun elemento ha sido prestado")
             i=i-1
         
+=======
+>>>>>>> origin/Version_1_PAblo
     
+
     def __str__(self):
-        return ("\n Nombre del Elemento: " + str(self.getNombre())+ 
-             "\n Codigo del Elemento: " + str(self.getCodigo())+ "\n La ubicacion del Elemento es:  " + str(self.getUbicacion()) +
-            "\n Fecha de prestamo: " + str(self.getFechaPrestamo()) +  "\n Cantidad de veces prestado: " + str(self.getContador()) + 
-            "\n Estado del Elemento: " + str(self.getEstadoActual()))
-    def str_Inventario(self):
-        return ("\n Nombre del Elemento: " + str(self.getNombre())+ "\n Codigo del Elemento: " +
-         str(self.getCodigo())+ "\n La ubicacion del Elemento es:  " + str(self.getUbicacion()) +
-             "\n Estado del Elemento: " + str(self.getEstadoActual()))
+        return ("Codigo del Elemento: " + str(self.getCodigo()) + 
+            "\n Nombre del Elemento: " + self.getNombre() + "\n La ubicacion del Elemento es:  " + self.getUbicacion() +
+            "\n Fecha de prestamo: " + self.getFechaPrestamo() +  "\n Cantidad de veces prestado: " + str(self.getContador()) + 
+            "\n Estado del Elemento: " + self.getEstadoActual())

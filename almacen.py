@@ -107,7 +107,16 @@ class Almacen:
         if op == "1":
             Elemento().ElementosDisponibles(self._elementos)
             input()
-
+        elif(op == 2):
+            Elemento().ElementosPrestados(self._elementos)
+        elif(op == 3):
+            Elemento().ReservarElementos(self._elementos)
+        elif(op == 4):
+            pass
+        elif(op == 5):
+            pass
+        else(op == 6):
+            pass
 
     def menu1AdministradorAlmacen(self):
         salir = False

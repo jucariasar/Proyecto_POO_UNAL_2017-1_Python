@@ -41,15 +41,63 @@ class Elemento:
     def getEstadoActual (self):
         return self._estadoActual
     def setEstadoActual (self, estadoActual):
-        self._estadoActual = estadoActual
+        if (estadoActual != Elemento().estados ['1'] or
+            estadoActual != Elemento().estados ['2'] or
+            estadoActual != Elemento().estados ['3'] or)
+            print("Estado no reconocido")
+        else
+            self._estadoActual = estadoActual
 
     @staticmethod
     def ElementosDisponibles(listado):
         for e in listado:
             
             if(str(e.getEstadoActual()) == Elemento().estados['1']):
-               print(e.getNombre())
-
+               elemdis = [e.getCodigo]
+               print(e.str_Inventario())
+    @staticmethod
+    def ElementosPrestados(listado):
+        for e in listado:
+            if(str(e.getEstadoActual()) == Elemento().estados['2']):
+               print(e.str_Inventario())
+    @staticmethod
+    def ReservarElementos(listado):
+        print (ElementosDisponibles(listado))
+        re = input ("Ingrese codigo del elemento que desea prestar: ")
+        for k in elemdis:
+            if (re == k):
+                print ("Elemento Encotrado con Exito")
+                op = input ("Desea Reservar?  (S/N)"  )
+                if (op == S):
+                    for e in listado:
+                        if (re == e.getCodigo):
+                            e.setEstadoActual() = Elemento().estado['3']
+                            print ("Elemento Reservado con exito")
+                            break
+                    break
+                
+            
+     @staticmethod
+     def ModificarReserva (listado):
+         for e in listado:
+            if(str(e.getEstadoActual()) == Elemento().estados['3']):
+               elemres = [e.getCodigo]
+               print(e.str_Inventario())
+               
+         cr = input ("Ingrese codigo del elemento al cual desea modificar la reserva: ")
+         for k in elemdis:
+            if (cr == k):
+                print ("Elemento Encotrado con Exito")
+                op = input ("Desea Cancelar Reservar?  (S/N)"  )
+                if (op == S):
+                    for e in listado:
+                        if (re == e.getCodigo):
+                            e.setEstadoActual() = Elemento().estado['1']
+                            print ("Reserva cancelada  con exito")
+                            break
+                    break       
+         
+        
 
     def __str__(self):
         return ("Codigo del Elemento: " + str(self.getCodigo()) + 

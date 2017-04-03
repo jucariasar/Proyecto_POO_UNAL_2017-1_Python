@@ -9,9 +9,9 @@ from historialprestamo import HistorialPrestamo
 import sys
 import time
 
-salirTotal = False
-class Almacen:
 
+class Almacen:
+    salirTotal = False    
     def __init__(self):
         self._empleados = []
         self._elementos = []
@@ -71,7 +71,7 @@ class Almacen:
 
     def menuAdministradorAlmacen(self, admin):
         salir = False
-        while(salir == False or salirTotal == False):
+        while(salir == False):
             print("\nMenu de Usuario Administrador del Almacen:")
             print("\n1. Ir al Menu de Consultas.")
             print("2. Ir al Menu de Registros / Borrados.")
@@ -80,13 +80,13 @@ class Almacen:
             op = input("\nIngrese su Opcion: ")
             if op == "1":
                 self.menu1AdministradorAlmacen()
-                salir = True
+                #salir = True
             elif op == "2":
                 self.menu2AdministradorAlmacen()
-                salir = True
+                #salir = True
             elif op == "3":
                 self.menu3AdministradorAlmacen()
-                salir = True
+                #salir = True
             elif op == "4":
                 salir = True
             else:
@@ -142,7 +142,6 @@ class Almacen:
             elif(op == 8):
                 pass
             elif(op == 9):
-                Almacen().salirTotal = False
                 salir = True
             else:
                 print("\n%s %s" % (op, "No es una opcio valida"))
@@ -171,28 +170,40 @@ class Almacen:
 
             if op == "1":
                 i = int(input("Ingrese la identificacion del Usuario: "))
-                emp = Empleado.buscarEmpleadoPorId(self._empleados, i)
+                emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
                 if emp != None:
-                    if (Elemento().verificarReserva(emp._elementos)):
+                    if (Elemento().verificarReserva(emp.getElementos())):
                         print("El usuario actualmente tiene elemento(s) reservado(s): ")
                         print("Desea: ")
                         print("1. Asentar la reserva.")
                         print("2. Prestar nuevos elementos.")
+                        print("3. Volver.")
                         op2 = input("Escoja su opcion: ")
-
-                        if opt2 == "1":
-                            Elemento().asentarReserva(emp._elementos) # Programar método estatico
-                        elif opt2 == "2":
-                            Elemento().prestarElementos(self._elementos, emp) # Programar método estatico
+                        salir2 = True
+                        while salir2 == False:
+                            if op2 == "1":
+                                Elemento().asentarReserva(emp.getElementos())
+                                salir2 = True
+                            elif op2 == "2":
+                                Elemento().prestarElementos(self._elementos, emp)
+                                salir2 = True
+                            elif op2 == "3":
+                                salir2 = True
+                            else:
+                                print("Opcion no valida.")
                     else:
                         Elemento().prestarElementos(self._elementos, emp)
                 else:
                     print("El usuario no se encuentra registrado")
 
             elif op == "2":
-                pass
+                i = int(input("Ingrese la identificacion del Usuario: "))
+                emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
+                if emp != None:
+                    Elemento().recibirElementos(emp)
+                else:
+                    print("El usuario no se encuentra registrado")
             elif op == "3":
-                Almacen().salirTotal = False
                 salir = True
             else:
                 print("%s %s" % (op, "No es una opcion Valida"))
@@ -320,7 +331,6 @@ class Almacen:
     		if(accion):
     			accion()
     		else:
-    			os.system.cls
     			print("%s %s" % (op, "No es una opcion valida"))
 
 

@@ -1,5 +1,6 @@
 from empleado import Empleado
-from elemento import Elemento
+from datetime import datetime, date, time, timedelta
+import calendar
 
 class HistorialPrestamo:
     historial = []
@@ -50,11 +51,17 @@ class HistorialPrestamo:
          str(self.getFechaPrestamo()) + '\n' + "Fecha Devolucion: " + str(self.getFechaDevolucion()))
 
     @staticmethod
-    def agregar(emp, element):
+    def agregarAHistorial(emp, element):
         h = HistorialPrestamo()
         h.setIdEmpleado(emp.getIdent())
         h.setNomEmpleado(emp.getNombre())
         h.setNomElemento(element.getNombre())
         h.setCodElemento(element.getCodigo())
-        #h.setFechaPrestamo("") ## Hay que consultar y organizar
-        HistrialPrestamo().historial.append(h)
+        h.setFechaPrestamo(element.getFechaPrestamo())
+        HistorialPrestamo().historial.append(h)
+
+    @staticmethod
+    def agregarFechaEntrega(emp, elemento):
+        for h in HistorialPrestamo().historial:
+            if elemento.getFechaPrestamo() == h.getFechaPrestamo() and emp.getIdent() == h.getIdEmpleado():
+                h.setFechaDevolucion(datetime.now())

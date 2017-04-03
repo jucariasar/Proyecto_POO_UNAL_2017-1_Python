@@ -1,4 +1,3 @@
-#PRUEBA DE POO
 from empleado import Empleado
 from administrativo import Administrativo
 from ingenierotecnico import IngenieroTecnico
@@ -37,20 +36,28 @@ class Almacen:
                         print("\nCon que Roll Desea Ingresar:\n")
                         print("1. Como Administrador del Almacen.")
                         print("2. Como Empleado NO Administrador.")
+                        print("3. Desea volver al menu principal.")
                         opt = int(input("\nIngrese su Opcion: "))
                         if opt == 1:
                             self.autenticacionAdministradorAlmacen(emp)
-                            salir = True
-                            salir2 = True
+                            #salir = True
+                            #salir2 = True
                         elif opt == 2:
                             self.menuEmpleado(emp)
+                            salir = True
+                            salir2 = True
+                        elif opt == 3:
                             salir = True
                             salir2 = True
                         else:
                             print("\n%d %s" % (opt, "No es una opcion Valida"))
                 else: 
                     self.menuEmpleado(emp)
-                    salir = True
+                    op=input("\n Desea salir del sistema? (S/N): ")
+                    if op=="S":
+                        salir=True
+                    elif op=="N":
+                        pass
             else:
                 print("\nE-mail y/o Documento Invalido\n")
                 # probando algo con un delay y regerso al menu en caso de error 
@@ -76,7 +83,7 @@ class Almacen:
             print("\n1. Ir al Menu de Consultas.")
             print("2. Ir al Menu de Registros / Borrados.")
             print("3. Prestar / Recibir.")
-            print("4. Salir.") # Falta programar estas funcionalidad bien
+            print("4. Cerrar Sesion de Administrador.") # Falta programar estas funcionalidad bien
             op = input("\nIngrese su Opcion: ")
             if op == "1":
                 self.menu1AdministradorAlmacen()
@@ -94,19 +101,30 @@ class Almacen:
 
 
     def menuEmpleado(self, admin):
-        print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
-        print("¿Que desea hacer?\n")
-        print("1. Consultar Elementos Disponibles.")
-        print("2. Consultar Elementos Prestados.")
-        print("3. Reservar Elementos para Prestar.")
-        print("4. Modificar Reserva de Elementos.")
-        print("5. Cancelar Reserva de Elementos.")
-        print("6. Cerrar Sesion de Usuario.")
-        op = input("\nIngrese su opcion: ")
-        # Resta implementar las funcionalidades
-        if op == "1":
-            Elemento().ElementosDisponibles(self._elementos)
-            input()
+        salir = False
+        while salir == False:
+            print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
+            print("¿Que desea hacer?\n")
+            print("1. Consultar Elementos Disponibles.")
+            print("2. Consultar Elementos Prestados.")
+            print("3. Reservar Elementos para Prestar.")
+            print("4. Modificar Reserva de Elementos.")
+            print("5. Cerrar Sesion de Usuario.")
+
+            op = input("\nIngrese su opcion: ")
+            if op == "1":
+                Elemento().elementosDisponibles(self._elementos)
+            elif(op =="2"):
+                Elemento().elementosPrestados(admin._elementos)
+            elif(op == "3"):
+                Elemento().reservarElementos(self._elementos, admin)
+            elif(op == "4"):
+                Elemento().modificarReserva(admin._elementos, admin)
+            elif(op == "5"):
+                salir = True
+            else:
+                print("Opcion erronea")
+            
 
 
     def menu1AdministradorAlmacen(self):
@@ -126,21 +144,21 @@ class Almacen:
         # Resta implementar las funcionalidades
 
             if(op == 1):
-                pass
+                Elemento().inventarioElementos(self._elementos)
             elif(op == 2):
-                pass
+                Empleado().listadoEmpleados(self._empleados) # Para Empleado
             elif(op == 3):
-                pass
+                Elemento().masPrestado(self._elementos)
             elif(op == 4):
-                pass
+                Elemento().cincoMasPrestados(self._elementos)
             elif(op == 5):
-                pass
+                Empleado().masElemPrestados(self._empleados) # Para Empleado
             elif(op == 6):
-                pass
+                Empleado().masValorPrestado(self._empleados) # Para Empleado
             elif(op == 7):
-                pass
+                Empleado().masHaPrestado(self._empleados) # Para Empleado
             elif(op == 8):
-                pass
+                Empleado().rollEstrella(self._empleados) # Para Empleado
             elif(op == 9):
                 salir = True
             else:

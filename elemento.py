@@ -67,7 +67,7 @@ class Elemento:
         seguirPres = True
         while seguirPres == True:
 
-            if (isinstance(e, Administrativo) and e.getNumElementPres() <= Administrativo.MAX_AD and seguirPres == True) or (isinstance(e, IngenieroTecnico) and e.getNumElementPres() <= IngenieroTecnico.MAX_It and seguirPres == True) or (isinstance(e, Operario) and e.getNumElementPres() <= Operario.MAX_OP and seguirPres == True):
+            if (isinstance(e, Administrativo) and e.getNumElementPres() <= Administrativo.MAX_AD and seguirPres == True) or (isinstance(e, IngenieroTecnico) and e.getNumElementPres() <= IngenieroTecnico.MAX_IT and seguirPres == True) or (isinstance(e, Operario) and e.getNumElementPres() <= Operario.MAX_OP and seguirPres == True):
                 cod = int(input("Ingrese el codigo del elemento a prestar: "))
                 element = Elemento().buscarElementoPorId(listado, cod)
 
@@ -118,7 +118,7 @@ class Elemento:
                     else:
                         print("Opcion Invalida")
                 else:
-                    print("Codigo no encontrado.")
+                    print("Codigo no encontrado en sus elementos prestados.")
             else:
                 print("El usuario no tiene elementos prestados.")
                 seguirEntregando = False

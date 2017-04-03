@@ -165,7 +165,8 @@ class Almacen:
             print("\n¿Que desea hacer?\n")
             print("1. Prestar Elementos.")
             print("2. Recibir Elementos.")
-            print("3. Volver al Menu Anterior.")
+            print("3. Mostrar Historial.")
+            print("4. Volver al Menu Anterior.")
             op = input("\nIngrese su opcion: ")
 
             if op == "1":
@@ -204,6 +205,8 @@ class Almacen:
                 else:
                     print("El usuario no se encuentra registrado")
             elif op == "3":
+                HistorialPrestamo().mostrarHistorial()
+            elif op == "4":
                 salir = True
             else:
                 print("%s %s" % (op, "No es una opcion Valida"))

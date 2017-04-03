@@ -44,7 +44,7 @@ class HistorialPrestamo:
         self._fechaDevolucion=fechaD
 
     def __str__(self):
-        retrun ("Nombre del Empleado: " + self.getNomEmpleado() + '\n' +
+        return ("Nombre del Empleado: " + self.getNomEmpleado() + '\n' +
          "N° Identificacion: " + str(self.getIdEmpleado()) + '\n' + 
          "Nombre del Elemento: " + self.getNomElemento() + '\n' + "Codigo Elemento: " + 
          str(self.getCodElemento()) + '\n' + "Fecha Prestamo: " + 
@@ -65,3 +65,8 @@ class HistorialPrestamo:
         for h in HistorialPrestamo().historial:
             if elemento.getFechaPrestamo() == h.getFechaPrestamo() and emp.getIdent() == h.getIdEmpleado():
                 h.setFechaDevolucion(datetime.now())
+
+    @staticmethod
+    def mostrarHistorial():
+        for h in HistorialPrestamo().historial:
+            print("%s \n" % h)

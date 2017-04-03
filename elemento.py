@@ -44,38 +44,39 @@ class Elemento:
         if (estadoActual != Elemento().estados ['1'] and
             estadoActual != Elemento().estados ['2'] and
             estadoActual != Elemento().estados ['3'] ):
-            print("Estado no reconocido")
+            print("\n Estado no reconocido")
+
         else:
             self._estadoActual = estadoActual
 
     @staticmethod
     def ElementosDisponibles(listado):
-        print("Los elemntos disponibles son: ")
+        print("\n Los elemntos disponibles son: ")
         for e in listado:
             if(str(e.getEstadoActual()) == Elemento().estados['1']):
                print(e.str_Inventario())
 
     @staticmethod
     def InventarioElementos(listado):
-        print("El inventario actual de elementos es: ")
+        print("\n El inventario actual de elementos es: ")
         for e in listado:
             print(e.str_Inventario())
 
     @staticmethod
     def ElementosPrestados(listado):
-        print ("Los elementos prestados por el usuario son: ")
+        print ("\n Los elementos prestados son: ")
         c = 0
         for e in listado:
             if(str(e.getEstadoActual()) == Elemento().estados['2']):
                 print(e.str_Inventario())
                 c = c + 1
         if (c == 0):
-            print("\n El usuario no tiene elementos prestados")
+            print("\n No hay elementos prestados")
 
     @staticmethod
-    def ReservarElementos(listado):
+    def ReservarElementos(listado,emp):
         Elemento().ElementosDisponibles(listado)
-        re = int(input ("Ingrese codigo del elemento que desea reservar: "))
+        re = int(input ("\n Ingrese codigo del elemento que desea reservar: "))
         elemdis=[]
         for e in listado:
             elemdis.append(e.getCodigo())
@@ -88,6 +89,7 @@ class Elemento:
                     for e in listado:
                         if (re == e.getCodigo()):
                             e.setEstadoActual(Elemento().estados['3']) 
+                            emp.setaddElemento(e)
                             print ("\n Elemento Reservado con exito")
                             E=True
                             break
@@ -102,12 +104,12 @@ class Elemento:
                 
             
     @staticmethod
-    def ModificarReserva (listado):
+    def ModificarReserva (listado,emp):
         E = False
         elemres=[]
-        print("Sus elementos reservados son: ")
+        print("\n Sus elementos reservados son: ")
         for e in listado:
-            if(str(e.getEstadoActual()) == Elemento().estados['3']):
+            if(e.getEstadoActual() == Elemento().estados['3']):
                 elemres.append(e.getCodigo())
                 print(e.str_Inventario())
                
@@ -120,6 +122,7 @@ class Elemento:
                     for e in listado:
                         if (cr == e.getCodigo()):
                             e.setEstadoActual( Elemento().estados['1']) 
+                            emp.setdelElemento(e)
                             print ("\n Reserva cancelada  con éxito")
                             
                             break
@@ -146,12 +149,13 @@ class Elemento:
             print("El elemento mas prestado es: ")
             print ("\n"+str(elem.getNombre())+" >> "+"N° veces prestado: "+str(elem.getContador()))
         else:
-            print("Ningun elemento ha sido prestado")
+            print("\n Ningun elemento ha sido prestado")
     @staticmethod
     def CincoMasPrestados(listado):
-        print("Los 5 elementos mas prestados son: ")
         i=5
-        while(i>0):
+        c=0
+        lista=[]
+        while(i>0 and len(listado)>0):
             favorito=0
             elem=""
             for e in listado:
@@ -159,13 +163,16 @@ class Elemento:
                     favorito=e.getContador()
                     elem=e
             if(elem!=""):
-                print ("\n"+str(elem.getNombre())+" >> "+"N° veces prestado: "+str(elem.getContador()))
+                lista.append(elem)
                 listado.remove(elem)
-            else:
-                print("Ningun elemento ha sido prestado")
+                c=c+1
             i=i-1
-        
-
+        if (c!=0):
+            print("\n Los 5 elementos mas prestados son: ")
+            for j in lista:
+                print("\n"+str(j.getNombre())+" >> "+"N° veces prestado: "+str(j.getContador()))
+        else:
+            print ("\n Aun no hay elemntos prestados")
     
 
     def __str__(self):

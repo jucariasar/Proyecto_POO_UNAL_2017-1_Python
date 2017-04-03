@@ -56,6 +56,15 @@ class Empleado:
     def setEmail(self, email):
         self._email = email
 
+    def getElementos(self):
+        return self._elementos
+
+    def setaddElemento(self, elem):
+        self._elementos.append(elem)
+
+    def setdelElemento(self, elem):
+        self._elementos.remove(elem)
+
     def __str__(self):
         return("\n Nombre del Empleado: " + str(self.getNombre()) + " " + str(self.getApellido()) + 
             "\n N° Identificacion: " + str(self.getIdent()) + "\nRoll: " + str(self.getRoll()) +
@@ -79,12 +88,23 @@ class Empleado:
         else:
             print("Ningun empleado ha prestado elementos")
 
-    #@staticmethod
-    #def MasValorPrestado(listado):
-
-
-
-
+    @staticmethod
+    def MasValorPrestado(listado):
+        mayor=0
+        emp=""
+        for e in listado:
+            suma=0
+            for j in e.getElementos():
+                if j.getEstadoActual()==Elemento().estados ['2'] :
+                    suma=j.getValor()+suma
+            if suma>mayor:
+                mayor=suma
+                emp=e
+        if emp!="":
+            print("\n El empleado con mas Valor Prestado es: "+emp.getNombre()+" "+emp.getApellido())
+            print("\n El valor total prestado por el empleado actualmente es: "+ mayor )
+        elif emp=="":
+            print("\n Aun no han sido prestado elementos con valor ")
 
     @staticmethod
     def ListadoEmpleados(listado):
@@ -99,4 +119,52 @@ class Empleado:
                 return e
         return None
 
+    @staticmethod
+    def MasHaPrestado(listado):
+        elemPrest=0
+        emp=""
+        for e in listado:
+            if (e.getContador()>elemPrest):
+                elemPrest=e.getContador()
+                emp=e
+        if(emp!=""):
+            print("El empleado que mas ha prestado elementos es: ")
+            print ("\n"+str(emp.getNombre())+" "+emp.getApellido()+" >> "+"N° veces que ha prestado: "+str(emp.getContador()))
+        else:
+            print("\n Ningun elemento ha sido prestado")
 
+    @staticmethod
+    def RollEstrella(listado):
+        elemPrest1=0
+        elemPrest2=0
+        elemPrest3=0
+        elemPrest4=0
+        for e in listado:
+            if (e.getRoll()==Empleado().tiposEmpleado['1']):
+                elemPrest1=e.getContador()+elemPrest1
+                
+            elif (e.getRoll()==Empleado().tiposEmpleado['2']):
+                elemPrest2=e.getContador()+elemPrest2
+
+            elif(e.getRoll()==Empleado().tiposEmpleado['3']):
+                elemPrest3=e.getContador()+elemPrest3
+
+            elif (e.getRoll()==Empleado().tiposEmpleado['4']):
+                elemPrest4=e.getContador()+elemPrest4
+
+        roll=max(elemPrest1,elemPrest2,elemPrest3,elemPrest4)   
+        if(roll>0):
+            if(roll==elemPrest1):
+                print("El roll que mas ha prestado elementos es: ")
+                print ("\n"+Empleado().tiposEmpleado['1']+" >> "+"N° veces que han prestado: "+str(elemPrest1))
+            elif(roll==elemPrest2):
+                print("El roll que mas ha prestado elementos es: ")
+                print ("\n"+Empleado().tiposEmpleado['2']+" >> "+"N° veces que han prestado: "+str(elemPrest2))
+            elif(roll==elemPrest3):
+                print("El roll que mas ha prestado elementos es: ")
+                print ("\n"+Empleado().tiposEmpleado['3']+" >> "+"N° veces que han prestado: "+str(elemPrest3))
+            elif(roll==elemPrest4):
+                print("El roll que mas ha prestado elementos es: ")
+                print ("\n"+Empleado().tiposEmpleado['4']+" >> "+"N° veces que han prestado: "+str(elemPrest4))
+        else:
+            print("\n Ningun elemento ha sido prestado")

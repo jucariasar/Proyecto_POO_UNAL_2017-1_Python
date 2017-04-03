@@ -36,20 +36,28 @@ class Almacen:
                         print("\nCon que Roll Desea Ingresar:\n")
                         print("1. Como Administrador del Almacen.")
                         print("2. Como Empleado NO Administrador.")
+                        print("3. Desea volver al menu principal.")
                         opt = int(input("\nIngrese su Opcion: "))
                         if opt == 1:
                             self.autenticacionAdministradorAlmacen(emp)
-                            salir = True
-                            salir2 = True
+
                         elif opt == 2:
                             self.menuEmpleado(emp)
-                            salir = True
-                            salir2 = True
+                            salir2=True
+                            salir=True
+                        elif opt==3:
+                            salir2=True
+                            salir=True
+
                         else:
                             print("\n%d %s" % (opt, "No es una opcion Valida"))
                 else: 
                     self.menuEmpleado(emp)
-                    salir = True
+                    op=input("\n Desea salir del sistema? (S/N): ")
+                    if op=="S":
+                        salir=True
+                    elif op=="N":
+                        pass
             else:
                 print("\nE-mail y/o Documento Invalido\n")
                 # probando algo con un delay y regerso al menu en caso de error 
@@ -71,22 +79,22 @@ class Almacen:
 
     def menuAdministradorAlmacen(self, admin):
         salir = False
-        while(salir == False or salirTotal == False):
+        while(salir == False ):
             print("\nMenu de Usuario Administrador del Almacen:")
             print("\n1. Ir al Menu de Consultas.")
             print("2. Ir al Menu de Registros / Borrados.")
             print("3. Prestar / Recibir.")
-            print("4. Salir.") # Falta programar estas funcionalidad bien
+            print("4. Cerrar Sesion de Administrador.") 
             op = input("\nIngrese su Opcion: ")
             if op == "1":
                 self.menu1AdministradorAlmacen()
-                salir = True
+                
             elif op == "2":
                 self.menu2AdministradorAlmacen()
-                salir = True
+                
             elif op == "3":
                 self.menu3AdministradorAlmacen()
-                salir = True
+                
             elif op == "4":
                 salir = True
             else:
@@ -109,19 +117,19 @@ class Almacen:
             if (op == "1"):
                 Elemento().ElementosDisponibles(self._elementos)
             elif(op =="2"):
-                Elemento().ElementosPrestados(self._elementos)
+                Elemento().ElementosPrestados(admin._elementos)
             elif(op == "3"):
-                Elemento().ReservarElementos(self._elementos)
+                Elemento().ReservarElementos(self._elementos, admin)
             elif(op == "4"):
-                Elemento().ModificarReserva(self._elementos)
+                Elemento().ModificarReserva(admin._elementos, admin)
             elif(op == "5"):
                 break
             else:
                 print("Opcion erronea")
 
     def menu1AdministradorAlmacen(self):
-        salir = False
-        while(salir == False):
+        i=1
+        while(i== 1):
             print("\n¿Que consulta desea realizar?\n")
             print("1. Consultar Inventario de Elementos.")
             print("2. Consultar Base de Datos de Empleados.")
@@ -147,12 +155,11 @@ class Almacen:
             elif(op == 6):
                 Empleado().MasValorPrestado(self._empleados)
             elif(op == 7):
-                pass
+                Empleado().MasHaPrestado(self._empleados)
             elif(op == 8):
-                pass
+                Empleado().RollEstrella(self._empleados)
             elif(op == 9):
-                salirTotal = False
-                salir = True
+                break
             else:
                 print("\n%s %s" % (op, "No es una opcio valida"))
 

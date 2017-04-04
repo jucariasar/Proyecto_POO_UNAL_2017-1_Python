@@ -237,7 +237,7 @@ class Elemento:
 
     @staticmethod
     def reservarElementos(listado, emp):
-        if ((emp.getNumRestriccion() >= Administrativo.MAX_AD) or (emp.getNumRestriccion() >= IngenieroTecnico.MAX_IT) or (emp.getNumRestriccion() >= Operario.MAX_OP)):
+        if (isinstance(emp, Administrativo) and emp.getNumRestriccion() >= Administrativo.MAX_AD) or (isinstance(emp, IngenieroTecnico) and emp.getNumRestriccion() >= IngenieroTecnico.MAX_IT) or (isinstance(emp, Operario) and emp.getNumRestriccion() >= Operario.MAX_OP):
             print("El usuario no esta autorizado para realizar reservas!")
         else:    
             Elemento().elementosDisponibles(listado)

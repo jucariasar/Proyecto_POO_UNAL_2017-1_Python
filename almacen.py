@@ -1,4 +1,3 @@
-#PRUEBA DE POO
 from empleado import Empleado
 from administrativo import Administrativo
 from ingenierotecnico import IngenieroTecnico
@@ -9,16 +8,18 @@ from historialprestamo import HistorialPrestamo
 import sys
 import time
 
-salirTotal = False
+
 class Almacen:
+    salirTotal = False    
     def __init__(self):
         self._empleados = []
         self._elementos = []
-        self._historial = []
+        #self._historial = [] Se paso como estatico para la clase historial
         self._seleccion ={
         "1":self.crearDatosFicticios,
-        "2":self.ingresarAlSistema,
-        "3":self.salir
+        "2":self.crearDatosFicticiosDeUntxt,
+        "3":self.ingresarAlSistema,
+        "4":self.salir
         }
 
 
@@ -36,25 +37,32 @@ class Almacen:
                         print("\nCon que Roll Desea Ingresar:\n")
                         print("1. Como Administrador del Almacen.")
                         print("2. Como Empleado NO Administrador.")
+                        print("3. Desea volver al menu principal.")
                         opt = int(input("\nIngrese su Opcion: "))
                         if opt == 1:
                             self.autenticacionAdministradorAlmacen(emp)
-                            salir = True
-                            salir2 = True
+                            #salir = True
+                            #salir2 = True
                         elif opt == 2:
                             self.menuEmpleado(emp)
+                            salir = True
+                            salir2 = True
+                        elif opt == 3:
                             salir = True
                             salir2 = True
                         else:
                             print("\n%d %s" % (opt, "No es una opcion Valida"))
                 else: 
                     self.menuEmpleado(emp)
-                    salir = True
+                    op=input("\n Desea salir del sistema? (S/N): ")
+                    if op=="S":
+                        salir=True
+                    elif op=="N":
+                        pass
             else:
                 print("\nE-mail y/o Documento Invalido\n")
                 # probando algo con un delay y regerso al menu en caso de error 
             
-
 
      
     def autenticacionAdministradorAlmacen(self, admin):
@@ -71,22 +79,22 @@ class Almacen:
 
     def menuAdministradorAlmacen(self, admin):
         salir = False
-        while(salir == False or salirTotal == False):
+        while(salir == False):
             print("\nMenu de Usuario Administrador del Almacen:")
             print("\n1. Ir al Menu de Consultas.")
             print("2. Ir al Menu de Registros / Borrados.")
             print("3. Prestar / Recibir.")
-            print("4. Salir.") # Falta programar estas funcionalidad bien
+            print("4. Cerrar Sesion de Administrador.") # Falta programar estas funcionalidad bien
             op = input("\nIngrese su Opcion: ")
             if op == "1":
                 self.menu1AdministradorAlmacen()
-                salir = True
+                #salir = True
             elif op == "2":
                 self.menu2AdministradorAlmacen()
-                salir = True
+                #salir = True
             elif op == "3":
                 self.menu3AdministradorAlmacen()
-                salir = True
+                #salir = True
             elif op == "4":
                 salir = True
             else:
@@ -94,6 +102,33 @@ class Almacen:
 
 
     def menuEmpleado(self, admin):
+<<<<<<< HEAD
+        salir = False
+        while salir == False:
+            print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
+            print("¿Que desea hacer?\n")
+            print("1. Consultar Elementos Disponibles.")
+            print("2. Consultar Elementos Prestados.")
+            print("3. Reservar Elementos para Prestar.")
+            print("4. Modificar Reserva de Elementos.")
+            print("5. Cerrar Sesion de Usuario.")
+
+            op = input("\nIngrese su opcion: ")
+            if op == "1":
+                Elemento().elementosDisponibles(self._elementos)
+            elif(op =="2"):
+                Elemento().elementosPrestados(admin._elementos)
+            elif(op == "3"):
+                Elemento().reservarElementos(self._elementos, admin)
+            elif(op == "4"):
+                Elemento().modificarReserva(admin._elementos, admin)
+            elif(op == "5"):
+                salir = True
+            else:
+                print("Opcion erronea")
+            
+
+=======
         print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
         print("¿Que desea hacer?\n")
         print("1. Consultar Elementos Disponibles.")
@@ -117,6 +152,7 @@ class Almacen:
             pass
         else(op == 6):
             pass
+>>>>>>> refs/remotes/origin/Version_1
 
     def menu1AdministradorAlmacen(self):
         salir = False
@@ -134,6 +170,15 @@ class Almacen:
             op = int(input("\nIngrese su opcion: "+'\n'))
         
             if(op == 1):
+<<<<<<< HEAD
+                Elemento().inventarioElementos(self._elementos)
+            elif(op == 2):
+                Empleado().listadoEmpleados(self._empleados) # Para Empleado
+            elif(op == 3):
+                Elemento().masPrestado(self._elementos)
+            elif(op == 4):
+                Elemento().cincoMasPrestados(self._elementos)
+=======
                 Elemento().InventarioElementos(self._elementos)
             elif(op == 2):
                 Empleado().ListadoEmpleados(self._empleados)
@@ -141,39 +186,150 @@ class Almacen:
                 Elemento().MasPrestado(self._elementos)
             elif(op == 4):
                 Elemento().CincoMasPrestados(self._elementos)
+>>>>>>> refs/remotes/origin/Version_1
             elif(op == 5):
-                pass
+                Empleado().masElemPrestados(self._empleados) # Para Empleado
             elif(op == 6):
-                pass
+                Empleado().masValorPrestado(self._empleados) # Para Empleado
             elif(op == 7):
-                pass
+                Empleado().masHaPrestado(self._empleados) # Para Empleado
             elif(op == 8):
-                pass
+                Empleado().rollEstrella(self._empleados) # Para Empleado
             elif(op == 9):
-                salirTotal = False
                 salir = True
             else:
                 print("\n%s %s" % (op, "No es una opcio valida"))
 
 
     def menu2AdministradorAlmacen(self):
-        print("\n¿Que desea hacer?\n")
-        print("1. Registrar Empleado.")
-        print("2. Registrar Elemento.")
-        print("3. Eliminar Empleado.")
-        print("4. Eliminar Elemento.")
-        print("5. Volver al Menu Anterior.")
+        salir = False
+        while salir == False :
+
+            print("\n¿Que desea hacer?\n")
+            print("1. Registrar Empleado.")
+            print("2. Registrar Elemento.")
+            print("3. Eliminar Empleado.")
+            print("4. Eliminar Elemento.")
+            print("5. Volver al Menu Anterior.")
+            op = input("\nIngrese su opcion: ")
+            # Resta implementar las funcionalidades
+            if op == "1":
+                   self.menuRegistrarEmpleado()
+            elif op == "2":
+                   Elemento().registrarElemento(self)
+        
+            elif op == "3":
+                    i = int(input("Ingrese la identificacion del Usuario: "))
+                    emp = Empleado().buscarEmpleadoPorId(self._empleados, i) 
+           
+                    if emp != None:
+                        if (Elemento().verificarPrestamo(emp.getElementos())):
+                          print("El empleado tiene elementos prestados.No puede ser eliminado")
+                        elif(Elemento().verificarReserva(emp.getElementos())):
+                          print("El empleado tiene elementos reservados.Estos pasaran a estar disponibles")
+                          Elemento().cancelarReserva(emp.getElementos())
+                          self._empleados.remove(emp)
+                        else:
+                          self._empleados.remove(emp)
+                    else:
+                       print("Empleado no registrado en la base de datos") 
+            elif op == "4":        
+                    i = int(input("Ingrese el codigo  del elemnto: "))
+                    elm = Elemento().buscarElementoPorId(self._elementos, i)
+                  
+                    if elm != None:
+                        if (Elemento().verificarPrestamo(self._elementos)):
+                           print("El elemento encuentra prestado.No puede ser eliminado")
+                        elif(Elemento().verificarReserva(self._elementos)):
+                           print("El elemento tiene reservas, al eliminar el elemento estas se anularan")
+                           Elemento().cancelarReserva(self._elementos)
+                           self._elementos.remove(elm)
+                        else:
+                           self._elementos.remove(elm)
+                    else:
+                     print("Elemento no registrado en la base de datos") 
+
+            elif op == "5":
+                   salir = True
+            else:
+                   print("%s %s" % (op, "No es una opcion Valida"))                                           
+
+   
+
+
+    def menuRegistrarEmpleado(self):
+        print("\n¿Qué tipo de empleado desea registrar?\n")
+        print("1.Empleado Administrativo.")
+        print("2.Empleado Operario.")
+        print("3.Ingeniero Tecnico.")
         op = input("\nIngrese su opcion: ")
-        # Resta implementar las funcionalidades
+        if op == '1':
+           AdministradorAlmacen().registrarEmpleado(self._empleados)
+        elif op == '2' :
+            Operario().registrarEmpleado(self._empleados)
+        else:
+            IngenieroTecnico().registrarEmpleado(self._empleados)
 
 
     def menu3AdministradorAlmacen(self):
-        print("\n¿Que desea hacer?\n")
-        print("1. Prestar Elementos.")
-        print("2. Recibir Elementos.")
-        print("3. Volver al Menu Anterior.")
-        op = input("\nIngrese su opcion: ")
-        # Resta implementar las funcionalidades
+        salir = False
+        while salir == False:
+
+            print("\n¿Que desea hacer?\n")
+            print("1. Prestar Elementos.")
+            print("2. Recibir Elementos.")
+            print("3. Mostrar Historial.")
+            print("4. Volver al Menu Anterior.")
+            op = input("\nIngrese su opcion: ")
+
+            if op == "1":
+                Elemento().elementosDisponibles(self._elementos)
+                i = int(input("\n Ingrese la identificacion del Usuario: "))
+                emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
+                if emp != None:
+                    if (Elemento().verificarReserva(emp.getElementos())):
+                        print("\n El usuario actualmente tiene elemento(s) reservado(s): ")
+                        print("\n ¿Que Desea Hacer?:\n")
+                        print(" 1. Asentar la reserva.")
+                        print(" 2. Prestar nuevos elementos.")
+                        print(" 3. Volver.")
+                        op2 = input("\n Escoja su opcion: ")
+                        salir2 = False
+                        while salir2 == False:
+                            if op2 == "1":
+                                Elemento().asentarReserva(emp.getElementos(), emp)
+                                print("\n El elemento Reservado paso a Prestado con Exito")
+                                salir2 = True
+                            elif op2 == "2":
+                                Elemento().prestarElementos(self._elementos, emp)
+                                salir2 = True
+                            elif op2 == "3":
+                                salir2 = True
+                            else:
+                                print("Opcion no valida.")
+                    else:
+                        Elemento().prestarElementos(self._elementos, emp)
+                else:
+                    print("El usuario no se encuentra registrado")
+
+            elif op == "2":
+                i = int(input("\n Ingrese la identificacion del Usuario: "))
+                emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
+                if emp != None:
+                    Elemento().recibirElementos(emp)
+                else:
+                    print("\n El usuario no se encuentra registrado")
+            elif op == "3":
+                if len(HistorialPrestamo().historial) > 0:
+                    print("\n\n El Historial de Prestamos es:")
+                    HistorialPrestamo().mostrarHistorial()
+                else:
+                    print("\n Aun no Existe Historial")
+            elif op == "4":
+                salir = True
+            else:
+                print(" %s %s" % (op, "No es una opcion Valida"))
+        
 
     def crearDatosFicticios(self):
 
@@ -300,33 +456,36 @@ class Almacen:
         self._elementos.append(elemento6)
         
 
-        print ("Datos leidos con exito")
+        print ("\nDatos Leidos con Exito !!!")
+    
+    def crearDatosFicticiosDeUntxt(self):
+        pass
 
 
     def salir(self):
-    	print("Muchas gracias por utilizar la aplicacion")
-    	sys.exit(0)
+        print("\nMuchas gracias por utilizar la aplicacion")
+        sys.exit(0)
 
 
 
     # Primer menu
     def menu(self):
-    	break_while = 1
-    	while break_while == 1:
+        break_while = 1
+        while break_while == 1:
 
-    		print("")
-    		print("1. Crear Datos Ficticios.")
-    		print("2. Ingresar al sistema.")
-    		print("3. Salir.")
-    		op = input("\nIngrese su Opcion: ")
-    		accion = self._seleccion.get(op)
-    		if(accion):
-    			accion()
-    		else:
-    			os.system.cls
-    			print("%s %s" % (op, "No es una opcion valida"))
+            print("")
+            print("1. Crear Datos Ficticios.")
+            print("2. Crear Datos Ficticios Desde un txt.")
+            print("3. Ingresar al sistema.")
+            print("4. Salir.")
+            op = input("\nIngrese su Opcion: ")
+            accion = self._seleccion.get(op)
+            if(accion):
+                accion()
+            else:
+                print("%s %s" % (op, "No es una opcion valida"))
 
 
 if __name__ == "__main__":
-	a = Almacen()
-	a.menu()
+    a = Almacen()
+    a.menu()

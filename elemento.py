@@ -91,10 +91,27 @@ class Elemento:
         return False
 
     @staticmethod
+    def cancelarReserva(listado):
+        for element in listado:
+            if(element.getEstadoActual() == Elemento().estados['3']):
+              element.setEstadoActual(Elemento().estados['1'])
+
+
+
+    @staticmethod
+    def verificarPrestamo(listado):
+        for element in listado:
+            if(element.getEstadoActual() == Elemento().estados['2']):
+                return True
+        return False
+
+
+
+    @staticmethod
     def prestarElementos(listado, e): # Agregado por Camilo (El metodo recibe la BD de elementos y un empleado)
         seguirPres = True
         while seguirPres == True:
-            if (isinstance(e, Administrativo) and e.getNumRestriccion() <= Administrativo.MAX_AD and seguirPres == True) or (isinstance(e, IngenieroTecnico) and e.getNumRestriccion() <= IngenieroTecnico.MAX_IT and seguirPres == True) or (isinstance(e, Operario) and e.getNumRestriccion() <= Operario.MAX_OP and seguirPres == True):
+            if (isinstance(e, Administrativo) and e.getNumRestriccion() < Administrativo.MAX_AD and seguirPres == True) or (isinstance(e, IngenieroTecnico) and e.getNumRestriccion() < IngenieroTecnico.MAX_IT and seguirPres == True) or (isinstance(e, Operario) and e.getNumRestriccion() < Operario.MAX_OP and seguirPres == True):
 
                 cod = int(input("\n Ingrese el codigo del elemento a prestar: "))
                 element = Elemento().buscarElementoPorId(listado, cod)
@@ -110,7 +127,11 @@ class Elemento:
                     HistorialPrestamo().agregarAHistorial(e, element)
                     op = input("\n Desea Prestar mas Elementos? (S/N): ")
                     if(op == "S"):
-                        seguirPres = True
+                        if(isinstance(e, Administrativo) and e.getNumRestriccion() < Administrativo.MAX_AD) or (isinstance(e, IngenieroTecnico) and e.getNumRestriccion() < IngenieroTecnico.MAX_IT) or (isinstance(e, Operario) and e.getNumRestriccion() < Operario.MAX_OP):
+                            seguirPres = True
+                        else:
+                            print("\n Este Usuario ya No Puede Prestar mas Elementos.")
+                            seguirPres = False
                     elif op == "N":
                         seguirPres = False
                     else:
@@ -141,7 +162,7 @@ class Elemento:
                     HistorialPrestamo().agregarFechaEntrega(emp, element)
                     element.setFechaPrestamo(None)
                     emp.getElementos().remove(element)
-                    op = input("\n Desea seguir entregando? (S/N) ")
+                    op = input("\n Desea seguir entregando? (S/N): ")
                     if op == "S":
                         seguirEntregando = True
                     elif op == "N":
@@ -200,35 +221,53 @@ class Elemento:
                 c = c + 1
         if (c == 0):
             print("\n No hay elementos prestados")
+    
+
+    @staticmethod
+    def registrarElemento(self):
+        elemento = Elemento()
+       
+        elemento.setCodigo(int(input("\nIngrese codigo del elemento:")))
+        elemento.setNombre(str(input("Ingrese nombre del elemento:")))
+        elemento.setUbicacion(str(input("Ingrese la ubicacion del elemento:")))
+        elemento.setValor(int(input("Ingrese valor economico del elemento:")))
+        elemento.setEstadoActual(Elemento().estados['1'])
+        self._elementos.append(elemento) 
+
 
     @staticmethod
     def reservarElementos(listado, emp):
-        Elemento().elementosDisponibles(listado)
-        re = int(input ("\n Ingrese codigo del elemento que desea reservar: "))
-        elemdis=[]
-        for e in listado:
-            elemdis.append(e.getCodigo())
-        E=False   
-        for k in elemdis:
-            if (k==re):
-                print ("\n Elemento Encotrado con Exito")
-                op = str(input ("\n Desea Reservar?  (S/N): "))
-                if (op == "S"):
-                    for e in listado:
-                        if (re == e.getCodigo()):
-                            e.setEstadoActual(Elemento().estados['3']) 
-                            emp.setaddElemento(e)
-                            print ("\n Elemento Reservado con exito")
-                            E=True
-                            break
-                elif(op=="N"):
-                    print("\n Ok")
+        if ((emp.getNumRestriccion() >= Administrativo.MAX_AD) or (emp.getNumRestriccion() >= IngenieroTecnico.MAX_IT) or (emp.getNumRestriccion() >= Operario.MAX_OP)):
+            print("El usuario no esta autorizado para realizar reservas!")
+        else:    
+            Elemento().elementosDisponibles(listado)
+            re = int(input ("\n Ingrese codigo del elemento que desea reservar: "))
+            elemdis=[]
+            for e in listado:
+                elemdis.append(e.getCodigo())
+            E=False   
+            for k in elemdis:
+                if (k==re):
+                    print ("\n Elemento Encotrado con Exito")
+                    op = str(input ("\n Desea Reservar?  (S/N): "))
+                    if (op == "S"):
+                        for e in listado:
+                            if (re == e.getCodigo()):
+                                e.setEstadoActual(Elemento().estados['3']) 
+                                emp.setaddElemento(e)
+                                emp.setNumRestriccion(emp.getNumRestriccion() + 1) # La agrego Camilo, es para que aumente ese contador de restriccion de numero de elementos cuando se reserva
+                                print ("\n Elemento Reservado con exito")
+                                E=True
+                                break
+                    elif(op=="N"):
+                        print("\n Ok")
             
-                else:
-                    print("\n Opcion erronea")
-        if(E==False):
-            print("\n Elemento no encontrado")  
+                    else:
+                        print("\n Opcion erronea")
+            if(E==False):
+                print("\n Elemento no encontrado")  
             
+
 
     @staticmethod
     def modificarReserva(listado, emp):
@@ -248,7 +287,8 @@ class Elemento:
                 if (op == "S"):
                     for e in listado:
                         if (cr == e.getCodigo()):
-                            e.setEstadoActual( Elemento().estados['1']) 
+                            e.setEstadoActual( Elemento().estados['1'])
+                            emp.setNumRestriccion(emp.getNumRestriccion() - 1) # La agrego Camilo para que le reste a la variable que controla la restriccion 
                             emp.setdelElemento(e)
                             print ("\n Reserva cancelada  con éxito")
                             

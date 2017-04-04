@@ -17,8 +17,9 @@ class Almacen:
         #self._historial = [] Se paso como estatico para la clase historial
         self._seleccion ={
         "1":self.crearDatosFicticios,
-        "2":self.ingresarAlSistema,
-        "3":self.salir
+        "2":self.crearDatosFicticiosDeUntxt,
+        "3":self.ingresarAlSistema,
+        "4":self.salir
         }
 
 
@@ -166,14 +167,73 @@ class Almacen:
 
 
     def menu2AdministradorAlmacen(self):
-        print("\n¿Que desea hacer?\n")
-        print("1. Registrar Empleado.")
-        print("2. Registrar Elemento.")
-        print("3. Eliminar Empleado.")
-        print("4. Eliminar Elemento.")
-        print("5. Volver al Menu Anterior.")
+        salir = False
+        while salir == False :
+
+            print("\n¿Que desea hacer?\n")
+            print("1. Registrar Empleado.")
+            print("2. Registrar Elemento.")
+            print("3. Eliminar Empleado.")
+            print("4. Eliminar Elemento.")
+            print("5. Volver al Menu Anterior.")
+            op = input("\nIngrese su opcion: ")
+            # Resta implementar las funcionalidades
+            if op == "1":
+                   self.menuRegistrarEmpleado()
+            elif op == "2":
+                   Elemento().registrarElemento(self)
+        
+            elif op == "3":
+                    i = int(input("Ingrese la identificacion del Usuario: "))
+                    emp = Empleado().buscarEmpleadoPorId(self._empleados, i) 
+           
+                    if emp != None:
+                        if (Elemento().verificarPrestamo(emp.getElementos())):
+                          print("El empleado tiene elementos prestados.No puede ser eliminado")
+                        elif(Elemento().verificarReserva(emp.getElementos())):
+                          print("El empleado tiene elementos reservados.Estos pasaran a estar disponibles")
+                          Elemento().cancelarReserva(emp.getElementos())
+                          self._empleados.remove(emp)
+                        else:
+                          self._empleados.remove(emp)
+                    else:
+                       print("Empleado no registrado en la base de datos") 
+            elif op == "4":        
+                    i = int(input("Ingrese el codigo  del elemnto: "))
+                    elm = Elemento().buscarElementoPorId(self._elementos, i)
+                  
+                    if elm != None:
+                        if (Elemento().verificarPrestamo(self._elementos)):
+                           print("El elemento encuentra prestado.No puede ser eliminado")
+                        elif(Elemento().verificarReserva(self._elementos)):
+                           print("El elemento tiene reservas, al eliminar el elemento estas se anularan")
+                           Elemento().cancelarReserva(self._elementos)
+                           self._elementos.remove(elm)
+                        else:
+                           self._elementos.remove(elm)
+                    else:
+                     print("Elemento no registrado en la base de datos") 
+
+            elif op == "5":
+                   salir = True
+            else:
+                   print("%s %s" % (op, "No es una opcion Valida"))                                           
+
+   
+
+
+    def menuRegistrarEmpleado(self):
+        print("\n¿Qué tipo de empleado desea registrar?\n")
+        print("1.Empleado Administrativo.")
+        print("2.Empleado Operario.")
+        print("3.Ingeniero Tecnico.")
         op = input("\nIngrese su opcion: ")
-        # Resta implementar las funcionalidades
+        if op == '1':
+           AdministradorAlmacen().registrarEmpleado(self._empleados)
+        elif op == '2' :
+            Operario().registrarEmpleado(self._empleados)
+        else:
+            IngenieroTecnico().registrarEmpleado(self._empleados)
 
 
     def menu3AdministradorAlmacen(self):
@@ -336,31 +396,35 @@ class Almacen:
         self._elementos.append(elemento4)
 
         print ("\nDatos Leidos con Exito !!!")
+    
+    def crearDatosFicticiosDeUntxt(self):
+        pass
 
 
     def salir(self):
-    	print("\nMuchas gracias por utilizar la aplicacion")
-    	sys.exit(0)
+        print("\nMuchas gracias por utilizar la aplicacion")
+        sys.exit(0)
 
 
 
     # Primer menu
     def menu(self):
-    	break_while = 1
-    	while break_while == 1:
+        break_while = 1
+        while break_while == 1:
 
-    		print("")
-    		print("1. Crear Datos Ficticios.")
-    		print("2. Ingresar al sistema.")
-    		print("3. Salir.")
-    		op = input("\nIngrese su Opcion: ")
-    		accion = self._seleccion.get(op)
-    		if(accion):
-    			accion()
-    		else:
-    			print("%s %s" % (op, "No es una opcion valida"))
+            print("")
+            print("1. Crear Datos Ficticios.")
+            print("2. Crear Datos Ficticios Desde un txt.")
+            print("3. Ingresar al sistema.")
+            print("4. Salir.")
+            op = input("\nIngrese su Opcion: ")
+            accion = self._seleccion.get(op)
+            if(accion):
+                accion()
+            else:
+                print("%s %s" % (op, "No es una opcion valida"))
 
 
 if __name__ == "__main__":
-	a = Almacen()
-	a.menu()
+    a = Almacen()
+    a.menu()

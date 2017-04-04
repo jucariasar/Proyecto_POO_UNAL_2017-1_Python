@@ -9,6 +9,7 @@ class Empleado:
         self._nombre = nombre
         self._apellido = apellido
         self._numElementPrest = numElementPrest
+        self._numRestriccion = 0 # Variable nueva, para que entre reservas y prestamos un usuario no pueda prestar masde lo que su rol le permite
         self._roll = roll  # Son los tipos del diccionario tiposEmpleado
         self._contador = 0
         self._email = email
@@ -59,8 +60,11 @@ class Empleado:
     def getElementos(self):
         return self._elementos
 
-    #def setElementos(self, e): ## Revisar que no este utilizando este método mas adelante
-    #   self.append._elementos(e) Sobretodo cuando se presta o se entegan elementos
+    def getNumRestriccion(self):  # Retorna valor de Variable Nueva
+        return self._numRestriccion
+
+    def setNumRestriccion(self, num): # Establece Valor de Variable Nueva
+        self._numRestriccion = num
 
     def setaddElemento(self, elem):
         self._elementos.append(elem)
@@ -116,14 +120,14 @@ class Empleado:
         for e in listado:
             suma=0
             for j in e.getElementos():
-                if j.getEstadoActual()==Elemento().estados ['2'] :
+                if j.getEstadoActual()=="Prestado" : # Problemas con la importacion
                     suma=j.getValor()+suma
             if suma>mayor:
                 mayor=suma
                 emp=e
         if emp!="":
             print("\n El empleado con mas Valor Prestado es: "+emp.getNombre()+" "+emp.getApellido())
-            print("\n El valor total prestado por el empleado actualmente es: "+ mayor )
+            print("\n El valor total prestado por el empleado actualmente es: "+ str(mayor) )
         elif emp=="":
             print("\n Aun no han sido prestado elementos con valor ")
 

@@ -188,20 +188,22 @@ class Almacen:
             op = input("\nIngrese su opcion: ")
 
             if op == "1":
-                i = int(input("Ingrese la identificacion del Usuario: "))
+                Elemento().elementosDisponibles(self._elementos)
+                i = int(input("\n Ingrese la identificacion del Usuario: "))
                 emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
                 if emp != None:
                     if (Elemento().verificarReserva(emp.getElementos())):
-                        print("El usuario actualmente tiene elemento(s) reservado(s): ")
-                        print("Desea: ")
-                        print("1. Asentar la reserva.")
-                        print("2. Prestar nuevos elementos.")
-                        print("3. Volver.")
-                        op2 = input("Escoja su opcion: ")
-                        salir2 = True
+                        print("\n El usuario actualmente tiene elemento(s) reservado(s): ")
+                        print("\n ¿Que Desea Hacer?:\n")
+                        print(" 1. Asentar la reserva.")
+                        print(" 2. Prestar nuevos elementos.")
+                        print(" 3. Volver.")
+                        op2 = input("\n Escoja su opcion: ")
+                        salir2 = False
                         while salir2 == False:
                             if op2 == "1":
-                                Elemento().asentarReserva(emp.getElementos())
+                                Elemento().asentarReserva(emp.getElementos(), emp)
+                                print("\n El elemento Reservado paso a Prestado con Exito")
                                 salir2 = True
                             elif op2 == "2":
                                 Elemento().prestarElementos(self._elementos, emp)
@@ -216,18 +218,22 @@ class Almacen:
                     print("El usuario no se encuentra registrado")
 
             elif op == "2":
-                i = int(input("Ingrese la identificacion del Usuario: "))
+                i = int(input("\n Ingrese la identificacion del Usuario: "))
                 emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
                 if emp != None:
                     Elemento().recibirElementos(emp)
                 else:
-                    print("El usuario no se encuentra registrado")
+                    print("\n El usuario no se encuentra registrado")
             elif op == "3":
-                HistorialPrestamo().mostrarHistorial()
+                if len(HistorialPrestamo().historial) > 0:
+                    print("\n\n El Historial de Prestamos es:")
+                    HistorialPrestamo().mostrarHistorial()
+                else:
+                    print("\n Aun no Existe Historial")
             elif op == "4":
                 salir = True
             else:
-                print("%s %s" % (op, "No es una opcion Valida"))
+                print(" %s %s" % (op, "No es una opcion Valida"))
         
 
     def crearDatosFicticios(self):
@@ -329,11 +335,11 @@ class Almacen:
         elemento4.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento4)
 
-        print ("Datos leidos con exito")
+        print ("\nDatos Leidos con Exito !!!")
 
 
     def salir(self):
-    	print("Muchas gracias por utilizar la aplicacion")
+    	print("\nMuchas gracias por utilizar la aplicacion")
     	sys.exit(0)
 
 

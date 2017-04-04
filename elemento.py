@@ -94,70 +94,76 @@ class Elemento:
     def prestarElementos(listado, e): # Agregado por Camilo (El metodo recibe la BD de elementos y un empleado)
         seguirPres = True
         while seguirPres == True:
+            if (isinstance(e, Administrativo) and e.getNumRestriccion() <= Administrativo.MAX_AD and seguirPres == True) or (isinstance(e, IngenieroTecnico) and e.getNumRestriccion() <= IngenieroTecnico.MAX_IT and seguirPres == True) or (isinstance(e, Operario) and e.getNumRestriccion() <= Operario.MAX_OP and seguirPres == True):
 
-            if (isinstance(e, Administrativo) and e.getNumElementPres() <= Administrativo.MAX_AD and seguirPres == True) or (isinstance(e, IngenieroTecnico) and e.getNumElementPres() <= IngenieroTecnico.MAX_IT and seguirPres == True) or (isinstance(e, Operario) and e.getNumElementPres() <= Operario.MAX_OP and seguirPres == True):
-                cod = int(input("Ingrese el codigo del elemento a prestar: "))
+                cod = int(input("\n Ingrese el codigo del elemento a prestar: "))
                 element = Elemento().buscarElementoPorId(listado, cod)
 
                 if element != None and element.getEstadoActual() == Elemento().estados['1']:
                     e.getElementos().append(element) # Cambie e._elementos por e.getElementos()
-                    e.setContador(e.getContador() + 1)
-                    e.setNumElementPres(e.getNumElementPres() + 1)
+                    e.setContador(e.getContador() + 1) # El numero de elementos que ha prestado en la historia ya sea que los haya devuelto o no
+                    e.setNumElementPres(e.getNumElementPres() + 1) # Lo tiene actualmente prestado
+                    e.setNumRestriccion(e.getNumRestriccion() + 1) # Lo que tiene entre prestados y reservados
                     element.setContador(element.getContador() + 1)
                     element.setEstadoActual(Elemento().estados['2']) #El elemento queda marcado como prestado
                     element.setFechaPrestamo(datetime.now())
                     HistorialPrestamo().agregarAHistorial(e, element)
-                    op = input("Desea prestar mas elementos s/n: ")
-                    if(op == "s"):
+                    op = input("\n Desea Prestar mas Elementos? (S/N): ")
+                    if(op == "S"):
                         seguirPres = True
-                    elif op == "n":
+                    elif op == "N":
                         seguirPres = False
                     else:
-                        print("Opcion Invalida")
+                        print("\n Opcion Invalida")
                 elif element != None and element.getEstadoActual() == Elemento().estados['2']:
-                    print("El elemento se encuentra perestado")
+                    print("\n Lo Sentimos el elemento se encuentra perestado")
                 elif element != None and element.getEstadoActual() == Elemento().estados['3']:
-                    print("El elementos se encuentra reservado")
+                    print("\n Lo Sentimos el Elemento se Encuentra Reservado")
                 else:
-                    print("El código NO se encuentra registrado en la BD")
+                    print("\n El código NO se Encuentra Registrado en la BD")
             else:
-                print("El empleado ya no puede prestar mas elementos")
+                print("\n El Empleado ya no Puede Prestar mas Elementos")
                 seguirPres = False
 
 
     @staticmethod
     def recibirElementos(emp):
         seguirEntregando = True
+        Elemento().elementosPrestados(emp.getElementos())
         while(seguirEntregando == True): 
-            if len(emp.getElementos()) > 0:
-                cod = int(input("Ingrese el codigo del elementos que va a entregar: "))
+            if emp.getNumElementPres() > 0:
+                cod = int(input("\n Ingrese el codigo del elementos que va a entregar: "))
                 element = Elemento().buscarElementoPorId(emp.getElementos(), cod)
                 if element != None:
                     element.setEstadoActual(Elemento().estados['1'])
                     emp.setNumElementPres(emp.getNumElementPres() - 1)
+                    emp.setNumRestriccion(emp.getNumRestriccion() - 1)
                     HistorialPrestamo().agregarFechaEntrega(emp, element)
                     element.setFechaPrestamo(None)
                     emp.getElementos().remove(element)
-                    op = input("Desea seguir entregando s/n: ")
-                    if op == "s":
+                    op = input("\n Desea seguir entregando? (S/N) ")
+                    if op == "S":
                         seguirEntregando = True
-                    elif op == "n":
+                    elif op == "N":
                         seguirEntregando = False
                     else:
-                        print("Opcion Invalida")
+                        print("\n Opcion Invalida")
                 else:
-                    print("Codigo no encontrado en sus elementos prestados.")
+                    print("\n Codigo no encontrado en sus elementos prestados.")
             else:
-                print("El usuario no tiene elementos prestados.")
+                print("\n El usuario no tiene elementos prestados.")
                 seguirEntregando = False
 
     @staticmethod
-    def asentarReserva(listElementEmp):
+    def asentarReserva(listElementEmp, emp): # Recibe un parametro mas emp
         for element in listElementEmp:
             if(element.getEstadoActual() == Elemento().estados['3']):
                 element.setEstadoActual(Elemento().estados['2'])
-                element.setNumElementPres(getNumElementPres() + 1)
-                element.setContador(getContador() + 1)
+                element.setContador(element.getContador() + 1)
+                element.setFechaPrestamo(datetime.now())
+                emp.setNumElementPres(emp.getNumElementPres() + 1) # Es emp en vez de element
+                emp.setContador(emp.getContador() + 1)
+                HistorialPrestamo().agregarAHistorial(emp, element)
 
 
     @staticmethod
@@ -197,7 +203,7 @@ class Elemento:
 
     @staticmethod
     def reservarElementos(listado, emp):
-        Elemento().ElementosDisponibles(listado)
+        Elemento().elementosDisponibles(listado)
         re = int(input ("\n Ingrese codigo del elemento que desea reservar: "))
         elemdis=[]
         for e in listado:

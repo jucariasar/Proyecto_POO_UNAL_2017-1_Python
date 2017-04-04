@@ -41,14 +41,17 @@ class HistorialPrestamo:
     def getFechaDevolucion(self): 
         return self._fechaDevolucion
     def setFechaDevolucion(self,fechaD):
-        self._fechaDevolucion=fechaD
+        if self.getFechaDevolucion() == None:
+            self._fechaDevolucion = "Elemento Prestado"
+        else:
+            self._fechaDevolucion=fechaD
 
     def __str__(self):
-        return ("Nombre del Empleado: " + self.getNomEmpleado() + '\n' +
-         "N° Identificacion: " + str(self.getIdEmpleado()) + '\n' + 
-         "Nombre del Elemento: " + self.getNomElemento() + '\n' + "Codigo Elemento: " + 
-         str(self.getCodElemento()) + '\n' + "Fecha Prestamo: " + 
-         str(self.getFechaPrestamo()) + '\n' + "Fecha Devolucion: " + str(self.getFechaDevolucion()))
+        return ("\n Nombre del Empleado: " + self.getNomEmpleado() + '\n' +
+         " N° Identificacion: " + str(self.getIdEmpleado()) + '\n' + 
+         " Nombre del Elemento: " + self.getNomElemento() + '\n' + " Codigo Elemento: " + 
+         str(self.getCodElemento()) + '\n' + " Fecha Prestamo: " + 
+         str(self.getFechaPrestamo()) + '\n' + " Fecha Devolucion: " + str(self.getFechaDevolucion()))
 
     @staticmethod
     def agregarAHistorial(emp, element):
@@ -57,6 +60,7 @@ class HistorialPrestamo:
         h.setNomEmpleado(emp.getNombre())
         h.setNomElemento(element.getNombre())
         h.setCodElemento(element.getCodigo())
+        h.setFechaDevolucion(None)
         h.setFechaPrestamo(element.getFechaPrestamo())
         HistorialPrestamo().historial.append(h)
 

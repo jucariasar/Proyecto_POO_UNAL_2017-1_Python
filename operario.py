@@ -1,7 +1,11 @@
 from empleado import Empleado
 
 class Operario(Empleado):
+<<<<<<< HEAD
     MAX_OP = 6 # Constante de clase para controlar el numero máximo de elementos que puede
+=======
+    MAX_OP = 15 # Constante de clase para controlar el numero máximo de elementos que puede
+>>>>>>> refs/remotes/origin/Version_1
                 # prestar un operario
     tipo = {'1':'Mecanico', 
     '2':'Electrico', '3':'Electronico'} # Diccionario estatico para estandarizar los tipos de Operarios
@@ -16,6 +20,7 @@ class Operario(Empleado):
     def setTipo(self, tipo):
         self._tipo = tipo
 
+<<<<<<< HEAD
     
     @staticmethod
     def registrarEmpleado(listEmpleados):
@@ -33,5 +38,7 @@ class Operario(Empleado):
 
 
 
+=======
+>>>>>>> refs/remotes/origin/Version_1
     def __str__(self):
         return(super().__str__() + "\nTipo: " + self.getTipo())

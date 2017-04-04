@@ -102,6 +102,7 @@ class Almacen:
 
 
     def menuEmpleado(self, admin):
+<<<<<<< HEAD
         salir = False
         while salir == False:
             print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
@@ -127,6 +128,31 @@ class Almacen:
                 print("Opcion erronea")
             
 
+=======
+        print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
+        print("¿Que desea hacer?\n")
+        print("1. Consultar Elementos Disponibles.")
+        print("2. Consultar Elementos Prestados.")
+        print("3. Reservar Elementos para Prestar.")
+        print("4. Modificar Reserva de Elementos.")
+        print("5. Cancelar Reserva de Elementos.")
+        print("6. Cerrar Sesion de Usuario.")
+        op = input("\nIngrese su opcion: ")
+        # Resta implementar las funcionalidades
+        if op == "1":
+            Elemento().ElementosDisponibles(self._elementos)
+            input()
+        elif(op == 2):
+            Elemento().ElementosPrestados(self._elementos)
+        elif(op == 3):
+            Elemento().ReservarElementos(self._elementos)
+        elif(op == 4):
+            pass
+        elif(op == 5):
+            pass
+        else(op == 6):
+            pass
+>>>>>>> refs/remotes/origin/Version_1
 
     def menu1AdministradorAlmacen(self):
         salir = False
@@ -141,10 +167,10 @@ class Almacen:
             print("7. Consultar el Empleado que mas Presta.")
             print("8. Consultar el Roll que mas Presta.")
             print("9. Volver al Menu Anterior.")
-            op = int(input("\nIngrese su opcion: "))
-        # Resta implementar las funcionalidades
-
+            op = int(input("\nIngrese su opcion: "+'\n'))
+        
             if(op == 1):
+<<<<<<< HEAD
                 Elemento().inventarioElementos(self._elementos)
             elif(op == 2):
                 Empleado().listadoEmpleados(self._empleados) # Para Empleado
@@ -152,6 +178,15 @@ class Almacen:
                 Elemento().masPrestado(self._elementos)
             elif(op == 4):
                 Elemento().cincoMasPrestados(self._elementos)
+=======
+                Elemento().InventarioElementos(self._elementos)
+            elif(op == 2):
+                Empleado().ListadoEmpleados(self._empleados)
+            elif(op == 3):
+                Elemento().MasPrestado(self._elementos)
+            elif(op == 4):
+                Elemento().CincoMasPrestados(self._elementos)
+>>>>>>> refs/remotes/origin/Version_1
             elif(op == 5):
                 Empleado().masElemPrestados(self._empleados) # Para Empleado
             elif(op == 6):
@@ -356,6 +391,8 @@ class Almacen:
         e5.setTipo("Mecanico")
         self._empleados.append(e5)
 
+        
+
 
         # Se crean varios elementos y se agregan a la lista _elementos
 
@@ -367,6 +404,7 @@ class Almacen:
         elemento1.setValor(250)
         elemento1.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento1)
+        
 
         elemento2 = Elemento()
         elemento2.setCodigo(35)
@@ -376,6 +414,7 @@ class Almacen:
         elemento2.setValor(125)
         elemento2.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento2)
+        
 
         elemento3 = Elemento()
         elemento3.setCodigo(45)
@@ -385,6 +424,7 @@ class Almacen:
         elemento3.setValor(120)
         elemento3.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento3)
+        elemento3.setContador(3)
 
         elemento4 = Elemento()
         elemento4.setCodigo(85)
@@ -394,6 +434,27 @@ class Almacen:
         elemento4.setValor(230)
         elemento4.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento4)
+        
+
+        elemento5 = Elemento()
+        elemento5.setCodigo(26)
+        elemento5.setNombre("Mouse")
+        elemento5.setUbicacion("M7")
+        elemento5.setFechaPrestamo(None)
+        elemento5.setValor(251)
+        elemento5.setEstadoActual(Elemento().estados['1'])
+        self._elementos.append(elemento5)
+        
+
+        elemento6 = Elemento()
+        elemento6.setCodigo(27)
+        elemento6.setNombre("Lapiz")
+        elemento6.setUbicacion("T8")
+        elemento6.setFechaPrestamo(None)
+        elemento6.setValor(250)
+        elemento6.setEstadoActual(Elemento().estados['1'])
+        self._elementos.append(elemento6)
+        
 
         print ("\nDatos Leidos con Exito !!!")
     

@@ -1,7 +1,6 @@
 from empleado import Empleado
 
 class Administrativo(Empleado):
-<<<<<<< HEAD
 	MAX_AD = 2
 	def __init__(self, ident=0, nombre="", apellido="", numElementPrest=0, roll="", email="", grado=0):
 		super().__init__(ident, nombre, apellido, numElementPrest, roll, email)
@@ -13,16 +12,3 @@ class Administrativo(Empleado):
 	def __str__(self):
 		return (super().__str__()+'\n'+ "Grado: "+ self.getGrado())
 		
-=======
-    MAX_AD = 5
-    def __init__(self, ident=0, nombre="", apellido="", numElementPrest=0, roll="", email="", grado=0):
-        super().__init__(ident, nombre, apellido, numElementPrest, roll, email)
-        self._grado = grado
-    def getGrado (self):
-        return self._grado
-    def setGrado (self, grado):
-        self._grado = grado
-    def __str__(self):
-        return (super().__str__()+'\n'+ "Grado: "+ self.getGrado())
-        
->>>>>>> refs/remotes/origin/Version_1

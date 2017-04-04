@@ -9,10 +9,7 @@ class Empleado:
         self._nombre = nombre
         self._apellido = apellido
         self._numElementPrest = numElementPrest
-<<<<<<< HEAD
         self._numRestriccion = 0 # Variable nueva, para que entre reservas y prestamos un usuario no pueda prestar masde lo que su rol le permite
-=======
->>>>>>> refs/remotes/origin/Version_1
         self._roll = roll  # Son los tipos del diccionario tiposEmpleado
         self._contador = 0
         self._email = email
@@ -60,7 +57,6 @@ class Empleado:
     def setEmail(self, email):
         self._email = email
 
-<<<<<<< HEAD
     def getElementos(self):
         return self._elementos
 
@@ -80,18 +76,11 @@ class Empleado:
         return("Nombre del Empleado: " + self.getNombre() + " " + self.getApellido() + 
             "\nN° Identificacion: " + str(self.getIdent()) + "\nRoll: " + self.getRoll() +
             "\nN° de Elementos Prestados: " + str(self.getNumElementPres())+'\n'+"E-mail: "+self.getEmail())
-=======
-    def __str__(self):
-        return("\n Nombre del Empleado: " + str(self.getNombre()) + " " + str(self.getApellido()) + 
-            "\n N° Identificacion: " + str(self.getIdent()) + "\nRoll: " + str(self.getRoll()) +
-            "\n N° de Elementos Prestados: " + str(self.getNumElementPres())+"\n E-mail: "+str(self.getEmail()))
->>>>>>> refs/remotes/origin/Version_1
 
     def str_Empleado(self):
         return("\n Nombre del Empleado: " + str(self.getNombre()) + " " + str(self.getApellido()) + 
             "\n N° Identificacion: " + str(self.getIdent()) + "\n Roll: " + str(self.getRoll()) +
             "\n E-mail: "+str(self.getEmail()))
-<<<<<<< HEAD
 
 # Inicio de métodos estaticos agregados por Camilo
     @staticmethod
@@ -111,10 +100,6 @@ class Empleado:
 
     @staticmethod
     def masElemPrestados(listado):
-=======
-    @staticmethod
-    def MasPrestado(listado):
->>>>>>> refs/remotes/origin/Version_1
         elempres=0
         emp=""
         for e in listado:
@@ -127,7 +112,6 @@ class Empleado:
         else:
             print("Ningun empleado ha prestado elementos")
 
-<<<<<<< HEAD
 
     @staticmethod
     def masValorPrestado(listado):
@@ -208,19 +192,3 @@ class Empleado:
             print("\n Ningun elemento ha sido prestado")
 
 # Fin de métodos estáticos agregados por Pablo y Jaider
-=======
-    @staticmethod
-    def ListadoEmpleados(listado):
-            print("La base de datos actual de empleados es: ")
-            for emp in listado:
-                    print(emp.str_Empleado())
-
-    @staticmethod
-    def buscarEmpleadoPorId(listado, i):
-        for e in listado:
-            if (e.getIdent() == i):
-                return e
-        return None
-
-
->>>>>>> refs/remotes/origin/Version_1

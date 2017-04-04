@@ -1,11 +1,7 @@
 from empleado import Empleado
 
 class IngenieroTecnico(Empleado):
-<<<<<<< HEAD
     MAX_IT = 4 # Constante de clase para controlar el numero máximo de elementos que puede prestar 
-=======
-    MAX_IT = 10 # Constante de clase para controlar el numero máximo de elementos que puede prestar 
->>>>>>> refs/remotes/origin/Version_1
                 #un IngenieroTecnico
     areas = {'1':'Mantenimiento', '2':'Produccion', 
     '3':'Calidad'}
@@ -20,7 +16,6 @@ class IngenieroTecnico(Empleado):
     def setArea(self, area):
         self._areaEncargada = area
 
-<<<<<<< HEAD
     @staticmethod
     def registrarEmpleado(listEmpleados):
         empleado = IngenieroTecnico()
@@ -37,7 +32,5 @@ class IngenieroTecnico(Empleado):
 
 
 
-=======
->>>>>>> refs/remotes/origin/Version_1
     def __str__(self):
         return (super().__str__() + "\nArea Encargada: " + self.getArea())

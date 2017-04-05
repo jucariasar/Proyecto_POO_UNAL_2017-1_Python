@@ -5,6 +5,7 @@ from operario import Operario
 from administradoralmacen import AdministradorAlmacen
 from elemento import Elemento
 from historialprestamo import HistorialPrestamo
+from bienvenida import Bienvenida
 import sys
 import time
 
@@ -402,7 +403,8 @@ class Almacen:
 
 
     def salir(self):
-        print("\nMuchas gracias por utilizar la aplicacion")
+        Bienvenida().imprimirDespedida()
+        input("\n\n Presione Enter Para Finalizar...")
         sys.exit(0)
 
 
@@ -427,4 +429,8 @@ class Almacen:
 
 if __name__ == "__main__":
     a = Almacen()
+    #Bienvenida().imprimirBienvenida()
+    #Bienvenida().imprimirBienvenida2()
+    #Bienvenida().imprimirBienvenida3()
+    Bienvenida().imprimirBienvenida4()
     a.menu()

@@ -314,7 +314,7 @@ class Elemento:
                 favorito=e.getContador()
                 elem=e
         if(elem!=""):
-            print("El elemento mas prestado es: ")
+            print("\n El elemento mas prestado es: ")
             print ("\n"+str(elem.getNombre())+" >> "+"N° veces prestado: "+str(elem.getContador()))
         else:
             print("\n Ningun elemento ha sido prestado")

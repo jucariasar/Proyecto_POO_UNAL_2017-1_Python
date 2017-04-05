@@ -134,7 +134,7 @@ class Empleado:
 
     @staticmethod
     def listadoEmpleados(listado):
-        print("La base de datos actual de empleados es: ")
+        print("\n La base de datos actual de empleados es: ")
         for emp in listado:
             print(emp.str_Empleado()) ## 
 
@@ -148,7 +148,7 @@ class Empleado:
                 elemPrest=e.getContador()
                 emp=e
         if(emp!=""):
-            print("El empleado que mas ha prestado elementos es: ")
+            print("\n El empleado que mas ha prestado elementos es: ")
             print ("\n"+str(emp.getNombre())+" "+emp.getApellido()+" >> "+"N° veces que ha prestado: "+str(emp.getContador()))
         else:
             print("\n Ningun elemento ha sido prestado")

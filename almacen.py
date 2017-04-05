@@ -8,7 +8,7 @@ from historialprestamo import HistorialPrestamo
 from bienvenida import Bienvenida
 import sys
 import time
-
+#Todo funciona bien 
 
 class Almacen:
     salirTotal = False    
@@ -67,15 +67,19 @@ class Almacen:
 
      
     def autenticacionAdministradorAlmacen(self, admin):
-        print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
-        print("A continuacion debe de ingresar su usuario y contraseña para " +
-            "ingresar a administrar la aplicacion\n")
-        user = input("Ingrese su Usuario: ")
-        paswd = input("Ingrese su Contraseña: ")
-        if admin.getUsuario() == user and admin.getPassword() == paswd:
-            self.menuAdministradorAlmacen(admin)
-        else:
-            print("Usuario y/o passwor incorrecto.")
+        i=1
+        while (i==1):
+            print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
+            print("A continuacion debe de ingresar su usuario y contraseña para " +
+                "ingresar a administrar la aplicacion\n")
+        
+            user = input("Ingrese su Usuario: ")
+            paswd = input("\n Ingrese su Contraseña: ")
+            if admin.getUsuario() == user and admin.getPassword() == paswd:
+                self.menuAdministradorAlmacen(admin)
+                break
+            else:
+                print("\n Usuario y/o passwor incorrecto.")
 
 
     def menuAdministradorAlmacen(self, admin):
@@ -99,7 +103,7 @@ class Almacen:
             elif op == "4":
                 salir = True
             else:
-                print("%s %s" % (op, "No es una opcion valida"))
+                print("\n" +"%s %s" % (op, "No es una opcion valida"))
 
 
     def menuEmpleado(self, admin):
@@ -125,7 +129,7 @@ class Almacen:
             elif(op == "5"):
                 salir = True
             else:
-                print("Opcion erronea")
+                print("\n" +"%s %s" % (op, "No es una opcion valida"))
             
 
 
@@ -164,7 +168,7 @@ class Almacen:
             elif(op == 9):
                 salir = True
             else:
-                print("\n%s %s" % (op, "No es una opcio valida"))
+                print("\n" +" %s %s" % (op, "No es una opcion Valida")) 
 
 
     def menu2AdministradorAlmacen(self):
@@ -213,28 +217,35 @@ class Almacen:
                         else:
                            self._elementos.remove(elm)
                     else:
-                     print("Elemento no registrado en la base de datos") 
+                     print("\n Elemento no registrado en la base de datos") 
 
             elif op == "5":
-                   salir = True
+                salir = True
             else:
-                   print("%s %s" % (op, "No es una opcion Valida"))                                           
+                print("\n" +" %s %s" % (op, "No es una opcion Valida"))                                         
 
    
 
 
     def menuRegistrarEmpleado(self):
-        print("\n¿Qué tipo de empleado desea registrar?\n")
-        print("1.Empleado Administrativo.")
-        print("2.Empleado Operario.")
-        print("3.Ingeniero Tecnico.")
-        op = input("\nIngrese su opcion: ")
-        if op == '1':
-           AdministradorAlmacen().registrarEmpleado(self._empleados)
-        elif op == '2' :
-            Operario().registrarEmpleado(self._empleados)
-        else:
-            IngenieroTecnico().registrarEmpleado(self._empleados)
+        i=1
+        while(i==1):
+            print("\n¿Qué tipo de empleado desea registrar?\n")
+            print("1.Empleado Administrativo.")
+            print("2.Empleado Operario.")
+            print("3.Ingeniero Tecnico.")    
+            op = input("\nIngrese su opcion: ")
+            if op == '1':
+                AdministradorAlmacen().registrarEmpleado(self._empleados)
+                
+            elif op == '2' :
+                Operario().registrarEmpleado(self._empleados)
+                
+            elif op=='3':
+                IngenieroTecnico().registrarEmpleado(self._empleados)
+                
+            else:
+                print("\n" +"%s %s" % (op, "No es una opcion valida"))
 
 
     def menu3AdministradorAlmacen(self):
@@ -272,11 +283,11 @@ class Almacen:
                             elif op2 == "3":
                                 salir2 = True
                             else:
-                                print("Opcion no valida.")
+                                print("\n" +"%s %s" % (op2, "No es una opcion valida"))
                     else:
                         Elemento().prestarElementos(self._elementos, emp)
                 else:
-                    print("El usuario no se encuentra registrado")
+                    print("\n El usuario no se encuentra registrado")
 
             elif op == "2":
                 i = int(input("\n Ingrese la identificacion del Usuario: "))
@@ -294,7 +305,7 @@ class Almacen:
             elif op == "4":
                 salir = True
             else:
-                print(" %s %s" % (op, "No es una opcion Valida"))
+                print("\n" +" %s %s" % (op, "No es una opcion Valida"))
         
 
     def crearDatosFicticios(self):

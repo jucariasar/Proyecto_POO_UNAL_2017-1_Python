@@ -111,45 +111,48 @@ class Elemento:
     def prestarElementos(listado, e): # Agregado por Camilo (El metodo recibe la BD de elementos y un empleado)
         seguirPres = True
         while seguirPres == True:
-            if (isinstance(e, Administrativo) and e.getNumRestriccion() < Administrativo.MAX_AD and seguirPres == True) or (isinstance(e, IngenieroTecnico) and e.getNumRestriccion() < IngenieroTecnico.MAX_IT and seguirPres == True) or (isinstance(e, Operario) and e.getNumRestriccion() < Operario.MAX_OP and seguirPres == True):
+            if Elemento().verificarDisponibles(listado):
 
-                cod = int(input("\n Ingrese el codigo del elemento a prestar: "))
-                element = Elemento().buscarElementoPorId(listado, cod)
+                if (isinstance(e, Administrativo) and e.getNumRestriccion() < Administrativo.MAX_AD and seguirPres == True) or (isinstance(e, IngenieroTecnico) and e.getNumRestriccion() < IngenieroTecnico.MAX_IT and seguirPres == True) or (isinstance(e, Operario) and e.getNumRestriccion() < Operario.MAX_OP and seguirPres == True):
+                    cod = int(input("\n Ingrese el codigo del elemento a prestar: "))
+                    element = Elemento().buscarElementoPorId(listado, cod)
 
-                if element != None and element.getEstadoActual() == Elemento().estados['1']:
-                    e.getElementos().append(element) # Cambie e._elementos por e.getElementos()
-                    e.setContador(e.getContador() + 1) # El numero de elementos que ha prestado en la historia ya sea que los haya devuelto o no
-                    e.setNumElementPres(e.getNumElementPres() + 1) # Lo tiene actualmente prestado
-                    e.setNumRestriccion(e.getNumRestriccion() + 1) # Lo que tiene entre prestados y reservados
-                    element.setContador(element.getContador() + 1)
-                    element.setEstadoActual(Elemento().estados['2']) #El elemento queda marcado como prestado
-                    element.setFechaPrestamo(datetime.now())
-                    HistorialPrestamo().agregarAHistorial(e, element)
-                    op = input("\n Desea Prestar mas Elementos? (S/N): ")
-                    if(op == "S"):
-                        if(isinstance(e, Administrativo) and e.getNumRestriccion() < Administrativo.MAX_AD) or (isinstance(e, IngenieroTecnico) and e.getNumRestriccion() < IngenieroTecnico.MAX_IT) or (isinstance(e, Operario) and e.getNumRestriccion() < Operario.MAX_OP):
-                            if Elemento().verificarDisponibles(listado):
-                                seguirPres = True
+                    if element != None and element.getEstadoActual() == Elemento().estados['1']:
+                        e.getElementos().append(element) # Cambie e._elementos por e.getElementos()
+                        e.setContador(e.getContador() + 1) # El numero de elementos que ha prestado en la historia ya sea que los haya devuelto o no
+                        e.setNumElementPres(e.getNumElementPres() + 1) # Lo tiene actualmente prestado
+                        e.setNumRestriccion(e.getNumRestriccion() + 1) # Lo que tiene entre prestados y reservados
+                        element.setContador(element.getContador() + 1)
+                        element.setEstadoActual(Elemento().estados['2']) #El elemento queda marcado como prestado
+                        element.setFechaPrestamo(datetime.now())
+                        HistorialPrestamo().agregarAHistorial(e, element)
+                        op = input("\n Desea Prestar mas Elementos? (S/N): ")
+                        if(op == "S"):
+                            if(isinstance(e, Administrativo) and e.getNumRestriccion() < Administrativo.MAX_AD) or (isinstance(e, IngenieroTecnico) and e.getNumRestriccion() < IngenieroTecnico.MAX_IT) or (isinstance(e, Operario) and e.getNumRestriccion() < Operario.MAX_OP):
+                                if Elemento().verificarDisponibles(listado):
+                                    seguirPres = True
+                                else:
+                                    print("\n Lo Sentimos, ya NO hay mas Elementos Disponibles en el Inventario.")
+                                    seguirPres = False
                             else:
-                                print("\n Lo Sentimos, ya NO hay mas Elementos Disponibles en el Inventario.")
+                                print("\n Este Usuario ya No Puede Prestar mas Elementos.")
                                 seguirPres = False
-                        else:
-                            print("\n Este Usuario ya No Puede Prestar mas Elementos.")
+                        elif op == "N":
                             seguirPres = False
-                    elif op == "N":
-                        seguirPres = False
+                        else:
+                            print("\n Opcion Invalida")
+                    elif element != None and element.getEstadoActual() == Elemento().estados['2']:
+                        print("\n Lo Sentimos el elemento se encuentra perestado")
+                    elif element != None and element.getEstadoActual() == Elemento().estados['3']:
+                        print("\n Lo Sentimos el Elemento se Encuentra Reservado")
                     else:
-                        print("\n Opcion Invalida")
-                elif element != None and element.getEstadoActual() == Elemento().estados['2']:
-                    print("\n Lo Sentimos el elemento se encuentra perestado")
-                elif element != None and element.getEstadoActual() == Elemento().estados['3']:
-                    print("\n Lo Sentimos el Elemento se Encuentra Reservado")
+                        print("\n El código NO se Encuentra Registrado en la BD")
                 else:
-                    print("\n El código NO se Encuentra Registrado en la BD")
+                    print("\n El Empleado ya no Puede Prestar mas Elementos")
+                    seguirPres = False
             else:
-                print("\n El Empleado ya no Puede Prestar mas Elementos")
                 seguirPres = False
-
+                print("\n Lo Sentimos, ya NO hay mas Elementos Disponibles en el Inventario.")
 
     @staticmethod
     def recibirElementos(emp):
@@ -325,7 +328,7 @@ class Elemento:
                 favorito=e.getContador()
                 elem=e
         if(elem!=""):
-            print("\n El elemento mas prestado es: ")
+            print("El elemento mas prestado es: ")
             print ("\n"+str(elem.getNombre())+" >> "+"N° veces prestado: "+str(elem.getContador()))
         else:
             print("\n Ningun elemento ha sido prestado")

@@ -8,12 +8,8 @@ from historialprestamo import HistorialPrestamo
 from bienvenida import Bienvenida
 import sys
 import time
-<<<<<<< HEAD
-#Todo funciona bien 
-=======
 import os # Linea nueva para probar
 
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
 
 class Almacen:
     salirTotal = False    
@@ -75,21 +71,6 @@ class Almacen:
 
      
     def autenticacionAdministradorAlmacen(self, admin):
-<<<<<<< HEAD
-        i=1
-        while (i==1):
-            print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
-            print("A continuacion debe de ingresar su usuario y contraseña para " +
-                "ingresar a administrar la aplicacion\n")
-        
-            user = input("Ingrese su Usuario: ")
-            paswd = input("\n Ingrese su Contraseña: ")
-            if admin.getUsuario() == user and admin.getPassword() == paswd:
-                self.menuAdministradorAlmacen(admin)
-                break
-            else:
-                print("\n Usuario y/o passwor incorrecto.")
-=======
         os.system("cls")
         print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
         print("A continuacion debe de ingresar su usuario y contraseña para " +
@@ -101,7 +82,6 @@ class Almacen:
         else:
             print("\n Usuario y/o passwor incorrecto.")
             input("\n Presion Enter Para Continuar..")
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
 
 
     def menuAdministradorAlmacen(self, admin):
@@ -126,12 +106,8 @@ class Almacen:
             elif op == "4":
                 salir = True
             else:
-<<<<<<< HEAD
-                print("\n" +"%s %s" % (op, "No es una opcion valida"))
-=======
                 os.system("cls")
                 print("\n%s %s" % (op, "No es una opcion valida"))
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
 
 
     def menuEmpleado(self, admin):
@@ -163,12 +139,8 @@ class Almacen:
                 os.system("cls")
                 salir = True
             else:
-<<<<<<< HEAD
-                print("\n" +"%s %s" % (op, "No es una opcion valida"))
-=======
                 os.system("cls")
                 print("\n Opcion Erronea.")
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
             
 
 
@@ -217,12 +189,8 @@ class Almacen:
                 os.system("cls")
                 salir = True
             else:
-<<<<<<< HEAD
-                print("\n" +" %s %s" % (op, "No es una opcion Valida")) 
-=======
                 os.system("cls")
                 print("\n %s %s" % (op, "No es una opcio valida"))
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
 
 
     def menu2AdministradorAlmacen(self):
@@ -272,14 +240,6 @@ class Almacen:
                         Elemento().cancelarReserva(self._elementos)
                         self._elementos.remove(elm)
                     else:
-<<<<<<< HEAD
-                     print("\n Elemento no registrado en la base de datos") 
-
-            elif op == "5":
-                salir = True
-            else:
-                print("\n" +" %s %s" % (op, "No es una opcion Valida"))                                         
-=======
                         self._elementos.remove(elm)
                 else:
                     print("Elemento no registrado en la base de datos") 
@@ -288,30 +248,22 @@ class Almacen:
                 salir = True
         else:
                 print("%s %s" % (op, "No es una opcion Valida"))                                           
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
 
    
 
 
     def menuRegistrarEmpleado(self):
-        i=1
-        while(i==1):
-            print("\n¿Qué tipo de empleado desea registrar?\n")
-            print("1.Empleado Administrativo.")
-            print("2.Empleado Operario.")
-            print("3.Ingeniero Tecnico.")    
-            op = input("\nIngrese su opcion: ")
-            if op == '1':
-                AdministradorAlmacen().registrarEmpleado(self._empleados)
-                
-            elif op == '2' :
-                Operario().registrarEmpleado(self._empleados)
-                
-            elif op=='3':
-                IngenieroTecnico().registrarEmpleado(self._empleados)
-                
-            else:
-                print("\n" +"%s %s" % (op, "No es una opcion valida"))
+        print("\n¿Qué tipo de empleado desea registrar?\n")
+        print("1.Empleado Administrativo.")
+        print("2.Empleado Operario.")
+        print("3.Ingeniero Tecnico.")
+        op = input("\nIngrese su opcion: ")
+        if op == '1':
+           AdministradorAlmacen().registrarEmpleado(self._empleados)
+        elif op == '2' :
+            Operario().registrarEmpleado(self._empleados)
+        else:
+            IngenieroTecnico().registrarEmpleado(self._empleados)
 
 
     def menu3AdministradorAlmacen(self):
@@ -328,47 +280,42 @@ class Almacen:
 
             if op == "1":
                 os.system("cls")
-                Elemento().elementosDisponibles(self._elementos)
-                i = int(input("\n Ingrese la identificacion del Usuario: "))
-                emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
-                if emp != None:
-                    if (Elemento().verificarReserva(emp.getElementos())):
-                        print("\n El usuario actualmente tiene elemento(s) reservado(s): ")
-                        print("\n ¿Que Desea Hacer?:\n")
-                        print(" 1. Asentar la reserva.")
-                        print(" 2. Prestar nuevos elementos.")
-                        print(" 3. Volver.")
-                        op2 = input("\n Escoja su opcion: ")
-                        salir2 = False
-                        while salir2 == False:
-                            if op2 == "1":
-                                Elemento().asentarReserva(emp.getElementos(), emp)
-                                os.system("cls")
-                                print("\n El elemento Reservado paso a Prestado con Exito")
-                                salir2 = True
-                            elif op2 == "2":
-                                Elemento().prestarElementos(self._elementos, emp)
-                                salir2 = True
-                            elif op2 == "3":
-                                os.system("cls")
-                                salir2 = True
-                            else:
-<<<<<<< HEAD
-                                print("\n" +"%s %s" % (op2, "No es una opcion valida"))
+                if Elemento().verificarDisponibles(self._elementos): # Linea nueva
+                    Elemento().elementosDisponibles(self._elementos)
+                    i = int(input("\n Ingrese la identificacion del Usuario: "))
+                    emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
+                    if emp != None:
+                        if (Elemento().verificarReserva(emp.getElementos())):
+                            print("\n El usuario actualmente tiene elemento(s) reservado(s): ")
+                            print("\n ¿Que Desea Hacer?:\n")
+                            print(" 1. Asentar la reserva.")
+                            print(" 2. Prestar nuevos elementos.")
+                            print(" 3. Volver.")
+                            op2 = input("\n Escoja su opcion: ")
+                            salir2 = False
+                            while salir2 == False:
+                                if op2 == "1":
+                                    Elemento().asentarReserva(emp.getElementos(), emp)
+                                    os.system("cls")
+                                    print("\n El elemento Reservado paso a Prestado con Exito")
+                                    salir2 = True
+                                elif op2 == "2":
+                                    Elemento().prestarElementos(self._elementos, emp)
+                                    salir2 = True
+                                elif op2 == "3":
+                                    os.system("cls")
+                                    salir2 = True
+                                else:
+                                    os.system("cls")
+                                    print("\n Opcion invalida.")
+                        else:
+                            Elemento().prestarElementos(self._elementos, emp)
                     else:
-                        Elemento().prestarElementos(self._elementos, emp)
+                        os.system("cls")
+                        print("\n El usuario no se encuentra registrado.")
                 else:
-                    print("\n El usuario no se encuentra registrado")
-=======
-                                os.system("cls")
-                                print("\n Opcion invalida.")
-                    else:
-                        Elemento().prestarElementos(self._elementos, emp)
-                else:
-                    os.system("cls")
-                    print("\n El usuario no se encuentra registrado.")
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
-
+                    print("\n Lo Sentimos, ya NO hay mas Elementos Disponibles en el Inventario.")
+                    
             elif op == "2":
                 os.system("cls")
                 i = int(input("\n Ingrese la identificacion del Usuario: "))
@@ -391,12 +338,8 @@ class Almacen:
                 os.system("cls")
                 salir = True
             else:
-<<<<<<< HEAD
-                print("\n" +" %s %s" % (op, "No es una opcion Valida"))
-=======
                 os.system("cls")
                 print(" %s %s" % (op, "No es una opcion Valida"))
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
         
 
     def crearDatosFicticios(self):

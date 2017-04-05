@@ -8,12 +8,9 @@ from historialprestamo import HistorialPrestamo
 from bienvenida import Bienvenida
 import sys
 import time
-<<<<<<< HEAD
 #Todo funciona bien 
-=======
 import os # Linea nueva para probar
 
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
 
 class Almacen:
     salirTotal = False    
@@ -75,7 +72,6 @@ class Almacen:
 
      
     def autenticacionAdministradorAlmacen(self, admin):
-<<<<<<< HEAD
         i=1
         while (i==1):
             print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
@@ -89,7 +85,6 @@ class Almacen:
                 break
             else:
                 print("\n Usuario y/o passwor incorrecto.")
-=======
         os.system("cls")
         print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
         print("A continuacion debe de ingresar su usuario y contraseña para " +
@@ -101,7 +96,7 @@ class Almacen:
         else:
             print("\n Usuario y/o passwor incorrecto.")
             input("\n Presion Enter Para Continuar..")
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
+
 
 
     def menuAdministradorAlmacen(self, admin):
@@ -126,12 +121,8 @@ class Almacen:
             elif op == "4":
                 salir = True
             else:
-<<<<<<< HEAD
                 print("\n" +"%s %s" % (op, "No es una opcion valida"))
-=======
                 os.system("cls")
-                print("\n%s %s" % (op, "No es una opcion valida"))
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
 
 
     def menuEmpleado(self, admin):
@@ -163,12 +154,8 @@ class Almacen:
                 os.system("cls")
                 salir = True
             else:
-<<<<<<< HEAD
                 print("\n" +"%s %s" % (op, "No es una opcion valida"))
-=======
                 os.system("cls")
-                print("\n Opcion Erronea.")
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
             
 
 
@@ -217,12 +204,8 @@ class Almacen:
                 os.system("cls")
                 salir = True
             else:
-<<<<<<< HEAD
                 print("\n" +" %s %s" % (op, "No es una opcion Valida")) 
-=======
                 os.system("cls")
-                print("\n %s %s" % (op, "No es una opcio valida"))
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
 
 
     def menu2AdministradorAlmacen(self):
@@ -272,23 +255,13 @@ class Almacen:
                         Elemento().cancelarReserva(self._elementos)
                         self._elementos.remove(elm)
                     else:
-<<<<<<< HEAD
                      print("\n Elemento no registrado en la base de datos") 
 
             elif op == "5":
                 salir = True
             else:
                 print("\n" +" %s %s" % (op, "No es una opcion Valida"))                                         
-=======
-                        self._elementos.remove(elm)
-                else:
-                    print("Elemento no registrado en la base de datos") 
-
-            elif op == "5":
-                salir = True
-        else:
-                print("%s %s" % (op, "No es una opcion Valida"))                                           
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
+                
 
    
 
@@ -353,21 +326,14 @@ class Almacen:
                                 os.system("cls")
                                 salir2 = True
                             else:
-<<<<<<< HEAD
                                 print("\n" +"%s %s" % (op2, "No es una opcion valida"))
                     else:
                         Elemento().prestarElementos(self._elementos, emp)
-                else:
-                    print("\n El usuario no se encuentra registrado")
-=======
-                                os.system("cls")
-                                print("\n Opcion invalida.")
-                    else:
-                        Elemento().prestarElementos(self._elementos, emp)
+                
                 else:
                     os.system("cls")
                     print("\n El usuario no se encuentra registrado.")
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
+
 
             elif op == "2":
                 os.system("cls")
@@ -391,13 +357,9 @@ class Almacen:
                 os.system("cls")
                 salir = True
             else:
-<<<<<<< HEAD
                 print("\n" +" %s %s" % (op, "No es una opcion Valida"))
-=======
                 os.system("cls")
-                print(" %s %s" % (op, "No es una opcion Valida"))
->>>>>>> 69e335926b2f30675d397af311eb54636a215058
-        
+   
 
     def crearDatosFicticios(self):
 

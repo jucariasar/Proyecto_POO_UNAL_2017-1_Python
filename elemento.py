@@ -128,7 +128,11 @@ class Elemento:
                     op = input("\n Desea Prestar mas Elementos? (S/N): ")
                     if(op == "S"):
                         if(isinstance(e, Administrativo) and e.getNumRestriccion() < Administrativo.MAX_AD) or (isinstance(e, IngenieroTecnico) and e.getNumRestriccion() < IngenieroTecnico.MAX_IT) or (isinstance(e, Operario) and e.getNumRestriccion() < Operario.MAX_OP):
-                            seguirPres = True
+                            if Elemento().verificarDisponibles(listado):
+                                seguirPres = True
+                            else:
+                                print("\n Lo Sentimos, ya NO hay mas Elementos Disponibles en el Inventario.")
+                                seguirPres = False
                         else:
                             print("\n Este Usuario ya No Puede Prestar mas Elementos.")
                             seguirPres = False
@@ -193,6 +197,13 @@ class Elemento:
             if element.getCodigo() == cod:
                 return element
         return None
+
+    @staticmethod
+    def verificarDisponibles(listado): ## Trabajarle a este método
+        for element in listado:
+            if element.getEstadoActual() == Elemento().estados['1']:
+                return True
+        return False
     # Fin de métodos estaticos agregados por Camilo
 
 

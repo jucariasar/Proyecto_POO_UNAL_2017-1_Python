@@ -64,8 +64,18 @@ class Mensaje():
 	'baseDatEmpleados':'\nLa base de datos actual de empleados es: ',
 	'empMasPrest':'El empleado que mas ha prestado elementos es: ',
 	'rollMasPrest':'El roll que mas ha prestado elementos es: ',
-	'':'',
-	'':'',
+	'optIn':'\nIngrese su Opcion: ',
+	'emailIn':'\nIngrese su E-mail: ',
+	'documentIn':'Ingrese su Documento: ',
+	'userIn':'Ingrese su Usuario: ',
+	'passwdIn':'Ingrese su Contraseña: ',
+	'salirSoN':'\n Desea salir del sistema? (S/N): ',
+	'continuar':'\n Presion Enter Para Continuar...',
+	'finalizar':'',
+	'idIn':'\n Ingrese la Identificacion del Usuario: ',
+	'seguirEliminandoEmp':'\n¿Desea eliminar otro empleado?(s/n): ',
+	'seguirEliminandoElement':'\n¿Desea eliminar otro elemento?(s/n): ',
+	'seguirRegistEmp':'\n¿Desea registrar otro empleado?(s/n):  ',
 	'':'',
 	'':'',
 	'':'',
@@ -88,3 +98,7 @@ class Mensaje():
 	@staticmethod
 	def mostrarBienvenidaPersonalizada(msj, emp):
 		print(Mensaje().mensaje[msj] + str(emp.getNombre()) + " " + str(emp.getApellido()))
+
+	@staticmethod
+	def obtenerMensaje(msj):
+		return Mensaje().mensaje[msj]

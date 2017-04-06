@@ -31,10 +31,5 @@ class IngenieroTecnico(Empleado):
         empleado.setArea(str(input("Establezca area del Ingeniero:")))
         listEmpleados.append(empleado)
 
-
-
-
-
-
     def __str__(self):
         return (super().__str__() + "\nArea Encargada: " + self.getArea())

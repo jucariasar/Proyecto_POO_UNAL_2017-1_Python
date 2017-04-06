@@ -9,7 +9,7 @@ from bienvenida import Bienvenida
 from mensajes import Mensaje
 import sys
 import time
-import os # Linea nueva para probar
+import os
 
 
 class Almacen:
@@ -17,7 +17,6 @@ class Almacen:
     def __init__(self):
         self._empleados = []
         self._elementos = []
-        #self._historial = [] Se paso como estatico para la clase historial
         self._seleccion ={
         "1":self.crearDatosFicticios,
         "2":self.crearDatosFicticiosDeUntxt,
@@ -33,8 +32,8 @@ class Almacen:
         os.system("color 0A")
         while(salir == False):
             
-            email = input("\nIngrese su E-mail: ")
-            cc = int(input("Ingrese su Documento: "))
+            email = input(Mensaje.obtenerMensaje('emailIn'))
+            cc = int(input(Mensaje.obtenerMensaje('documentIn')))
             emp = Empleado().buscarEmpleadoPorId(self._empleados, cc)
             if emp != None and emp.getEmail() == email:
                 if isinstance(emp,AdministradorAlmacen):
@@ -42,7 +41,7 @@ class Almacen:
                     while(salir2 == False):
                         os.system("cls")
                         Mensaje.mostrarMensajes('SelectRollAdmin')
-                        opt = int(input("\nIngrese su Opcion: "))
+                        opt = int(input(Mensaje.obtenerMensaje('optIn')))
                         if opt == 1:
                             self.autenticacionAdministradorAlmacen(emp)
                         elif opt == 2:
@@ -57,7 +56,7 @@ class Almacen:
                             Mensaje.mostrarMensajes('optInvalid')
                 else: 
                     self.menuEmpleado(emp)
-                    op=input("\n Desea salir del sistema? (S/N): ")
+                    op=input(Mensaje.obtenerMensaje('salirSoN'))
                     if op=="S":
                         salir=True
                     elif op=="N":
@@ -71,14 +70,14 @@ class Almacen:
         os.system("color 0A")
         Mensaje.mostrarBienvenidaPersonalizada('bienvenida', admin)
         Mensaje.mostrarMensajes('infoAdmin1')
-        user = input("Ingrese su Usuario: ")
-        paswd = input("Ingrese su Contraseña: ")
+        user = input(Mensaje.obtenerMensaje('userIn'))
+        paswd = input(Mensaje.obtenerMensaje('passwdIn'))
 
         if admin.getUsuario() == user and admin.getPassword() == paswd:
             self.menuAdministradorAlmacen(admin)
         else:
             Mensaje.mostrarMensajes('userPassInvalid')
-            input("\n Presion Enter Para Continuar..")
+            input(Mensaje.obtenerMensaje('continuar'))
 
 
     def menuAdministradorAlmacen(self, admin):
@@ -87,7 +86,7 @@ class Almacen:
         os.system("color 0A")
         while(salir == False):
             Mensaje.mostrarMensajes('menuPpalAdmin')
-            op = input("\nIngrese su Opcion: ")
+            op = input(Mensaje.obtenerMensaje('optIn'))
             if op == "1":
                 self.menu1AdministradorAlmacen()
             elif op == "2":
@@ -109,7 +108,7 @@ class Almacen:
         while salir == False:
             Mensaje.mostrarMensajes('menuEmpleado')
 
-            op = input("\nIngrese su opcion: ")
+            op = input(Mensaje.obtenerMensaje('optIn'))
             if op == "1":
                 os.system("cls")
                 Elemento().elementosDisponibles(self._elementos)
@@ -136,7 +135,7 @@ class Almacen:
         os.system("color 0A")
         while(salir == False):
             Mensaje.mostrarMensajes('menu1Admin')
-            op = int(input("\nIngrese su opcion: "))
+            op = int(input(Mensaje.obtenerMensaje('optIn')))
         
             if(op == 1):
                 os.system("cls")
@@ -176,7 +175,7 @@ class Almacen:
         while salir == False :
 
             Mensaje.mostrarMensajes('menu2Admin')
-            op = input("\nIngrese su opcion: ")
+            op = input(Mensaje.obtenerMensaje('optIn'))
             if op == "1":
                 os.system("cls")
                 self.menuRegistrarEmpleado()
@@ -189,7 +188,7 @@ class Almacen:
                     salir = False
                     while salir == False:    
                    
-                        i = int(input("Ingrese la identificacion del Usuario: "))
+                        i = int(input(Mensaje.obtenerMensaje('idIn')))
                         
                         emp = Empleado().buscarEmpleadoPorId(self._empleados, i) 
                    
@@ -207,7 +206,7 @@ class Almacen:
                                 self._empleados.remove(emp)
                         else:
                             Mensaje.mostrarMensajes('empNoRegistrado')
-                        respuesta = input("\n¿Desea eliminar otro empleado?(s/n):  ") 
+                        respuesta = input(Mensaje.obtenerMensaje('seguirEliminandoEmp')) 
                         if(respuesta == 'n') :
                           salir = True    
            
@@ -233,7 +232,7 @@ class Almacen:
                                 self._elementos.remove(elm)
                         else:
                             Mensaje.mostrarMensajes('elementNoRegistr')
-                        respuesta = input("\n¿Desea eliminar otro elemento?(s/n):  ") 
+                        respuesta = input(Mensaje.obtenerMensaje('seguirEliminandoElement')) 
                         if(respuesta == 'n') :
                           salir = True 
 
@@ -248,7 +247,7 @@ class Almacen:
         while salir == False:
 
                     Mensaje.mostrarMensajes('registEmp1')
-                    op = input("\nIngrese su opcion: ")
+                    op = input(Mensaje.obtenerMensaje('optIn'))
                     if op == '1':
                        AdministradorAlmacen().registrarEmpleado(self._empleados)
                     elif op == '2' :
@@ -262,7 +261,7 @@ class Almacen:
                         Mensaje.mostrarMensajes('optInvalid')
 
                     Mensaje.mostrarMensajes('registroEmpOk')
-                    respuesta = input("\n¿Desea registrar otro empleado?(s/n):  ") 
+                    respuesta = input(Mensaje.obtenerMensaje('seguirRegistEmp')) 
                     if(respuesta == 'n') :
                        salir = True
 
@@ -273,18 +272,18 @@ class Almacen:
         while salir == False:
 
             Mensaje.mostrarMensajes('menu3Admin')
-            op = input("\nIngrese su opcion: ")
+            op = input(Mensaje.obtenerMensaje('optIn'))
 
             if op == "1":
                 os.system("cls")
-                if Elemento().verificarDisponibles(self._elementos): # Linea nueva
+                if Elemento().verificarDisponibles(self._elementos):
                     Elemento().elementosDisponibles(self._elementos)
-                    i = int(input("\n Ingrese la identificacion del Usuario: "))
+                    i = int(input(Mensaje.obtenerMensaje('idIn')))
                     emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
                     if emp != None:
                         if (Elemento().verificarReserva(emp.getElementos())):
                             Mensaje.mostrarMensajes('menu3Opt1')
-                            op2 = input("\n Escoja su opcion: ")
+                            op2 = input(Mensaje.obtenerMensaje('optIn'))
                             salir2 = False
                             while salir2 == False:
                                 if op2 == "1":
@@ -311,7 +310,7 @@ class Almacen:
                     
             elif op == "2":
                 os.system("cls")
-                i = int(input("\n Ingrese la identificacion del Usuario: "))
+                i = int(input(Mensaje.obtenerMensaje('idIn')))
                 emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
                 if emp != None:
                     os.system("cls")
@@ -464,10 +463,11 @@ class Almacen:
 
 
     def salir(self):
+        os.system("color 0A")
+        os.system("cls")
         Bienvenida().imprimirDespedida()
         input("\n\n Presione Enter Para Finalizar...")
         sys.exit(0)
-
 
 
     # Primer menu
@@ -476,7 +476,7 @@ class Almacen:
         while break_while == 1:
 
             Mensaje.mostrarMensajes('menuPpal')
-            op = input("\nIngrese su Opcion: ")
+            op = input(Mensaje.obtenerMensaje('optIn'))
             accion = self._seleccion.get(op)
             if(accion):
                 accion()
@@ -486,9 +486,5 @@ class Almacen:
 
 if __name__ == "__main__":
     a = Almacen()
-    #Bienvenida().imprimirBienvenida()
-    #Bienvenida().imprimirBienvenida2()
-    #Bienvenida().imprimirBienvenida3()
-
     Bienvenida().imprimirBienvenida4()
     a.menu()

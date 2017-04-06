@@ -22,7 +22,7 @@ class AdministradorAlmacen(Administrativo):
     @staticmethod
     def registrarEmpleado(listEmpleados):
         Mensaje.mostrarMensajes('registAdminAlmacen')
-        op = input("\nIngrese su opcion: ")
+        op = input(Mensaje.obtenerMensaje('optIn'))
         if op == '1':
                empleado = AdministradorAlmacen()
                empleado.setUsuario(str(input("Establezca el usuario:")))

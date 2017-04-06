@@ -6,6 +6,7 @@ from administradoralmacen import AdministradorAlmacen
 from elemento import Elemento
 from historialprestamo import HistorialPrestamo
 from bienvenida import Bienvenida
+from mensajes import Mensaje
 import sys
 import time
 import os # Linea nueva para probar
@@ -38,15 +39,10 @@ class Almacen:
                     salir2 = False
                     while(salir2 == False):
                         os.system("cls")
-                        print("\nCon que Roll Desea Ingresar:\n")
-                        print("1. Como Administrador del Almacen.")
-                        print("2. Como Empleado NO Administrador.")
-                        print("3. Desea volver al menu principal.")
+                        Mensaje.mostrarMensajes('SelectRollAdmin')
                         opt = int(input("\nIngrese su Opcion: "))
                         if opt == 1:
                             self.autenticacionAdministradorAlmacen(emp)
-                            #salir = True
-                            #salir2 = True
                         elif opt == 2:
                             self.menuEmpleado(emp)
                             salir = True
@@ -55,7 +51,7 @@ class Almacen:
                             salir = True
                             salir2 = True
                         else:
-                            print("\n%d %s" % (opt, "No es una opcion Valida"))
+                            Mensaje.mostrarMensajes('optInvalid')
                 else: 
                     self.menuEmpleado(emp)
                     op=input("\n Desea salir del sistema? (S/N): ")
@@ -65,22 +61,18 @@ class Almacen:
                         pass
             else:
                 os.system("cls")
-                print("\nE-mail y/o Documento Invalido\n")
-                # probando algo con un delay y regerso al menu en caso de error 
-            
-
+                Mensaje.mostrarMensajes('emailDocumentInvalid')
      
     def autenticacionAdministradorAlmacen(self, admin):
         os.system("cls")
-        print("\nBienvenido %s %s\n" % (admin.getNombre(), admin.getApellido()))
-        print("A continuacion debe de ingresar su usuario y contraseña para " +
-            "ingresar a administrar la aplicacion\n")
+        Mensaje.mostrarBienvenidaPersonalizada('bienvenida', admin)
+        Mensaje.mostrarMensajes('infoAdmin1')
         user = input("Ingrese su Usuario: ")
         paswd = input("Ingrese su Contraseña: ")
         if admin.getUsuario() == user and admin.getPassword() == paswd:
             self.menuAdministradorAlmacen(admin)
         else:
-            print("\n Usuario y/o passwor incorrecto.")
+            Mensaje.mostrarMensajes('userPassInvalid')
             input("\n Presion Enter Para Continuar..")
 
 
@@ -88,39 +80,27 @@ class Almacen:
         salir = False
         os.system("cls")
         while(salir == False):
-            print("\nMenu de Usuario Administrador del Almacen:")
-            print("\n1. Ir al Menu de Consultas.")
-            print("2. Ir al Menu de Registros / Borrados.")
-            print("3. Prestar / Recibir.")
-            print("4. Cerrar Sesion de Administrador.") # Falta programar estas funcionalidad bien
+            Mensaje.mostrarMensajes('menuPpalAdmin')
             op = input("\nIngrese su Opcion: ")
             if op == "1":
                 self.menu1AdministradorAlmacen()
-                #salir = True
             elif op == "2":
                 self.menu2AdministradorAlmacen()
-                #salir = True
             elif op == "3":
                 self.menu3AdministradorAlmacen()
-                #salir = True
             elif op == "4":
                 salir = True
             else:
                 os.system("cls")
-                print("\n%s %s" % (op, "No es una opcion valida"))
+                Mensaje.mostrarMensajes('optInvalid')
 
 
     def menuEmpleado(self, admin):
         salir = False
         os.system("cls")
-        print("\nBienvenido %s %s" % (admin.getNombre(), admin.getApellido()))
+        Mensaje.mostrarBienvenidaPersonalizada('bienvenida', admin)
         while salir == False:
-            print("\n¿Que desea hacer?\n")
-            print("1. Consultar Elementos Disponibles.")
-            print("2. Consultar Elementos Prestados.")
-            print("3. Reservar Elementos para Prestar.")
-            print("4. Modificar Reserva de Elementos.")
-            print("5. Cerrar Sesion de Usuario.")
+            Mensaje.mostrarMensajes('menuEmpleado')
 
             op = input("\nIngrese su opcion: ")
             if op == "1":
@@ -140,33 +120,22 @@ class Almacen:
                 salir = True
             else:
                 os.system("cls")
-                print("\n Opcion Erronea.")
+                Mensaje.mostrarMensajes('optInvalid')
             
-
 
     def menu1AdministradorAlmacen(self):
         salir = False
         os.system("cls")
         while(salir == False):
-            print("\n¿Que consulta desea realizar?\n")
-            print("1. Consultar Inventario de Elementos.")
-            print("2. Consultar Base de Datos de Empleados.")
-            print("3. Consultar el Elemento mas Prestado.")
-            print("4. Consultar los 5 Elementos mas Prestados.")
-            print("5. Consultar Empleado con mas Elementos Prestados.")
-            print("6. Consultar Empleados con mas Valor Prestado.")
-            print("7. Consultar el Empleado que mas Presta.")
-            print("8. Consultar el Roll que mas Presta.")
-            print("9. Volver al Menu Anterior.")
+            Mensaje.mostrarMensajes('menu1Admin')
             op = int(input("\nIngrese su opcion: "))
-        # Resta implementar las funcionalidades
-
+        
             if(op == 1):
                 os.system("cls")
                 Elemento().inventarioElementos(self._elementos)
             elif(op == 2):
                 os.system("cls")
-                Empleado().listadoEmpleados(self._empleados) # Para Empleado
+                Empleado().listadoEmpleados(self._empleados)
             elif(op == 3):
                 os.system("cls")
                 Elemento().masPrestado(self._elementos)
@@ -175,36 +144,30 @@ class Almacen:
                 Elemento().cincoMasPrestados(self._elementos)
             elif(op == 5):
                 os.system("cls")
-                Empleado().masElemPrestados(self._empleados) # Para Empleado
+                Empleado().masElemPrestados(self._empleados)
             elif(op == 6):
                 os.system("cls")
-                Empleado().masValorPrestado(self._empleados) # Para Empleado
+                Empleado().masValorPrestado(self._empleados)
             elif(op == 7):
                 os.system("cls")
-                Empleado().masHaPrestado(self._empleados) # Para Empleado
+                Empleado().masHaPrestado(self._empleados)
             elif(op == 8):
                 os.system("cls")
-                Empleado().rollEstrella(self._empleados) # Para Empleado
+                Empleado().rollEstrella(self._empleados)
             elif(op == 9):
                 os.system("cls")
                 salir = True
             else:
                 os.system("cls")
-                print("\n %s %s" % (op, "No es una opcio valida"))
+                Mensaje.mostrarMensajes('optInvalid')
 
 
     def menu2AdministradorAlmacen(self):
         salir = False
         while salir == False :
 
-            print("\n¿Que desea hacer?\n")
-            print("1. Registrar Empleado.")
-            print("2. Registrar Elemento.")
-            print("3. Eliminar Empleado.")
-            print("4. Eliminar Elemento.")
-            print("5. Volver al Menu Anterior.")
+            Mensaje.mostrarMensajes('menu2Admin')
             op = input("\nIngrese su opcion: ")
-            # Resta implementar las funcionalidades
             if op == "1":
                 os.system("cls")
                 self.menuRegistrarEmpleado()
@@ -222,24 +185,22 @@ class Almacen:
                    
                         if emp != None:
                             if (Elemento().verificarPrestamo(emp.getElementos())):
-                                print("El empleado tiene elementos prestados.No puede ser eliminado")
+                                Mensaje.mostrarMensajes('empNoPuedeSerEliminado1')
                                 
                             elif(Elemento().verificarReserva(emp.getElementos())):
-                                print("El empleado tiene elementos reservados.Estos pasaran a estar disponibles")
+                                Mensaje.mostrarMensajes('eliminacionEmp1')
                                 Elemento().cancelarReserva(emp.getElementos())
-                                print("\n !!! El empleado se elimino con exito !!!")
+                                Mensaje.mostrarMensajes('eliminacionEmpOk')
                                 self._empleados.remove(emp)
                             else:
-                                print("\n !!! El empleado se elimino con exito !!!")
+                                Mensaje.mostrarMensajes('eliminacionEmpOk')
                                 self._empleados.remove(emp)
                         else:
-                            print("Empleado no registrado en la base de datos") 
+                            Mensaje.mostrarMensajes('empNoRegistrado')
                         respuesta = input("\n¿Desea eliminar otro empleado?(s/n):  ") 
                         if(respuesta == 'n') :
                           salir = True    
            
-
-
 
             elif op == "4":        
                     os.system("cls")
@@ -250,17 +211,17 @@ class Almacen:
                           
                         if elm != None:
                             if (Elemento().verificarPrestamo(self._elementos)):
-                                print("El elemento encuentra prestado.No puede ser eliminado")
+                                Mensaje.mostrarMensajes('elementNoPuedeSerEliminado1')
                             elif(Elemento().verificarReserva(self._elementos)):
-                                print("El elemento tiene reservas, al eliminar el elemento estas se anularan")
+                                Mensaje.mostrarMensajes('eliminacionElement1')
                                 Elemento().cancelarReserva(self._elementos)
-                                print("\n !!! El elemento se elimino con exito !!!")
+                                Mensaje.mostrarMensajes('eliminacionElementOk')
                                 self._elementos.remove(elm)
                             else:
-                                print("\n !!! El elemento se elimino con exito !!!")
+                                Mensaje.mostrarMensajes('eliminacionElementOk')
                                 self._elementos.remove(elm)
                         else:
-                            print("Elemento no registrado en la base de datos")
+                            Mensaje.mostrarMensajes('elementNoRegistr')
                         respuesta = input("\n¿Desea eliminar otro elemento?(s/n):  ") 
                         if(respuesta == 'n') :
                           salir = True 
@@ -268,20 +229,14 @@ class Almacen:
             elif op == "5":
                 salir = True
             else:
-                print("%s %s" % (op, "No es una opcion Valida"))                                           
-
-   
+                Mensaje.mostrarMensajes('optInvalid')                                           
 
 
     def menuRegistrarEmpleado(self):
         salir = False
         while salir == False:
 
-                    print("\n¿Qué tipo de empleado desea registrar?\n")
-                    print("1.Empleado Administrativo.")
-                    print("2.Empleado Operario.")
-                    print("3.Ingeniero Tecnico.")
-                    print("4.Regresar al Menu anterior")
+                    Mensaje.mostrarMensajes('registEmp1')
                     op = input("\nIngrese su opcion: ")
                     if op == '1':
                        AdministradorAlmacen().registrarEmpleado(self._empleados)
@@ -293,9 +248,10 @@ class Almacen:
                         salir = True
                         break
                     else:
-                        print("%s %s" % (op, "No es una opcion Valida")) 
-                    
-                    print("\n !!! El empleado se registro con extito !!!")
+                        Mensaje.mostrarMensajes('optInvalid')
+
+                    Mensaje.mostrarMensajes('registroEmpOk')
+
                     respuesta = input("\n¿Desea registrar otro empleado?(s/n):  ") 
                     if(respuesta == 'n') :
                        salir = True
@@ -306,11 +262,7 @@ class Almacen:
         os.system("cls")
         while salir == False:
 
-            print("\n¿Que desea hacer?:\n")
-            print("1. Prestar Elementos.")
-            print("2. Recibir Elementos.")
-            print("3. Mostrar Historial.")
-            print("4. Volver al Menu Anterior.")
+            Mensaje.mostrarMensajes('menu3Admin')
             op = input("\nIngrese su opcion: ")
 
             if op == "1":
@@ -321,11 +273,7 @@ class Almacen:
                     emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
                     if emp != None:
                         if (Elemento().verificarReserva(emp.getElementos())):
-                            print("\n El usuario actualmente tiene elemento(s) reservado(s): ")
-                            print("\n ¿Que Desea Hacer?:\n")
-                            print(" 1. Asentar la reserva.")
-                            print(" 2. Prestar nuevos elementos.")
-                            print(" 3. Volver.")
+                            Mensaje.mostrarMensajes('menu3Opt1')
                             op2 = input("\n Escoja su opcion: ")
                             salir2 = False
                             while salir2 == False:
@@ -342,7 +290,7 @@ class Almacen:
                                     salir2 = True
                                 else:
                                     os.system("cls")
-                                    print("\n Opcion invalida.")
+                                    Mensaje.mostrarMensajes('optInvalid')
                         else:
                             Elemento().prestarElementos(self._elementos, emp)
                     else:
@@ -374,7 +322,7 @@ class Almacen:
                 salir = True
             else:
                 os.system("cls")
-                print(" %s %s" % (op, "No es una opcion Valida"))
+                Mensaje.mostrarMensajes('optInvalid')
         
 
     def crearDatosFicticios(self):
@@ -495,17 +443,13 @@ class Almacen:
         break_while = 1
         while break_while == 1:
 
-            print("")
-            print("1. Crear Datos Ficticios.")
-            print("2. Crear Datos Ficticios Desde un txt.")
-            print("3. Ingresar al sistema.")
-            print("4. Salir.")
+            Mensaje.mostrarMensajes('menuPpal')
             op = input("\nIngrese su Opcion: ")
             accion = self._seleccion.get(op)
             if(accion):
                 accion()
             else:
-                print("%s %s" % (op, "No es una opcion valida"))
+                Mensaje.mostrarMensajes('optInvalid')
 
 
 if __name__ == "__main__":

@@ -1,5 +1,7 @@
 from administrativo import Administrativo
 from empleado import Empleado
+from mensajes import Mensaje
+
 class AdministradorAlmacen(Administrativo):
     def __init__(self, ident=0, nombre="", apellido="", numElementPrest=0, roll="", email="", grado=0, 
     usuario="", password=""):
@@ -19,10 +21,7 @@ class AdministradorAlmacen(Administrativo):
     
     @staticmethod
     def registrarEmpleado(listEmpleados):
-        
-        print("\n¿Empleado Administrador del almacen?\n")
-        print("1. Si.")
-        print("2. No.")
+        Mensaje.mostrarMensajes('registAdminAlmacen')
         op = input("\nIngrese su opcion: ")
         if op == '1':
                empleado = AdministradorAlmacen()
@@ -37,7 +36,7 @@ class AdministradorAlmacen(Administrativo):
         empleado.setIdent(int(input("Ingrese el id del Administrador:")))
         
         while Empleado().buscarEmpleadoPorId(listEmpleados, empleado.getIdent()) != None:
-            print(" \n!!! Ya existe un empleado con este numero de identificacion !!!")
+            Mensaje.mostrarMensajes('yaExistEmp')
             empleado.setIdent(int(input("Ingrese el id del Administrador:")))
         
 

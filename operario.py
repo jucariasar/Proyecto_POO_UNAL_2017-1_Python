@@ -1,4 +1,5 @@
 from empleado import Empleado
+from mensajes import Mensaje
 
 class Operario(Empleado):
     MAX_OP = 6 # Constante de clase para controlar el numero máximo de elementos que puede
@@ -20,10 +21,10 @@ class Operario(Empleado):
     @staticmethod
     def registrarEmpleado(listEmpleados):
         empleado = Operario()
-        empleado.setIdent(int(input("Ingrese el id del operario:")))
+        empleado.setIdent(int(input("\nIngrese el id del operario:")))
         
         while Empleado().buscarEmpleadoPorId(listEmpleados, empleado.getIdent()) != None:
-            print(" \n!!! Ya existe un empleado con este numero de identificacion !!!")
+            Mensaje.mostrarMensajes('yaExistEmp')
             empleado.setIdent(int(input("Ingrese el id del operario:")))
 
         empleado.setNombre(str(input("Ingrese el nombre del operario:"))) 
@@ -32,10 +33,6 @@ class Operario(Empleado):
         empleado.setRoll(Empleado().tiposEmpleado['4'])
         empleado.setTipo(str(input("Establezca el tipo de operario:")))
         listEmpleados.append(empleado)
-
-
-
-
 
 
     def __str__(self):

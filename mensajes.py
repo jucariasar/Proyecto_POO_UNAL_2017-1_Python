@@ -1,8 +1,8 @@
+#from administradoralmacen import AdministradorAlmacen
 from empleado import Empleado
-from administradoralmacen import AdministradorAlmacen
 from administrativo import Administrativo
 from ingenierotecnico import IngenieroTecnico
-from operario import Operario
+#from operario import Operario
 
 class Mensaje():
 	mensaje = {
@@ -56,6 +56,22 @@ class Mensaje():
 	'ningunElementPrest':'\n Ningun elemento ha sido prestado',
 	'5MasPrest':'\n Los 5 elementos mas prestados son: ',
 	'ningunElementPrest2':'\n Aun no hay elemntos prestados',
+	'registAdminAlmacen':'\n¿Empleado Administrador del almacen?\n\n1. Si.\n2. No.',
+	'yaExistEmp':' \n!!! Ya existe un empleado con este numero de identificacion !!!\n',
+	'':'',
+	'':'',
+	'':'',
+	'':'',
+	'':'',
+	'':'',
+	'':'',
+	'':'',
+	'':'',
+	'':'',
+	'':'',
+	'':'',
+	'':'',
+	'':'',
 	'':'',
 	'':'',
 	'':'',

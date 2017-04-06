@@ -64,8 +64,7 @@ class Elemento:
         if (estadoActual != Elemento().estados ['1'] and
             estadoActual != Elemento().estados ['2'] and
             estadoActual != Elemento().estados ['3'] ):
-            print("\n Estado no reconocido")
-
+            Mensaje.mostrarMensajes('estadoNoReconocido')
         else:
             self._estadoActual = estadoActual
 
@@ -133,27 +132,27 @@ class Elemento:
                                 if Elemento().verificarDisponibles(listado):
                                     seguirPres = True
                                 else:
-                                    print("\n Lo Sentimos, ya NO hay mas Elementos Disponibles en el Inventario.")
+                                    Mensaje.mostrarMensajes('elementNoDisponInventario')
                                     seguirPres = False
                             else:
-                                print("\n Este Usuario ya No Puede Prestar mas Elementos.")
+                                Mensaje.mostrarMensajes('userFullElement')
                                 seguirPres = False
                         elif op == "N":
                             seguirPres = False
                         else:
-                            print("\n Opcion Invalida")
+                            Mensaje.mostrarMensajes('optInvalid')
                     elif element != None and element.getEstadoActual() == Elemento().estados['2']:
-                        print("\n Lo Sentimos el elemento se encuentra perestado")
+                        Mensaje.mostrarMensajes('estElementPrest')
                     elif element != None and element.getEstadoActual() == Elemento().estados['3']:
-                        print("\n Lo Sentimos el Elemento se Encuentra Reservado")
+                        Mensaje.mostrarMensajes('estElementReserv')
                     else:
-                        print("\n El código NO se Encuentra Registrado en la BD")
+                        Mensaje.mostrarMensajes('elementNoRegistr')
                 else:
-                    print("\n El Empleado ya no Puede Prestar mas Elementos")
+                    Mensaje.mostrarMensajes('userFullElement')
                     seguirPres = False
             else:
                 seguirPres = False
-                print("\n Lo Sentimos, ya NO hay mas Elementos Disponibles en el Inventario.")
+                Mensaje.mostrarMensajes('elementNoDisponInventario')
 
     @staticmethod
     def recibirElementos(emp):
@@ -178,19 +177,19 @@ class Elemento:
                     else:
                         Mensaje.mostrarMensajes('optInvalid')
                 else:
-                    print("\n Codigo No Encontrado en sus Elementos Prestados.")
+                    Mensaje.mostrarMensajes('codNoEncotr')
             else:
                 Mensaje.mostrarMensajes('noElementPrest')
                 seguirEntregando = False
 
     @staticmethod
-    def asentarReserva(listElementEmp, emp): # Recibe un parametro mas emp
+    def asentarReserva(listElementEmp, emp):
         for element in listElementEmp:
             if(element.getEstadoActual() == Elemento().estados['3']):
                 element.setEstadoActual(Elemento().estados['2'])
                 element.setContador(element.getContador() + 1)
                 element.setFechaPrestamo(datetime.now())
-                emp.setNumElementPres(emp.getNumElementPres() + 1) # Es emp en vez de element
+                emp.setNumElementPres(emp.getNumElementPres() + 1)
                 emp.setContador(emp.getContador() + 1)
                 HistorialPrestamo().agregarAHistorial(emp, element)
 
@@ -211,31 +210,30 @@ class Elemento:
     # Fin de métodos estaticos agregados por Camilo
 
 
-
     # Inicio de métodos estáticos agregados por Pablo y Jaider
     @staticmethod
     def elementosDisponibles(listado):
-        print("\n Los elemntos disponibles son: ")
+        Mensaje.mostrarMensajes('elementDisp')
         for e in listado:
             if(str(e.getEstadoActual()) == Elemento().estados['1']):
                 print(e.str_Inventario())
 
     @staticmethod
     def inventarioElementos(listado):
-        print("\n El inventario actual de elementos es: ")
+        Mensaje.mostrarMensajes('inventElement')
         for e in listado:
             print(e.str_Inventario())
 
     @staticmethod
     def elementosPrestados(listado):
-        print ("\n Los elementos prestados son: ")
+        Mensaje.mostrarMensajes('elementPrest')
         c = 0
         for e in listado:
             if(str(e.getEstadoActual()) == Elemento().estados['2']):
                 print(e.str_Inventario())
                 c = c + 1
         if (c == 0):
-            print("\n No hay elementos prestados")
+            Mensaje.mostrarMensajes('noElementPres2')
     
 
     @staticmethod
@@ -246,15 +244,15 @@ class Elemento:
                 
                 elemento.setCodigo(int(input("\nIngrese codigo del elemento:")))
                 while Elemento().buscarElementoPorId(self._elementos, elemento.getCodigo()) != None:
-                    print(" \n!!! Ya existe un elemento con este numero de codigo !!!")
+                    Mensaje.mostrarMensajes('elementYaExite')
                     elemento.setCodigo(int(input("\nIngrese codigo del elemento:")))
                 
                 elemento.setNombre(str(input("Ingrese nombre del elemento:")))
                 elemento.setUbicacion(str(input("Ingrese la ubicacion del elemento:")))
                 elemento.setValor(int(input("Ingrese valor economico del elemento:")))
                 elemento.setEstadoActual(Elemento().estados['1'])
-                self._elementos.append(elemento) 
-                print("\n !!! Elemento Registrado con exito !!! ")
+                self._elementos.append(elemento)
+                Mensaje.mostrarMensajes('elementRegistOk')
                 respuesta = input("\n¿Desea registrar otro elemento?(s/n):  ") 
                 if(respuesta == 'n') :
                     salir = True
@@ -263,7 +261,7 @@ class Elemento:
     @staticmethod
     def reservarElementos(listado, emp):
         if (isinstance(emp, Administrativo) and emp.getNumRestriccion() >= Administrativo.MAX_AD) or (isinstance(emp, IngenieroTecnico) and emp.getNumRestriccion() >= IngenieroTecnico.MAX_IT) or (isinstance(emp, Operario) and emp.getNumRestriccion() >= Operario.MAX_OP):
-            print("El usuario no esta autorizado para realizar reservas!")
+            Mensaje.mostrarMensajes('userNoAutoriz')
         else:    
             Elemento().elementosDisponibles(listado)
             re = int(input ("\n Ingrese codigo del elemento que desea reservar: "))
@@ -273,7 +271,7 @@ class Elemento:
             E=False   
             for k in elemdis:
                 if (k==re):
-                    print ("\n Elemento Encotrado con Exito")
+                    Mensaje.mostrarMensajes('elementEncontradoOk')
                     op = str(input ("\n Desea Reservar?  (S/N): "))
                     if (op == "S"):
                         for e in listado:
@@ -281,24 +279,23 @@ class Elemento:
                                 e.setEstadoActual(Elemento().estados['3']) 
                                 emp.setaddElemento(e)
                                 emp.setNumRestriccion(emp.getNumRestriccion() + 1) # La agrego Camilo, es para que aumente ese contador de restriccion de numero de elementos cuando se reserva
-                                print ("\n Elemento Reservado con exito")
+                                Mensaje.mostrarMensajes('elementReservadoOk')
                                 E=True
                                 break
                     elif(op=="N"):
                         print("\n Ok")
             
                     else:
-                        print("\n Opcion erronea")
+                        Mensaje.mostrarMensajes('optInvalid')
             if(E==False):
-                print("\n Elemento no encontrado")  
+                Mensaje.mostrarMensajes('elementNoEncontrado')  
             
-
 
     @staticmethod
     def modificarReserva(listado, emp):
         E = False
         elemres=[]
-        print("\n Sus elementos reservados son: ")
+        Mensaje.mostrarMensajes('listElementReserv')
         for e in listado:
             if(e.getEstadoActual() == Elemento().estados['3']):
                 elemres.append(e.getCodigo())
@@ -307,7 +304,7 @@ class Elemento:
         cr = int(input ("\n Ingrese codigo del elemento al cual desea modificar la reserva: "))
         for k in elemres:
             if (cr == k):
-                print ("\n Elemento Encotrado con Exito")
+                Mensaje.mostrarMensajes('elementEncontradoOk')
                 op = input ("\n Desea Cancelar Reservar?  (S/N): "  )
                 if (op == "S"):
                     for e in listado:
@@ -315,20 +312,19 @@ class Elemento:
                             e.setEstadoActual( Elemento().estados['1'])
                             emp.setNumRestriccion(emp.getNumRestriccion() - 1) # La agrego Camilo para que le reste a la variable que controla la restriccion 
                             emp.setdelElemento(e)
-                            print ("\n Reserva cancelada  con éxito")
-                            
+                            Mensaje.mostrarMensajes('cancelarReservOk')
                             break
 
                 elif(op=="N"):
                     print("\n Ok")
                     break
                 else:
-                    print("\n Opción erronea")
+                    Mensaje.mostrarMensajes('optInvalid')
                     break
                 E=True
         if(E==False):
-            print("\n Elemento no encontrado")                   
-
+            Mensaje.mostrarMensajes('elementNoEncontrado')
+             
 
     @staticmethod
     def masPrestado(listado):
@@ -339,10 +335,10 @@ class Elemento:
                 favorito=e.getContador()
                 elem=e
         if(elem!=""):
-            print("El elemento mas prestado es: ")
+            Mensaje.mostrarMensajes('elmentMasPrest')
             print ("\n"+str(elem.getNombre())+" >> "+"N° veces prestado: "+str(elem.getContador()))
         else:
-            print("\n Ningun elemento ha sido prestado")
+            Mensaje.mostrarMensajes('ningunElementPrest')
 
 
     @staticmethod
@@ -363,10 +359,8 @@ class Elemento:
                 c=c+1
             i=i-1
         if (c!=0):
-            print("\n Los 5 elementos mas prestados son: ")
+            Mensaje.mostrarMensajes('5MasPrest')
             for j in lista:
                 print("\n"+str(j.getNombre())+" >> "+"N° veces prestado: "+str(j.getContador()))
         else:
-            print ("\n Aun no hay elemntos prestados")
-    
-
+            Mensaje.mostrarMensajes('ningunElementPrest2')

@@ -49,8 +49,5 @@ class AdministradorAlmacen(Administrativo):
 
 
 
-
-
-
     def __str__(self):
         retrun (super().__str__()+'\n'+"Usuario: "+self.getUsuario()+'\n'+"Password: "+self.getPassword())

@@ -74,7 +74,7 @@ class Elemento:
             "\n Fecha de prestamo: " + self.getFechaPrestamo() +  "\n Cantidad de veces prestado: " + str(self.getContador()) + 
             "\n Estado del Elemento: " + self.getEstadoActual())
 
-    # Método de instancia agregado por Pablo o Jaider
+    
     def str_Inventario(self):
         return ("\n Nombre del Elemento: " + str(self.getNombre())+ "\n Codigo del Elemento: " + 
             str(self.getCodigo())+ "\n La ubicacion del Elemento es:  " + str(self.getUbicacion()) + 
@@ -82,9 +82,8 @@ class Elemento:
 
 
 
-# Inicio de métodos estáticos agregados por Camilo
     @staticmethod
-    def verificarReserva(listado): # Agregado por Camilo
+    def verificarReserva(listado): 
         for element in listado:
             if(element.getEstadoActual() == Elemento().estados['3']):
                 return True
@@ -108,7 +107,7 @@ class Elemento:
     @staticmethod
     def guardarDatosEntxt(self):
         Archivo = open("elementos.txt", "a")
-        m = int(input("Numero de elementos que desea escribir: "))
+        m = int(input(Mensaje.obtenerMensaje('elementToWrite')))
         M = []
         for i in range(m):
             M.append([0]*4)
@@ -125,29 +124,29 @@ class Elemento:
             
             Archivo.write(tmp+'\n')
             
-
         Archivo.close()
 
+
     @staticmethod
-    def prestarElementos(listado, e): # Agregado por Camilo (El metodo recibe la BD de elementos y un empleado)
+    def prestarElementos(listado, e):
         seguirPres = True
         while seguirPres == True:
             if Elemento().verificarDisponibles(listado):
 
                 if (isinstance(e, Administrativo) and e.getNumRestriccion() < Administrativo.MAX_AD and seguirPres == True) or (isinstance(e, IngenieroTecnico) and e.getNumRestriccion() < IngenieroTecnico.MAX_IT and seguirPres == True) or (isinstance(e, Operario) and e.getNumRestriccion() < Operario.MAX_OP and seguirPres == True):
-                    cod = int(input("\n Ingrese el codigo del elemento a prestar: "))
+                    cod = int(input(Mensaje.obtenerMensaje('codElementAPrestar')))
                     element = Elemento().buscarElementoPorId(listado, cod)
 
                     if element != None and element.getEstadoActual() == Elemento().estados['1']:
-                        e.getElementos().append(element) # Cambie e._elementos por e.getElementos()
-                        e.setContador(e.getContador() + 1) # El numero de elementos que ha prestado en la historia ya sea que los haya devuelto o no
-                        e.setNumElementPres(e.getNumElementPres() + 1) # Lo tiene actualmente prestado
-                        e.setNumRestriccion(e.getNumRestriccion() + 1) # Lo que tiene entre prestados y reservados
+                        e.getElementos().append(element)
+                        e.setContador(e.getContador() + 1) 
+                        e.setNumElementPres(e.getNumElementPres() + 1) 
+                        e.setNumRestriccion(e.getNumRestriccion() + 1) 
                         element.setContador(element.getContador() + 1)
-                        element.setEstadoActual(Elemento().estados['2']) #El elemento queda marcado como prestado
+                        element.setEstadoActual(Elemento().estados['2'])
                         element.setFechaPrestamo(datetime.now())
                         HistorialPrestamo().agregarAHistorial(e, element)
-                        op = input("\n Desea Prestar mas Elementos? (S/N): ")
+                        op = input(Mensaje.obtenerMensaje('presMasElementSoN'))
                         if(op == "S"):
                             if(isinstance(e, Administrativo) and e.getNumRestriccion() < Administrativo.MAX_AD) or (isinstance(e, IngenieroTecnico) and e.getNumRestriccion() < IngenieroTecnico.MAX_IT) or (isinstance(e, Operario) and e.getNumRestriccion() < Operario.MAX_OP):
                                 if Elemento().verificarDisponibles(listado):
@@ -181,7 +180,7 @@ class Elemento:
         Elemento().elementosPrestados(emp.getElementos())
         while(seguirEntregando == True): 
             if emp.getNumElementPres() > 0:
-                cod = int(input("\n Ingrese el codigo del elementos que va a entregar: "))
+                cod = int(input(Mensaje.obtenerMensaje('codElementAEntre')))
                 element = Elemento().buscarElementoPorId(emp.getElementos(), cod)
                 if element != None:
                     element.setEstadoActual(Elemento().estados['1'])
@@ -190,7 +189,7 @@ class Elemento:
                     HistorialPrestamo().agregarFechaEntrega(emp, element)
                     element.setFechaPrestamo(None)
                     emp.getElementos().remove(element)
-                    op = input("\n Desea seguir entregando? (S/N): ")
+                    op = input(Mensaje.obtenerMensaje('entreMasElementosSoN'))
                     if op == "S":
                         seguirEntregando = True
                     elif op == "N":
@@ -223,15 +222,13 @@ class Elemento:
         return None
 
     @staticmethod
-    def verificarDisponibles(listado): ## Trabajarle a este método
+    def verificarDisponibles(listado): 
         for element in listado:
             if element.getEstadoActual() == Elemento().estados['1']:
                 return True
         return False
-    # Fin de métodos estaticos agregados por Camilo
-
-
-    # Inicio de métodos estáticos agregados por Pablo y Jaider
+    
+    
     @staticmethod
     def elementosDisponibles(listado):
         Mensaje.mostrarMensajes('elementDisp')
@@ -263,18 +260,18 @@ class Elemento:
             while salir == False : 
                 elemento = Elemento()
                 
-                elemento.setCodigo(int(input("\nIngrese codigo del elemento:")))
+                elemento.setCodigo(int(input(Mensaje.obtenerMensaje('codElementRegist'))))
                 while Elemento().buscarElementoPorId(self._elementos, elemento.getCodigo()) != None:
                     Mensaje.mostrarMensajes('elementYaExite')
-                    elemento.setCodigo(int(input("\nIngrese codigo del elemento:")))
+                    elemento.setCodigo(int(input(Mensaje.obtenerMensaje('codElementRegist'))))
                 
-                elemento.setNombre(str(input("Ingrese nombre del elemento:")))
-                elemento.setUbicacion(str(input("Ingrese la ubicacion del elemento:")))
-                elemento.setValor(int(input("Ingrese valor economico del elemento:")))
+                elemento.setNombre(str(input(Mensaje.obtenerMensaje('setNomElement'))))
+                elemento.setUbicacion(str(input(Mensaje.obtenerMensaje('setUbiElement'))))
+                elemento.setValor(int(input(Mensaje.obtenerMensaje('setValorElement'))))
                 elemento.setEstadoActual(Elemento().estados['1'])
                 self._elementos.append(elemento)
                 Mensaje.mostrarMensajes('elementRegistOk')
-                respuesta = input("\n¿Desea registrar otro elemento?(s/n):  ") 
+                respuesta = input(Mensaje.obtenerMensaje('seguirRegistElement')) 
                 if(respuesta == 'n') :
                     salir = True
 
@@ -285,7 +282,7 @@ class Elemento:
             Mensaje.mostrarMensajes('userNoAutoriz')
         else:    
             Elemento().elementosDisponibles(listado)
-            re = int(input ("\n Ingrese codigo del elemento que desea reservar: "))
+            re = int(input (Mensaje.obtenerMensaje('elementAReserv')))
             elemdis=[]
             for e in listado:
                 elemdis.append(e.getCodigo())
@@ -293,7 +290,7 @@ class Elemento:
             for k in elemdis:
                 if (k==re):
                     Mensaje.mostrarMensajes('elementEncontradoOk')
-                    op = str(input ("\n Desea Reservar?  (S/N): "))
+                    op = str(input (Mensaje.obtenerMensaje('reservarSoN')))
                     if (op == "S"):
                         for e in listado:
                             if (re == e.getCodigo()):
@@ -322,11 +319,11 @@ class Elemento:
                 elemres.append(e.getCodigo())
                 print(e.str_Inventario())
                
-        cr = int(input ("\n Ingrese codigo del elemento al cual desea modificar la reserva: "))
+        cr = int(input (Mensaje.obtenerMensaje('codModReserv')))
         for k in elemres:
             if (cr == k):
                 Mensaje.mostrarMensajes('elementEncontradoOk')
-                op = input ("\n Desea Cancelar Reservar?  (S/N): "  )
+                op = input (Mensaje.obtenerMensaje('modReservSoN'))
                 if (op == "S"):
                     for e in listado:
                         if (cr == e.getCodigo()):

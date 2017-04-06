@@ -3,14 +3,14 @@ from mensajes import Mensaje
 class Empleado:
     tiposEmpleado = {'1':'Administrador Almacen','2':'Administrativo', 
     '3':'Ingeniero Tecnico', 
-    '4':'Operario'} # Diccionario estatico para estandarizar los tipos
+    '4':'Operario'}
     def __init__(self, ident=0, nombre="", apellido="", numElementPrest=0, roll=0, email=""):
         self._ident = ident
         self._nombre = nombre
         self._apellido = apellido
         self._numElementPrest = numElementPrest
-        self._numRestriccion = 0 # Variable nueva, para que entre reservas y prestamos un usuario no pueda prestar masde lo que su rol le permite
-        self._roll = roll  # Son los tipos del diccionario tiposEmpleado
+        self._numRestriccion = 0
+        self._roll = roll 
         self._contador = 0
         self._email = email
         self._elementos = []
@@ -82,11 +82,12 @@ class Empleado:
             "\n N° Identificacion: " + str(self.getIdent()) + "\n Roll: " + str(self.getRoll()) +
             "\n E-mail: "+str(self.getEmail()))
 
-# Inicio de métodos estaticos agregados por Camilo
+
     @staticmethod
     def imprimirEmpleados(lis):
         for e in lis:
             print(e)
+
 
     @staticmethod
     def buscarEmpleadoPorId(listado, i):
@@ -94,9 +95,7 @@ class Empleado:
             if (e.getIdent() == i):
                 return e
         return None
-# Fin de métodos estaticos agregados por  Camilo
 
-# Inicio de Métodos estáticos agregados por Pablo y Jaider
 
     @staticmethod
     def masElemPrestados(listado):

@@ -20,15 +20,15 @@ class IngenieroTecnico(Empleado):
     @staticmethod
     def registrarEmpleado(listEmpleados):
         empleado = IngenieroTecnico()
-        empleado.setIdent(int(input("Ingrese el id del ingeniero:")))
+        empleado.setIdent(int(input(Mensaje.obtenerMensaje('setIdIng'))))
         while Empleado().buscarEmpleadoPorId(listEmpleados, empleado.getIdent()) != None:
-            print(" \n!!! Ya existe un empleado con este numero de identificacion !!!")
-            empleado.setIdent(int(input("Ingrese el id del ingeniero:")))
-        empleado.setNombre(str(input("Ingrese el nombre del ingeniero:"))) 
-        empleado.setApellido(str(input("Ingrese el apellido del ingeniero:")))
-        empleado.setEmail(str(input("Ingrese el correo del ingeniero:")))
+            Mensaje.mostrarMensajes('yaExistEmp')
+            empleado.setIdent(int(input(Mensaje.obtenerMensaje('setIdIng'))))
+        empleado.setNombre(str(input(Mensaje.obtenerMensaje('setNomIng')))) 
+        empleado.setApellido(str(input(Mensaje.obtenerMensaje('setApellIng'))))
+        empleado.setEmail(str(input(Mensaje.obtenerMensaje('setEmailIng'))))
         empleado.setRoll(Empleado().tiposEmpleado['3'])
-        empleado.setArea(str(input("Establezca area del Ingeniero:")))
+        empleado.setArea(str(input(Mensaje.obtenerMensaje('setAreaIng'))))
         listEmpleados.append(empleado)
 
     def __str__(self):

@@ -2,10 +2,10 @@ from empleado import Empleado
 from mensajes import Mensaje
 
 class Operario(Empleado):
-    MAX_OP = 6 # Constante de clase para controlar el numero máximo de elementos que puede
-                # prestar un operario
+    MAX_OP = 6
+                
     tipo = {'1':'Mecanico', 
-    '2':'Electrico', '3':'Electronico'} # Diccionario estatico para estandarizar los tipos de Operarios
+    '2':'Electrico', '3':'Electronico'}
 
     def __init__(self, ident=0, nombre="", apellido="", numElementPrest=0, roll="", email="", tipo=""):
         super().__init__(ident, nombre, apellido, numElementPrest, roll, email)
@@ -21,17 +21,17 @@ class Operario(Empleado):
     @staticmethod
     def registrarEmpleado(listEmpleados):
         empleado = Operario()
-        empleado.setIdent(int(input("\nIngrese el id del operario:")))
+        empleado.setIdent(int(input(Mensaje.obtenerMensaje('setIdOp'))))
         
         while Empleado().buscarEmpleadoPorId(listEmpleados, empleado.getIdent()) != None:
             Mensaje.mostrarMensajes('yaExistEmp')
-            empleado.setIdent(int(input("Ingrese el id del operario:")))
+            empleado.setIdent(int(input(Mensaje.obtenerMensaje('setIdOp'))))
 
-        empleado.setNombre(str(input("Ingrese el nombre del operario:"))) 
-        empleado.setApellido(str(input("Ingrese el apellido del operario:")))
-        empleado.setEmail(str(input("Ingrese el correo del operario:")))
+        empleado.setNombre(str(input(Mensaje.obtenerMensaje('setNomOp')))) 
+        empleado.setApellido(str(input(Mensaje.obtenerMensaje('setApellOp'))))
+        empleado.setEmail(str(input(Mensaje.obtenerMensaje('setEmailOp'))))
         empleado.setRoll(Empleado().tiposEmpleado['4'])
-        empleado.setTipo(str(input("Establezca el tipo de operario:")))
+        empleado.setTipo(str(input(Mensaje.obtenerMensaje('setTipo'))))
         listEmpleados.append(empleado)
 
 

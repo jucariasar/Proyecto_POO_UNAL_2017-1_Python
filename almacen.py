@@ -69,6 +69,7 @@ class Almacen:
         Mensaje.mostrarMensajes('infoAdmin1')
         user = input("Ingrese su Usuario: ")
         paswd = input("Ingrese su Contraseña: ")
+
         if admin.getUsuario() == user and admin.getPassword() == paswd:
             self.menuAdministradorAlmacen(admin)
         else:
@@ -436,6 +437,7 @@ class Almacen:
         for i in lineas:
             tmp = i.strip('\n').split(';')
             e = Elemento()
+            e = Elemento()
             e.setCodigo(int(tmp[0]))
             e.setNombre(tmp[1])
             e.setUbicacion(tmp[2])
@@ -443,11 +445,7 @@ class Almacen:
             e.setValor(int(tmp[3]))
             e.setEstadoActual(Elemento().estados['1'])
             self._elementos.append(e)
-            
-
-            
-             
-        
+               
         Archivo.close()
 
 

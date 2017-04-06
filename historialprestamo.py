@@ -1,9 +1,11 @@
 from empleado import Empleado
-from elemento import Elemento
+from datetime import datetime, date, time, timedelta
+import calendar
 
 class HistorialPrestamo:
-    def __init__(self, idEmpleado, nomEmpleado, nomElemento, codElemento, 
-    fechaPrestamo, fechaDevolucion):
+    historial = []
+    def __init__(self, idEmpleado=0, nomEmpleado="", nomElemento="", codElemento=0, 
+    fechaPrestamo=None, fechaDevolucion=None):
         self._idEmpleado = idEmpleado
         self._nomEmpleado = nomEmpleado
         self._nomElemento = nomElemento
@@ -36,15 +38,39 @@ class HistorialPrestamo:
     def setFechaPrestamo(self,fechaP):
         self._fechaPrestamo=fechaP
 
-    def getFechaDevolucion(self):
+    def getFechaDevolucion(self): 
         return self._fechaDevolucion
     def setFechaDevolucion(self,fechaD):
-        self._fechaDevolucion=fechaD
+        if self.getFechaDevolucion() == None:
+            self._fechaDevolucion = "Elemento Prestado"
+        else:
+            self._fechaDevolucion=fechaD
 
     def __str__(self):
-        retrun ("Nombre del Empleado: " + self.getNomEmpleado() + '\n' +
-         "N° Identificacion: " + str(self.getIdEmpleado()) + '\n' + 
-         "Nombre del Elemento: " + self.getNomElemento() + '\n' + "Codigo Elemento: " + 
-         str(self.getCodElemento()) + '\n' + "Fecha Prestamo: " + 
-         str(self.getFechaPrestamo()) + '\n' + "Fecha Devolucion: " + str(self.getFechaDevolucion()))
-        
+        return ("\n Nombre del Empleado: " + self.getNomEmpleado() + '\n' +
+         " N° Identificacion: " + str(self.getIdEmpleado()) + '\n' + 
+         " Nombre del Elemento: " + self.getNomElemento() + '\n' + " Codigo Elemento: " + 
+         str(self.getCodElemento()) + '\n' + " Fecha Prestamo: " + 
+         str(self.getFechaPrestamo()) + '\n' + " Fecha Devolucion: " + str(self.getFechaDevolucion()))
+
+    @staticmethod
+    def agregarAHistorial(emp, element):
+        h = HistorialPrestamo()
+        h.setIdEmpleado(emp.getIdent())
+        h.setNomEmpleado(emp.getNombre())
+        h.setNomElemento(element.getNombre())
+        h.setCodElemento(element.getCodigo())
+        h.setFechaDevolucion(None)
+        h.setFechaPrestamo(element.getFechaPrestamo())
+        HistorialPrestamo().historial.append(h)
+
+    @staticmethod
+    def agregarFechaEntrega(emp, elemento):
+        for h in HistorialPrestamo().historial:
+            if elemento.getFechaPrestamo() == h.getFechaPrestamo() and emp.getIdent() == h.getIdEmpleado():
+                h.setFechaDevolucion(datetime.now())
+
+    @staticmethod
+    def mostrarHistorial():
+        for h in HistorialPrestamo().historial:
+            print("%s \n" % h)

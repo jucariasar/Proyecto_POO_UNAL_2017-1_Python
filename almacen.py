@@ -21,8 +21,9 @@ class Almacen:
         self._seleccion ={
         "1":self.crearDatosFicticios,
         "2":self.crearDatosFicticiosDeUntxt,
-        "3":self.ingresarAlSistema,
-        "4":self.salir
+        "3":self.escribirDatosEnUntxt,
+        "4":self.ingresarAlSistema,
+        "5":self.salir
         }
 
 
@@ -432,7 +433,7 @@ class Almacen:
         Mensaje.mostrarMensajes('LecturaDatosExitosa1')
     
     def crearDatosFicticiosDeUntxt(self):
-        Archivo = open("empleados.txt", "r")
+        Archivo = open("elementos.txt", "r")
         lineas = Archivo.readlines()
         for i in lineas:
             tmp = i.strip('\n').split(';')
@@ -445,8 +446,12 @@ class Almacen:
             e.setValor(int(tmp[3]))
             e.setEstadoActual(Elemento().estados['1'])
             self._elementos.append(e)
-               
+        Mensaje.mostrarMensajes('LecturaDatosExitosa1')
         Archivo.close()
+    
+    def escribirDatosEnUntxt(self):
+        Elemento().guardarDatosEntxt(self)
+    
 
 
     def salir(self):

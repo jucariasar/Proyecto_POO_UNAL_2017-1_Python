@@ -105,7 +105,28 @@ class Elemento:
                 return True
         return False
 
+    @staticmethod
+    def guardarDatosEntxt(self):
+        Archivo = open("elementos.txt", "a")
+        m = int(input("Numero de elementos que desea escribir: "))
+        M = []
+        for i in range(m):
+            M.append([0]*4)
 
+        for i in range(m):
+            print("\nIngrese el elemento :" , (i + 1), "\n")
+            for j in range(4):
+                 
+                M[i][j] = str(input(("Escriba el campo " , j + 1 )))
+
+            
+        for i in M:
+            tmp = ';'.join(i)
+            
+            Archivo.write(tmp+'\n')
+            
+
+        Archivo.close()
 
     @staticmethod
     def prestarElementos(listado, e): # Agregado por Camilo (El metodo recibe la BD de elementos y un empleado)

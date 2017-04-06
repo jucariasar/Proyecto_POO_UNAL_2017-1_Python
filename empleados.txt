@@ -1,4 +1,1 @@
-34;Pedro;Perez;Administrador Almacen;pp@Unal.edu.co;13;pperez;1313
-33;Camila;Soto;Administrativo;cs@unal.edu.co;15;csoto;3456
-38;Manuel;Velasquez;Ingeniero Tecnico;mv@unal.edu.co;33;mvelasquez;1010
-67;Sebastian;Sanchez;Operario;ss@unal.edu.co;80;ssanchez;4567
+56;Martillo;D67;230

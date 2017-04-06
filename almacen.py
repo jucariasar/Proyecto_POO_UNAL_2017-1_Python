@@ -181,6 +181,7 @@ class Almacen:
                     while salir == False:    
                    
                         i = int(input("Ingrese la identificacion del Usuario: "))
+                        
                         emp = Empleado().buscarEmpleadoPorId(self._empleados, i) 
                    
                         if emp != None:
@@ -208,7 +209,7 @@ class Almacen:
                     while salir == False:   
                         i = int(input("Ingrese el codigo  del elemento: "))
                         elm = Elemento().buscarElementoPorId(self._elementos, i)
-                          
+                        
                         if elm != None:
                             if (Elemento().verificarPrestamo(self._elementos)):
                                 Mensaje.mostrarMensajes('elementNoPuedeSerEliminado1')
@@ -386,7 +387,7 @@ class Almacen:
         e5.setEmail("lo@metalmecanica.com")
         e5.setTipo("Mecanico")
         self._empleados.append(e5)
-
+        
 
         # Se crean varios elementos y se agregan a la lista _elementos
 
@@ -425,12 +426,29 @@ class Almacen:
         elemento4.setValor(230)
         elemento4.setEstadoActual(Elemento().estados['1'])
         self._elementos.append(elemento4)
-
+       
         os.system("cls")
         Mensaje.mostrarMensajes('LecturaDatosExitosa1')
     
     def crearDatosFicticiosDeUntxt(self):
-        pass
+        Archivo = open("empleados.txt", "r")
+        lineas = Archivo.readlines()
+        for i in lineas:
+            tmp = i.strip('\n').split(';')
+            e = Elemento()
+            e.setCodigo(int(tmp[0]))
+            e.setNombre(tmp[1])
+            e.setUbicacion(tmp[2])
+            e.setFechaPrestamo(None)
+            e.setValor(int(tmp[3]))
+            e.setEstadoActual(Elemento().estados['1'])
+            self._elementos.append(e)
+            
+
+            
+             
+        
+        Archivo.close()
 
 
     def salir(self):

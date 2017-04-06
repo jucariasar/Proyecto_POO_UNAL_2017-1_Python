@@ -466,7 +466,7 @@ class Almacen:
         os.system("color 0A")
         os.system("cls")
         Bienvenida().imprimirDespedida()
-        input("\n\n Presione Enter Para Finalizar...")
+        input(Mensaje.obtenerMensaje('finalizar'))
         sys.exit(0)
 
 

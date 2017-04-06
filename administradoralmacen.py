@@ -25,25 +25,25 @@ class AdministradorAlmacen(Administrativo):
         op = input(Mensaje.obtenerMensaje('optIn'))
         if op == '1':
                empleado = AdministradorAlmacen()
-               empleado.setUsuario(str(input("Establezca el usuario:")))
-               empleado.setPassword(str(input("Establezca el password:")))
+               empleado.setUsuario(str(input(Mensaje.obtenerMensaje('setUser'))))
+               empleado.setPassword(str(input(Mensaje.obtenerMensaje('setPassd'))))
                empleado.setRoll('Administrador Almacen')
         else:
                empleado = Administrativo()
                empleado.setRoll('Administrativo')
                
         
-        empleado.setIdent(int(input("Ingrese el id del Administrador:")))
+        empleado.setIdent(int(input(Mensaje.obtenerMensaje('setIdAdmin'))))
         
         while Empleado().buscarEmpleadoPorId(listEmpleados, empleado.getIdent()) != None:
             Mensaje.mostrarMensajes('yaExistEmp')
-            empleado.setIdent(int(input("Ingrese el id del Administrador:")))
+            empleado.setIdent(int(input(Mensaje.obtenerMensaje('setIdAdmin'))))
         
 
-        empleado.setNombre(str(input("Ingrese el nombre del Administrador:"))) 
-        empleado.setApellido(str(input("Ingrese el apellido del Admnistrador:")))
-        empleado.setEmail(str(input("Ingrese el correo del Administrador:")))
-        empleado.setGrado(str(input("Establezca el grado del Administrador: ")))
+        empleado.setNombre(str(input(Mensaje.obtenerMensaje('setNomAdmin')))) 
+        empleado.setApellido(str(input(Mensaje.obtenerMensaje('setApellAdmin'))))
+        empleado.setEmail(str(input(Mensaje.obtenerMensaje('setEmailAdmin'))))
+        empleado.setGrado(str(input(Mensaje.obtenerMensaje('setGradAdmin'))))
         listEmpleados.append(empleado)
 
 

@@ -71,11 +71,18 @@ class Mensaje():
 	'passwdIn':'Ingrese su Contraseña: ',
 	'salirSoN':'\n Desea salir del sistema? (S/N): ',
 	'continuar':'\n Presion Enter Para Continuar...',
-	'finalizar':'',
+	'finalizar':'\n\n Presione Enter Para Finalizar...',
 	'idIn':'\n Ingrese la Identificacion del Usuario: ',
 	'seguirEliminandoEmp':'\n¿Desea eliminar otro empleado?(s/n): ',
 	'seguirEliminandoElement':'\n¿Desea eliminar otro elemento?(s/n): ',
 	'seguirRegistEmp':'\n¿Desea registrar otro empleado?(s/n):  ',
+	'setUser':'Establezca el usuario: ',
+	'setPassd':'Establezca el password: ',
+	'setIdAdmin':'Ingrese el id del Administrador: ',
+	'setNomAdmin':'Ingrese el nombre del Administrador: ',
+	'setApellAdmin':'Ingrese el apellido del Admnistrador: ',
+	'setEmailAdmin':'Ingrese el correo del Administrador:',
+	'setGradAdmin':'Establezca el grado del Administrador: ',
 	'':'',
 	'':'',
 	'':'',
@@ -89,6 +96,7 @@ class Mensaje():
 	'':'',
 	'':'',
 	'':'',
+	'':''
 	}
 
 	@staticmethod

@@ -9,8 +9,8 @@ from datetime import datetime, date, time, timedelta
 import calendar
 
 class Elemento:
-    estados = {'1':'Disponible',      ## Diccionario estatico para estandarizar los estados
-    '2':'Prestado','3':'Reservado'}   ## de los elementos (Camilo Agrego esta linea)
+    estados = {'1':'Disponible',      
+    '2':'Prestado','3':'Reservado'}  
 
     def __init__(self, codigo=0, nombre="", ubicacion="", fechaPrestamo=None, valor=0, estadoActual=""):
         self._codigo = codigo
@@ -19,7 +19,7 @@ class Elemento:
         self._fechaPrestamo = fechaPrestamo
         self._contador = 0
         self._valor = valor
-        self._estadoActual = estadoActual # Los tipos definidos en el diccionario estatico de estados
+        self._estadoActual = estadoActual 
 
     def getCodigo (self):
         return self._codigo

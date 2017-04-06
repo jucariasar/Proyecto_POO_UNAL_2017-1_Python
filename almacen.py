@@ -251,7 +251,6 @@ class Almacen:
                         Mensaje.mostrarMensajes('optInvalid')
 
                     Mensaje.mostrarMensajes('registroEmpOk')
-
                     respuesta = input("\n¿Desea registrar otro empleado?(s/n):  ") 
                     if(respuesta == 'n') :
                        salir = True
@@ -280,7 +279,7 @@ class Almacen:
                                 if op2 == "1":
                                     Elemento().asentarReserva(emp.getElementos(), emp)
                                     os.system("cls")
-                                    print("\n El elemento Reservado paso a Prestado con Exito")
+                                    Mensaje.mostrarMensajes('reserv1Ok')
                                     salir2 = True
                                 elif op2 == "2":
                                     Elemento().prestarElementos(self._elementos, emp)
@@ -295,9 +294,9 @@ class Almacen:
                             Elemento().prestarElementos(self._elementos, emp)
                     else:
                         os.system("cls")
-                        print("\n El usuario no se encuentra registrado.")
+                        Mensaje.mostrarMensajes('empNoRegistrado')
                 else:
-                    print("\n Lo Sentimos, ya NO hay mas Elementos Disponibles en el Inventario.")
+                    Mensaje.mostrarMensajes('elementNoDisponInventario')
                     
             elif op == "2":
                 os.system("cls")
@@ -305,18 +304,21 @@ class Almacen:
                 emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
                 if emp != None:
                     os.system("cls")
-                    Elemento().recibirElementos(emp)
+                    if Elemento.verificarPrestamo(emp.getElementos()): ## OJO ACA
+                        Elemento().recibirElementos(emp)
+                    else:
+                        Mensaje.mostrarMensajes('noElementPrest')
                 else:
                     os.system("cls")
-                    print("\n El usuario no se encuentra registrado")
+                    Mensaje.mostrarMensajes('empNoRegistrado')
             elif op == "3":
                 if len(HistorialPrestamo().historial) > 0:
                     os.system("cls")
-                    print("\n\n El Historial de Prestamos es:")
+                    Mensaje.mostrarMensajes('impHistorial1')
                     HistorialPrestamo().mostrarHistorial()
                 else:
                     os.system("cls")
-                    print("\n Aun no Existe Historial")
+                    Mensaje.mostrarMensajes('hoHayHistorial')
             elif op == "4":
                 os.system("cls")
                 salir = True
@@ -425,7 +427,7 @@ class Almacen:
         self._elementos.append(elemento4)
 
         os.system("cls")
-        print ("\nDatos Leidos con Exito !!!")
+        Mensaje.mostrarMensajes('LecturaDatosExitosa1')
     
     def crearDatosFicticiosDeUntxt(self):
         pass

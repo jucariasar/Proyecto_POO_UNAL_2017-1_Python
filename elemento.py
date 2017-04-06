@@ -4,6 +4,7 @@ from administrativo import Administrativo
 from ingenierotecnico import IngenieroTecnico
 from operario import Operario
 from historialprestamo import HistorialPrestamo
+from mensajes import Mensaje
 from datetime import datetime, date, time, timedelta
 import calendar
 
@@ -175,11 +176,11 @@ class Elemento:
                     elif op == "N":
                         seguirEntregando = False
                     else:
-                        print("\n Opcion Invalida")
+                        Mensaje.mostrarMensajes('optInvalid')
                 else:
-                    print("\n Codigo no encontrado en sus elementos prestados.")
+                    print("\n Codigo No Encontrado en sus Elementos Prestados.")
             else:
-                print("\n El usuario no tiene elementos prestados.")
+                Mensaje.mostrarMensajes('noElementPrest')
                 seguirEntregando = False
 
     @staticmethod

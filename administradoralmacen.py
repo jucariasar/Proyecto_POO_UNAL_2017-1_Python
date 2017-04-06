@@ -20,7 +20,7 @@ class AdministradorAlmacen(Administrativo):
     @staticmethod
     def registrarEmpleado(listEmpleados):
         
-        print("\n¿Empleado Administrador del almacen?")
+        print("\n¿Empleado Administrador del almacen?\n")
         print("1. Si.")
         print("2. No.")
         op = input("\nIngrese su opcion: ")

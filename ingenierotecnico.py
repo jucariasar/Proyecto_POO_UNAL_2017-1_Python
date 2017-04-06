@@ -20,6 +20,9 @@ class IngenieroTecnico(Empleado):
     def registrarEmpleado(listEmpleados):
         empleado = IngenieroTecnico()
         empleado.setIdent(int(input("Ingrese el id del ingeniero:")))
+        while Empleado().buscarEmpleadoPorId(listEmpleados, empleado.getIdent()) != None:
+            print(" \n!!! Ya existe un empleado con este numero de identificacion !!!")
+            empleado.setIdent(int(input("Ingrese el id del ingeniero:")))
         empleado.setNombre(str(input("Ingrese el nombre del ingeniero:"))) 
         empleado.setApellido(str(input("Ingrese el apellido del ingeniero:")))
         empleado.setEmail(str(input("Ingrese el correo del ingeniero:")))

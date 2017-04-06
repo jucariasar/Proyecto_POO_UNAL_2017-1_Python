@@ -213,57 +213,92 @@ class Almacen:
                 Elemento().registrarElemento(self)
         
             elif op == "3":
-                os.system("cls")
-                i = int(input("Ingrese la identificacion del Usuario: "))
-                emp = Empleado().buscarEmpleadoPorId(self._empleados, i) 
+                    os.system("cls")
+                    salir = False
+                    while salir == False:    
+                   
+                        i = int(input("Ingrese la identificacion del Usuario: "))
+                        emp = Empleado().buscarEmpleadoPorId(self._empleados, i) 
+                   
+                        if emp != None:
+                            if (Elemento().verificarPrestamo(emp.getElementos())):
+                                print("El empleado tiene elementos prestados.No puede ser eliminado")
+                                
+                            elif(Elemento().verificarReserva(emp.getElementos())):
+                                print("El empleado tiene elementos reservados.Estos pasaran a estar disponibles")
+                                Elemento().cancelarReserva(emp.getElementos())
+                                print("\n !!! El empleado se elimino con exito !!!")
+                                self._empleados.remove(emp)
+                            else:
+                                print("\n !!! El empleado se elimino con exito !!!")
+                                self._empleados.remove(emp)
+                        else:
+                            print("Empleado no registrado en la base de datos") 
+                        respuesta = input("\n¿Desea eliminar otro empleado?(s/n):  ") 
+                        if(respuesta == 'n') :
+                          salir = True    
            
-                if emp != None:
-                    if (Elemento().verificarPrestamo(emp.getElementos())):
-                        print("El empleado tiene elementos prestados.No puede ser eliminado")
-                    elif(Elemento().verificarReserva(emp.getElementos())):
-                        print("El empleado tiene elementos reservados.Estos pasaran a estar disponibles")
-                        Elemento().cancelarReserva(emp.getElementos())
-                        self._empleados.remove(emp)
-                    else:
-                        self._empleados.remove(emp)
-                else:
-                    print("Empleado no registrado en la base de datos") 
+
+
+
             elif op == "4":        
-                i = int(input("Ingrese el codigo  del elemnto: "))
-                elm = Elemento().buscarElementoPorId(self._elementos, i)
-                  
-                if elm != None:
-                    if (Elemento().verificarPrestamo(self._elementos)):
-                        print("El elemento encuentra prestado.No puede ser eliminado")
-                    elif(Elemento().verificarReserva(self._elementos)):
-                        print("El elemento tiene reservas, al eliminar el elemento estas se anularan")
-                        Elemento().cancelarReserva(self._elementos)
-                        self._elementos.remove(elm)
-                    else:
-                        self._elementos.remove(elm)
-                else:
-                    print("Elemento no registrado en la base de datos") 
+                    os.system("cls")
+                    salir = False
+                    while salir == False:   
+                        i = int(input("Ingrese el codigo  del elemento: "))
+                        elm = Elemento().buscarElementoPorId(self._elementos, i)
+                          
+                        if elm != None:
+                            if (Elemento().verificarPrestamo(self._elementos)):
+                                print("El elemento encuentra prestado.No puede ser eliminado")
+                            elif(Elemento().verificarReserva(self._elementos)):
+                                print("El elemento tiene reservas, al eliminar el elemento estas se anularan")
+                                Elemento().cancelarReserva(self._elementos)
+                                print("\n !!! El elemento se elimino con exito !!!")
+                                self._elementos.remove(elm)
+                            else:
+                                print("\n !!! El elemento se elimino con exito !!!")
+                                self._elementos.remove(elm)
+                        else:
+                            print("Elemento no registrado en la base de datos")
+                        respuesta = input("\n¿Desea eliminar otro elemento?(s/n):  ") 
+                        if(respuesta == 'n') :
+                          salir = True 
 
             elif op == "5":
                 salir = True
-        else:
+            else:
                 print("%s %s" % (op, "No es una opcion Valida"))                                           
 
    
 
 
     def menuRegistrarEmpleado(self):
-        print("\n¿Qué tipo de empleado desea registrar?\n")
-        print("1.Empleado Administrativo.")
-        print("2.Empleado Operario.")
-        print("3.Ingeniero Tecnico.")
-        op = input("\nIngrese su opcion: ")
-        if op == '1':
-           AdministradorAlmacen().registrarEmpleado(self._empleados)
-        elif op == '2' :
-            Operario().registrarEmpleado(self._empleados)
-        else:
-            IngenieroTecnico().registrarEmpleado(self._empleados)
+        salir = False
+        while salir == False:
+
+                    print("\n¿Qué tipo de empleado desea registrar?\n")
+                    print("1.Empleado Administrativo.")
+                    print("2.Empleado Operario.")
+                    print("3.Ingeniero Tecnico.")
+                    print("4.Regresar al Menu anterior")
+                    op = input("\nIngrese su opcion: ")
+                    if op == '1':
+                       AdministradorAlmacen().registrarEmpleado(self._empleados)
+                    elif op == '2' :
+                        Operario().registrarEmpleado(self._empleados)
+                    elif op == '3' :
+                        IngenieroTecnico().registrarEmpleado(self._empleados)
+                    elif op == '4' :
+                        salir = True
+                        break
+                    else:
+                        print("%s %s" % (op, "No es una opcion Valida")) 
+                    
+                    print("\n !!! El empleado se registro con extito !!!")
+                    respuesta = input("\n¿Desea registrar otro empleado?(s/n):  ") 
+                    if(respuesta == 'n') :
+                       salir = True
 
 
     def menu3AdministradorAlmacen(self):

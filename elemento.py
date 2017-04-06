@@ -239,14 +239,24 @@ class Elemento:
 
     @staticmethod
     def registrarElemento(self):
-        elemento = Elemento()
-       
-        elemento.setCodigo(int(input("\nIngrese codigo del elemento:")))
-        elemento.setNombre(str(input("Ingrese nombre del elemento:")))
-        elemento.setUbicacion(str(input("Ingrese la ubicacion del elemento:")))
-        elemento.setValor(int(input("Ingrese valor economico del elemento:")))
-        elemento.setEstadoActual(Elemento().estados['1'])
-        self._elementos.append(elemento) 
+            salir = False
+            while salir == False : 
+                elemento = Elemento()
+                
+                elemento.setCodigo(int(input("\nIngrese codigo del elemento:")))
+                while Elemento().buscarElementoPorId(self._elementos, elemento.getCodigo()) != None:
+                    print(" \n!!! Ya existe un elemento con este numero de codigo !!!")
+                    elemento.setCodigo(int(input("\nIngrese codigo del elemento:")))
+                
+                elemento.setNombre(str(input("Ingrese nombre del elemento:")))
+                elemento.setUbicacion(str(input("Ingrese la ubicacion del elemento:")))
+                elemento.setValor(int(input("Ingrese valor economico del elemento:")))
+                elemento.setEstadoActual(Elemento().estados['1'])
+                self._elementos.append(elemento) 
+                print("\n !!! Elemento Registrado con exito !!! ")
+                respuesta = input("\n¿Desea registrar otro elemento?(s/n):  ") 
+                if(respuesta == 'n') :
+                    salir = True
 
 
     @staticmethod

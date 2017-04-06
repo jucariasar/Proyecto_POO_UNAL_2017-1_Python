@@ -1,4 +1,4 @@
-
+from mensajes import Mensaje
 
 class Empleado:
     tiposEmpleado = {'1':'Administrador Almacen','2':'Administrativo', 
@@ -60,10 +60,10 @@ class Empleado:
     def getElementos(self):
         return self._elementos
 
-    def getNumRestriccion(self):  # Retorna valor de Variable Nueva
+    def getNumRestriccion(self):
         return self._numRestriccion
 
-    def setNumRestriccion(self, num): # Establece Valor de Variable Nueva
+    def setNumRestriccion(self, num):
         self._numRestriccion = num
 
     def setaddElemento(self, elem):
@@ -107,10 +107,10 @@ class Empleado:
                 elempres=e.getNumElementPres()
                 emp=e
         if(emp!=""):
-            print("El empleado con mas elementos prestados es: ")
+            Mensaje.mostrarMensajes('empMasElementPrest')
             print ("\n"+str(emp.getNombre())+" "+str(emp.getApellido()) + " >> "+"N° elementos prestado: "+str(emp.getNumElementPres()))
         else:
-            print("Ningun empleado ha prestado elementos")
+            Mensaje.mostrarMensajes('ningunPrestamo')
 
 
     @staticmethod
@@ -120,7 +120,7 @@ class Empleado:
         for e in listado:
             suma=0
             for j in e.getElementos():
-                if j.getEstadoActual()=="Prestado" : # Problemas con la importacion
+                if j.getEstadoActual()=="Prestado" :
                     suma=j.getValor()+suma
             if suma>mayor:
                 mayor=suma
@@ -129,14 +129,15 @@ class Empleado:
             print("\n El empleado con mas Valor Prestado es: "+emp.getNombre()+" "+emp.getApellido())
             print("\n El valor total prestado por el empleado actualmente es: "+ str(mayor) )
         elif emp=="":
-            print("\n Aun no han sido prestado elementos con valor ")
+            Mensaje.mostrarMensajes('noHayValorPrest')
 
 
     @staticmethod
     def listadoEmpleados(listado):
-        print("La base de datos actual de empleados es: ")
+        Mensaje.mostrarMensajes('baseDatEmpleados')
         for emp in listado:
-            print(emp.str_Empleado()) ## 
+            print(emp.str_Empleado())
+
 
 
     @staticmethod
@@ -148,10 +149,10 @@ class Empleado:
                 elemPrest=e.getContador()
                 emp=e
         if(emp!=""):
-            print("El empleado que mas ha prestado elementos es: ")
+            Mensaje.mostrarMensajes('empMasPrest')
             print ("\n"+str(emp.getNombre())+" "+emp.getApellido()+" >> "+"N° veces que ha prestado: "+str(emp.getContador()))
         else:
-            print("\n Ningun elemento ha sido prestado")
+            Mensaje.mostrarMensajes('ningunElementPrest')
 
 
 
@@ -177,18 +178,18 @@ class Empleado:
         roll=max(elemPrest1,elemPrest2,elemPrest3,elemPrest4)   
         if(roll>0):
             if(roll==elemPrest1):
-                print("El roll que mas ha prestado elementos es: ")
+                Mensaje.mostrarMensajes('rollMasPrest')
+                #print("El roll que mas ha prestado elementos es: ")
                 print ("\n"+Empleado().tiposEmpleado['1']+" >> "+"N° veces que han prestado: "+str(elemPrest1))
             elif(roll==elemPrest2):
-                print("El roll que mas ha prestado elementos es: ")
+                Mensaje.mostrarMensajes('rollMasPrest')
+                #print("El roll que mas ha prestado elementos es: ")
                 print ("\n"+Empleado().tiposEmpleado['2']+" >> "+"N° veces que han prestado: "+str(elemPrest2))
             elif(roll==elemPrest3):
-                print("El roll que mas ha prestado elementos es: ")
+                Mensaje.mostrarMensajes('rollMasPrest')
                 print ("\n"+Empleado().tiposEmpleado['3']+" >> "+"N° veces que han prestado: "+str(elemPrest3))
             elif(roll==elemPrest4):
-                print("El roll que mas ha prestado elementos es: ")
+                Mensaje.mostrarMensajes('rollMasPrest')
                 print ("\n"+Empleado().tiposEmpleado['4']+" >> "+"N° veces que han prestado: "+str(elemPrest4))
         else:
-            print("\n Ningun elemento ha sido prestado")
-
-# Fin de métodos estáticos agregados por Pablo y Jaider
+            Mensaje.mostrarMensajes('ningunElementPrest')

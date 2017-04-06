@@ -30,6 +30,7 @@ class Almacen:
     def ingresarAlSistema(self):
         salir = False
         os.system("cls")
+        os.system("color 0A")
         while(salir == False):
             
             email = input("\nIngrese su E-mail: ")
@@ -51,6 +52,7 @@ class Almacen:
                         elif opt == 3:
                             salir = True
                             salir2 = True
+                            os.system("cls")
                         else:
                             Mensaje.mostrarMensajes('optInvalid')
                 else: 
@@ -66,6 +68,7 @@ class Almacen:
      
     def autenticacionAdministradorAlmacen(self, admin):
         os.system("cls")
+        os.system("color 0A")
         Mensaje.mostrarBienvenidaPersonalizada('bienvenida', admin)
         Mensaje.mostrarMensajes('infoAdmin1')
         user = input("Ingrese su Usuario: ")
@@ -81,6 +84,7 @@ class Almacen:
     def menuAdministradorAlmacen(self, admin):
         salir = False
         os.system("cls")
+        os.system("color 0A")
         while(salir == False):
             Mensaje.mostrarMensajes('menuPpalAdmin')
             op = input("\nIngrese su Opcion: ")
@@ -100,6 +104,7 @@ class Almacen:
     def menuEmpleado(self, admin):
         salir = False
         os.system("cls")
+        os.system("color 0A")
         Mensaje.mostrarBienvenidaPersonalizada('bienvenida', admin)
         while salir == False:
             Mensaje.mostrarMensajes('menuEmpleado')
@@ -128,6 +133,7 @@ class Almacen:
     def menu1AdministradorAlmacen(self):
         salir = False
         os.system("cls")
+        os.system("color 0A")
         while(salir == False):
             Mensaje.mostrarMensajes('menu1Admin')
             op = int(input("\nIngrese su opcion: "))
@@ -166,6 +172,7 @@ class Almacen:
 
     def menu2AdministradorAlmacen(self):
         salir = False
+        os.system("color 0A")
         while salir == False :
 
             Mensaje.mostrarMensajes('menu2Admin')
@@ -207,6 +214,7 @@ class Almacen:
 
             elif op == "4":        
                     os.system("cls")
+                    os.system("color 0A")
                     salir = False
                     while salir == False:   
                         i = int(input("Ingrese el codigo  del elemento: "))
@@ -430,6 +438,7 @@ class Almacen:
         self._elementos.append(elemento4)
        
         os.system("cls")
+        os.system("color 0A")
         Mensaje.mostrarMensajes('LecturaDatosExitosa1')
     
     def crearDatosFicticiosDeUntxt(self):
@@ -480,5 +489,6 @@ if __name__ == "__main__":
     #Bienvenida().imprimirBienvenida()
     #Bienvenida().imprimirBienvenida2()
     #Bienvenida().imprimirBienvenida3()
+
     Bienvenida().imprimirBienvenida4()
     a.menu()

@@ -1,12 +1,12 @@
 #from administradoralmacen import AdministradorAlmacen
-from empleado import Empleado
-from administrativo import Administrativo
-from ingenierotecnico import IngenieroTecnico
+#from empleado import Empleado
+##from administrativo import Administrativo
+##from ingenierotecnico import IngenieroTecnico
 #from operario import Operario
 
 class Mensaje():
 	mensaje = {
-	'bienvenida':'\n\nBienvenido ',
+	'bienvenida':'\nBienvenido ',
 	'optInvalid':'\n ¡¡¡ Opcion Invalida !!!',
 	'menuPpal':'\n\n1. Crear Datos Ficticios.\n2. Crear Datos Ficiticos Desde un txt.\n3. Escribir Datos Ficiticos En un txt.\n4. Ingresar al Sistema.\n5. Salir',
 	'menuPpalAdmin':'\nMenu de Usuario Administrador del Almacen:\n\n1. Ir al Menu de Consultas.\n2. Ir al Menu de Registros / Borrados.\n3. Prestar / Recibir.\n4. Cerrar Sesion de Administrador.',
@@ -58,12 +58,12 @@ class Mensaje():
 	'ningunElementPrest2':'\n Aun no hay elemntos prestados',
 	'registAdminAlmacen':'\n¿Empleado Administrador del almacen?\n\n1. Si.\n2. No.',
 	'yaExistEmp':' \n!!! Ya existe un empleado con este numero de identificacion !!!\n',
-	'':'',
-	'':'',
-	'':'',
-	'':'',
-	'':'',
-	'':'',
+	'empMasElementPrest':'\nEl empleado con mas elementos prestados es: ',
+	'ningunPrestamo':'\nNingun empleado ha prestado elementos',
+	'noHayValorPrest':'\n Aun no han sido prestado elementos con valor ',
+	'baseDatEmpleados':'\nLa base de datos actual de empleados es: ',
+	'empMasPrest':'El empleado que mas ha prestado elementos es: ',
+	'rollMasPrest':'El roll que mas ha prestado elementos es: ',
 	'':'',
 	'':'',
 	'':'',

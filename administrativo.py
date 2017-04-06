@@ -1,4 +1,5 @@
 from empleado import Empleado
+from mensajes import Mensaje
 
 class Administrativo(Empleado):
 	MAX_AD = 2

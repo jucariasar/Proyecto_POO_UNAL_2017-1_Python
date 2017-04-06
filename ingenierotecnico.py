@@ -1,4 +1,5 @@
 from empleado import Empleado
+from mensajes import Mensaje
 
 class IngenieroTecnico(Empleado):
     MAX_IT = 4 # Constante de clase para controlar el numero máximo de elementos que puede prestar 

@@ -172,6 +172,7 @@ class Almacen:
     def menu2AdministradorAlmacen(self):
         salir = False
         os.system("color 0A")
+        os.system("cls")
         while salir == False :
 
             Mensaje.mostrarMensajes('menu2Admin')

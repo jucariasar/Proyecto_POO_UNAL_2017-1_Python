@@ -271,17 +271,16 @@ class Almacen:
         salir = False
         os.system("cls")
         while salir == False:
-
             Mensaje.mostrarMensajes('menu3Admin')
             op = input(Mensaje.obtenerMensaje('optIn'))
 
             if op == "1":
                 os.system("cls")
-                if Elemento().verificarDisponibles(self._elementos):
-                    Elemento().elementosDisponibles(self._elementos)
-                    i = int(input(Mensaje.obtenerMensaje('idIn')))
-                    emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
-                    if emp != None:
+                i = int(input(Mensaje.obtenerMensaje('idIn')))
+                emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
+                if emp != None:
+                    if Elemento().verificarDisponibles(self._elementos) or Elemento().verificarReserva(emp.getElementos()):
+                         
                         if (Elemento().verificarReserva(emp.getElementos())):
                             Mensaje.mostrarMensajes('menu3Opt1')
                             op2 = input(Mensaje.obtenerMensaje('optIn'))
@@ -293,6 +292,7 @@ class Almacen:
                                     Mensaje.mostrarMensajes('reserv1Ok')
                                     salir2 = True
                                 elif op2 == "2":
+                                    Elemento().elementosDisponibles(self._elementos)
                                     Elemento().prestarElementos(self._elementos, emp)
                                     salir2 = True
                                 elif op2 == "3":
@@ -302,12 +302,15 @@ class Almacen:
                                     os.system("cls")
                                     Mensaje.mostrarMensajes('optInvalid')
                         else:
+                            Elemento().elementosDisponibles(self._elementos)
                             Elemento().prestarElementos(self._elementos, emp)
                     else:
                         os.system("cls")
-                        Mensaje.mostrarMensajes('empNoRegistrado')
+                        Mensaje.mostrarMensajes('elementNoDisponInventario')    
                 else:
-                    Mensaje.mostrarMensajes('elementNoDisponInventario')
+                    os.system("cls")
+                    Mensaje.mostrarMensajes('empNoRegistrado')
+                    
                     
             elif op == "2":
                 os.system("cls")

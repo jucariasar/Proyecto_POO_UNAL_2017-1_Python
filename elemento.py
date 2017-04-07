@@ -7,6 +7,7 @@ from historialprestamo import HistorialPrestamo
 from mensajes import Mensaje
 from datetime import datetime, date, time, timedelta
 import calendar
+import os
 
 class Elemento:
     estados = {'1':'Disponible',      
@@ -152,12 +153,15 @@ class Elemento:
                                 if Elemento().verificarDisponibles(listado):
                                     seguirPres = True
                                 else:
+                                    os.system("cls")
                                     Mensaje.mostrarMensajes('elementNoDisponInventario')
                                     seguirPres = False
                             else:
+                                os.system("cls")
                                 Mensaje.mostrarMensajes('userFullElement')
                                 seguirPres = False
                         elif op == "N":
+                            os.system("cls")
                             seguirPres = False
                         else:
                             Mensaje.mostrarMensajes('optInvalid')
@@ -172,6 +176,7 @@ class Elemento:
                     seguirPres = False
             else:
                 seguirPres = False
+                os.system("cls")
                 Mensaje.mostrarMensajes('elementNoDisponInventario')
 
     @staticmethod
@@ -193,6 +198,7 @@ class Elemento:
                     if op == "S":
                         seguirEntregando = True
                     elif op == "N":
+                        os.system("cls")
                         seguirEntregando = False
                     else:
                         Mensaje.mostrarMensajes('optInvalid')

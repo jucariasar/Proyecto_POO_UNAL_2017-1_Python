@@ -106,11 +106,7 @@ class Mensaje():
 	'setNomOp':'Ingrese el nombre del operario: ',
 	'setApellOp':'Ingrese el apellido del operario: ',
 	'setEmailOp':'Ingrese el correo del operario: ',
-	'setTipo':'Establezca el tipo de operario: ',
-	'':'',
-	'':'',
-	'':'',
-	'':'',
+	'setTipo':'Establezca el tipo de operario: '
 	}
 
 	@staticmethod

@@ -11,7 +11,7 @@ import sys
 import time
 import os
 
-
+## Comentario para probar
 class Almacen:
     salirTotal = False    
     def __init__(self):

@@ -13,9 +13,11 @@ class Elemento:
     estados = {'1':'Disponible',      
     '2':'Prestado','3':'Reservado'}  
 
-    def __init__(self, codigo=0, nombre="", ubicacion="", fechaPrestamo=None, valor=0, estadoActual=""):
-        self._codigo = codigo
-        self._nombre = nombre
+    def __init__(self, codigo=0, descripcion="", modelo="", marca="", ubicacion="", fechaPrestamo=None, valor=0, estadoActual=""):
+        self._codigo = descripcion
+        self._descripcion = nombre
+        self._modelo = modelo
+        self._marca = marca
         self._ubicacion = ubicacion
         self._fechaPrestamo = fechaPrestamo
         self._contador = 0
@@ -33,6 +35,18 @@ class Elemento:
 
     def setNombre (self, nombre):
         self._nombre = nombre
+
+    def getModelo(self):
+        return self._modelo
+
+    def setModelo(self, modelo):
+        self._modelo = modelo
+
+    def getMarca(self):
+        return self._marca
+
+    def setMarca(self, marca):
+        self._marca = marca
 
     def getUbicacion (self):
         return self._ubicacion

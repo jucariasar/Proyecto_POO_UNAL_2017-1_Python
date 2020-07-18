@@ -2,8 +2,7 @@ from mensajes import Mensaje
 
 class Empleado:
     tiposEmpleado = {'1':'Administrador Almacen','2':'Administrativo', 
-    '3':'Ingeniero Tecnico', 
-    '4':'Operario'}
+    '3':'Ingeniero Tecnico', '4':'Operario'}
     def __init__(self, ident=0, nombre="", apellido="", numElementPrest=0, roll=0, email=""):
         self._ident = ident
         self._nombre = nombre

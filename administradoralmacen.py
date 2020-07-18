@@ -25,10 +25,19 @@ class AdministradorAlmacen(Administrativo):
         print("2. No.")
         op = input("\nIngrese su opcion: ")
         if op == '1':
-               empleado = AdministradorAlmacen()
-               empleado.setUsuario(str(input("Establezca el usuario:")))
-               empleado.setPassword(str(input("Establezca el password:")))
-               empleado.setRoll('Administrador Almacen')
+            empleado = AdministradorAlmacen()
+            empleado.setUsuario(str(input("Establezca el Usuario: ")))
+            estado = True
+            while estado == True:
+                clave = str(input("Establezca el Password: "))
+                claveConfir = str(input("Confirme su Password: "))
+                if clave == claveConfir:
+                    empleado.setPassword(clave)
+                    empleado.setRoll('Administrador Almacen')
+                    estado = False
+                else:
+                    print("\nLos Password no coinciden")
+                    print("\nIngrese los dos Password Iguales")
         else:
                empleado = Administrativo()
                empleado.setRoll('Administrativo')

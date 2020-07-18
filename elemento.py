@@ -11,9 +11,13 @@ class Elemento:
     estados = {'1':'Disponible',      ## Diccionario estatico para estandarizar los estados
     '2':'Prestado','3':'Reservado'}   ## de los elementos (Camilo Agrego esta linea)
 
-    def __init__(self, codigo=0, nombre="", ubicacion="", fechaPrestamo=None, valor=0, estadoActual=""):
+    # Crear diccionario con marcas, cargarlo de un archivo de texto con diferentes marcas
+
+    def __init__(self, codigo=0, descripcion="", modelo="", marca="" ,ubicacion="", fechaPrestamo=None, valor=0, estadoActual=""):
         self._codigo = codigo
-        self._nombre = nombre
+        self._descripcion = descripcion #Cambie nombre por descripcion
+        self._modelo = modelo # Agregué modelos
+        self._marca = marca   # Agregué marca
         self._ubicacion = ubicacion
         self._fechaPrestamo = fechaPrestamo
         self._contador = 0
@@ -26,11 +30,23 @@ class Elemento:
     def setCodigo(self, codigo):
         self._codigo = codigo
 
-    def getNombre (self):
-        return self._nombre
+    def getDescripcion (self):
+        return self._descripcion
 
-    def setNombre (self, nombre):
-        self._nombre = nombre
+    def setDescripcion (self, descripcion):
+        self._descripcion = descripcion
+
+    def getModelo(self):
+        return self._modelo
+
+    def setModelo(self, modelo):
+        self._modelo = modelo
+
+    def getMarca(self):
+        return self._marca
+
+    def setMarca(self, marca):
+        self._marca = marca
 
     def getUbicacion (self):
         return self._ubicacion

@@ -70,10 +70,10 @@ class Empleado:
     def setNumRestriccion(self, num): # Establece Valor de Variable Nueva
         self._numRestriccion = num
 
-    def setaddElemento(self, elem):
+    def setAddElemento(self, elem):
         self._elementos.append(elem)
 
-    def setdelElemento(self, elem):
+    def setDelElemento(self, elem):
         self._elementos.remove(elem)
 
     def __str__(self):
@@ -88,7 +88,7 @@ class Empleado:
 >>>>>>> refs/remotes/origin/Version_1
 
     def str_Empleado(self):
-        return("\n Nombre del Empleado: " + str(self.getNombre()) + " " + str(self.getApellido()) + 
+        return(" Nombre del Empleado: " + str(self.getNombre()) + " " + str(self.getApellido()) + 
             "\n N° Identificacion: " + str(self.getIdent()) + "\n Roll: " + str(self.getRoll()) +
             "\n E-mail: "+str(self.getEmail()))
 <<<<<<< HEAD

@@ -6,9 +6,9 @@
 
 class Mensaje():
 	mensaje = {
+	'menuPpal':'1. Crear Datos Ficticios.\n2. Crear Datos Ficticios Desde un csv.\n3. Guardar Datos en un csv.\n4. Ingresar al Sistema.\n5. Salir',
 	'bienvenida':'\nBienvenido ',
 	'optInvalid':'\n ¡¡¡ Opcion Invalida !!!',
-	'menuPpal':'\n\n1. Crear Datos Ficticios.\n2. Crear Datos Ficiticos Desde un txt.\n3. Escribir Datos Ficiticos En un txt.\n4. Ingresar al Sistema.\n5. Salir',
 	'menuPpalAdmin':'\nMenu de Usuario Administrador del Almacen:\n\n1. Ir al Menu de Consultas.\n2. Ir al Menu de Registros / Borrados.\n3. Prestar / Recibir.\n4. Cerrar Sesion de Administrador.',
 	'menu1Admin':'\n\n¿Que Consulta Desea Realizar?\n\n1. Consultar Inventario de Elementos.\n2. Consultar Base de Datos de Empleados.\n3. Consultar el Elemento mas Prestado.\n4. Consultar los 5 Elementos mas Prestados.\n5. Consultar Empleado con mas Elementos Prestados.\n6. Consultar Empleados con mas Valor Prestado.\n7. Consultar el Empleado que mas Presta.\n8. Consultar el Roll que mas Presta.\n9. Volver al Menu Anterior.',
 	'menu2Admin':'\n\n¿Que desea hacer?\n\n1. Registrar Empleado.\n2. Registrar Elemento.\n3. Eliminar Empleado.\n4. Eliminar Elemento.\n5. Volver al Menu Anterior.',
@@ -64,7 +64,7 @@ class Mensaje():
 	'baseDatEmpleados':'\nLa base de datos actual de empleados es: ',
 	'empMasPrest':'El empleado que mas ha prestado elementos es: ',
 	'rollMasPrest':'El roll que mas ha prestado elementos es: ',
-	'optIn':'\nIngrese su Opcion: ',
+	'optIn':'Ingrese su Opcion: ',
 	'emailIn':'\nIngrese su E-mail: ',
 	'documentIn':'Ingrese su Documento: ',
 	'userIn':'Ingrese su Usuario: ',

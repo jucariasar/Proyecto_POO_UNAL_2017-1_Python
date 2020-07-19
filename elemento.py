@@ -14,8 +14,8 @@ class Elemento:
     '2':'Prestado','3':'Reservado'}  
 
     def __init__(self, codigo=0, descripcion="", modelo="", marca="", ubicacion="", fechaPrestamo=None, valor=0, estadoActual=""):
-        self._codigo = descripcion
-        self._descripcion = nombre
+        self._codigo = codigo
+        self._descripcion = descripcion
         self._modelo = modelo
         self._marca = marca
         self._ubicacion = ubicacion
@@ -118,7 +118,7 @@ class Elemento:
             if(element.getEstadoActual() == Elemento().estados['2']):
                 return True
         return False
-
+    """
     @staticmethod
     def guardarDatosEntxt(self):
         Archivo = open("elementos.txt", "a")
@@ -140,7 +140,7 @@ class Elemento:
             Archivo.write(tmp+'\n')
             
         Archivo.close()
-
+    """
 
     @staticmethod
     def prestarElementos(listado, e):

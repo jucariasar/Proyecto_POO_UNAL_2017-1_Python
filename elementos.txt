@@ -1,8 +1,0 @@
-56;Martillo;Ad67;56000
-23;Saco;rty67;78000
-45;Mesa;ty67;34000
-78;polopo;jkl90;89000
-45;Libro;fgh67;89000
-33;Silla;ghj77;78000
-12;CPU;IUIO0;600000
-345;lupa;34rt;56000

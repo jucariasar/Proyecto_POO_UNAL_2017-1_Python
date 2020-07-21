@@ -58,7 +58,7 @@ class HistorialPrestamo:
         h = HistorialPrestamo()
         h.setIdEmpleado(emp.getIdent())
         h.setNomEmpleado(emp.getNombre())
-        h.setNomElemento(element.getNombre())
+        h.setNomElemento(element.getDescripcion())
         h.setCodElemento(element.getCodigo())
         h.setFechaDevolucion(None)
         h.setFechaPrestamo(element.getFechaPrestamo())

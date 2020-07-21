@@ -1,24 +1,29 @@
-#from administradoralmacen import AdministradorAlmacen
-#from empleado import Empleado
-##from administrativo import Administrativo
-##from ingenierotecnico import IngenieroTecnico
-#from operario import Operario
+
 
 class Mensaje():
 	mensaje = {
-	'menuPpal':'1. Crear Datos Ficticios.\n2. Crear Datos Ficticios Desde un csv.\n3. Guardar Datos en un csv.\n4. Ingresar al Sistema.\n5. Salir',
-	'bienvenida':'\nBienvenido ',
-	'optInvalid':'\n ¡¡¡ Opcion Invalida !!!',
+	'menuPpal':'1. Ingresar al Sistema.\n2. Consultar Inventario de Elementos.\n3. Salir.',
+	'optIn':'Ingrese su Opcion: ',
+	'optInvalid':'¡¡¡ Opcion Invalida !!!',
+	'inventElement':'El inventario actual de elementos es: ',
+	'correoInvalido':'Formato de Correo Invalido', 
+	'intentarNuevo':'Por Favor Intente Nuevamente',
+	'emailIn':'Ingrese el E-mail: ',
+	'documentIn':'Ingrese el Documento: ',
+	'emailDocumentInvalid':'E-mail y/o Documento Invalido\n',
+	'volverAnterior':'¿Volver al Menu Principal? S/N\n',
+	'bienvenida':'Bienvenid@ ',
+	'menuEmpleado':'¿Que desea hacer?\n\n1. Consultar Elementos Disponibles.\n2. Consultar Elementos Prestados.\n3. Reservar Elementos para Prestar.\n4. Modificar Reserva de Elementos.\n5. Cerrar Sesion de Usuario.',
+	'SelectRollAdmin':'Con que Roll Desea Ingresar:\n\n1. Como Administrador del Almacen.\n2. Como Empleado NO Administrador.\n3. Desea volver al menu principal.',
+	'infoAdmin1':'A continuacion debe de ingresar su usuario y contraseña para ingresar a administrar la aplicacion\n',
+	'userIn':'Ingrese el Usuario: ',# mensajes
+	'passwdIn':'Ingrese la Contraseña: ',
 	'menuPpalAdmin':'\nMenu de Usuario Administrador del Almacen:\n\n1. Ir al Menu de Consultas.\n2. Ir al Menu de Registros / Borrados.\n3. Prestar / Recibir.\n4. Cerrar Sesion de Administrador.',
 	'menu1Admin':'\n\n¿Que Consulta Desea Realizar?\n\n1. Consultar Inventario de Elementos.\n2. Consultar Base de Datos de Empleados.\n3. Consultar el Elemento mas Prestado.\n4. Consultar los 5 Elementos mas Prestados.\n5. Consultar Empleado con mas Elementos Prestados.\n6. Consultar Empleados con mas Valor Prestado.\n7. Consultar el Empleado que mas Presta.\n8. Consultar el Roll que mas Presta.\n9. Volver al Menu Anterior.',
 	'menu2Admin':'\n\n¿Que desea hacer?\n\n1. Registrar Empleado.\n2. Registrar Elemento.\n3. Eliminar Empleado.\n4. Eliminar Elemento.\n5. Volver al Menu Anterior.',
 	'menu3Admin':'\n\n¿Que desea hacer?:\n\n1. Prestar Elementos.\n2. Recibir Elementos.\n3. Mostrar Historial.\n4. Volver al Menu Anterior.',
-	'menuEmpleado':'\n¿Que desea hacer?\n\n1. Consultar Elementos Disponibles.\n2. Consultar Elementos Prestados.\n3. Reservar Elementos para Prestar.\n4. Modificar Reserva de Elementos.\n5. Cerrar Sesion de Usuario.',
-	'SelectRollAdmin':'\n\nCon que Roll Desea Ingresar:\n\n1. Como Administrador del Almacen.\n2. Como Empleado NO Administrador.\n3. Desea volver al menu principal.',
-	'infoAdmin1':'\nA continuacion debe de ingresar su usuario y contraseña para ingresar a administrar la aplicacion\n',
 	'registEmp1':'\n¿Qué tipo de empleado desea registrar?\n\n1.Empleado Administrativo.\n2.Empleado Operario.\n3.Ingeniero Tecnico.\n4.Regresar al Menu anterior',
 	'menu3Opt1':'\n El usuario actualmente tiene elemento(s) reservado(s): \n\n ¿Que Desea Hacer?:\n\n 1. Asentar la reserva.\n 2. Prestar nuevos elementos.\n 3. Volver.',
-	'emailDocumentInvalid':'\n\nE-mail y/o Documento Invalido\n\n',
 	'userPassInvalid':'\n Usuario y/o Passwor Incorrecto.\n',
 	'empNoPuedeSerEliminado1':'\n El empleado tiene elementos prestados. No puede ser eliminado\n',
 	'eliminacionEmp1':'\nEl empleado tiene elementos reservados.Estos pasaran a estar disponibles\n',
@@ -41,7 +46,6 @@ class Mensaje():
 	'estElementReserv':'\n Lo Sentimos el Elemento se Encuentra Reservado.',
 	'codNoEncotr':'\n Codigo No Encontrado en sus Elementos Prestados.',
 	'elementDisp':'\n Los elementos disponibles son: ',
-	'inventElement':'\n El inventario actual de elementos es: ',
 	'elementPrest':'\n Los elementos prestados son: ',
 	'noElementPres2':'\n No hay elementos prestados.',
 	'elementRegistOk':'\n !!! Elemento Registrado con exito !!! ',
@@ -64,11 +68,6 @@ class Mensaje():
 	'baseDatEmpleados':'\nLa base de datos actual de empleados es: ',
 	'empMasPrest':'El empleado que mas ha prestado elementos es: ',
 	'rollMasPrest':'El roll que mas ha prestado elementos es: ',
-	'optIn':'Ingrese su Opcion: ',
-	'emailIn':'\nIngrese su E-mail: ',
-	'documentIn':'Ingrese su Documento: ',
-	'userIn':'Ingrese su Usuario: ',
-	'passwdIn':'Ingrese su Contraseña: ',
 	'salirSoN':'\n Desea salir del sistema? (S/N): ',
 	'continuar':'\n Presion Enter Para Continuar...',
 	'finalizar':'\n\n Presione Enter Para Finalizar...',

@@ -1,0 +1,6 @@
+from os import path
+ruta_archivo = path.join("Datos","empleados.csv")
+archivo = open(ruta_archivo)
+archivo.seek(0)
+linea = archivo.readline()
+datos = linea.split(",")

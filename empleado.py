@@ -86,13 +86,14 @@ class Empleado:
     def imprimirEmpleados(lis):
         for e in lis:
             print(e)
+            print()
 
 
     @staticmethod
     def buscarEmpleadoPorId(listado, i):
-        for e in listado:
-            if (e.getIdent() == i):
-                return e
+        for empleado in listado:
+            if (empleado.getIdent() == i):
+                return empleado
         return None
 
 

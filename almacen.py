@@ -8,121 +8,157 @@ from historialprestamo import HistorialPrestamo
 from bienvenida import Bienvenida
 from mensajes import Mensaje
 from creardatos import empleadosFicticios, elementosFicticios
-from datosaplicacion import guardarDatos
-import sys
+from datosaplicacion import guardarDatosEmpleados, guardarDatosElementos, cargarDatosEmpleados, cargarDatosElementos, comprobarArchivo
+from sys import exit
+from funcionesvalidacion import comprobarCorreoValido
 import time
-import os
+from os import system, path
 
 ## Comentario para probar
 class Almacen:
-    salirTotal = False    
+    salirTotal = False
     def __init__(self):
-        self._empleados = []
-        self._elementos = []
+        self._empleados = [] # Solo utilizado en la creación inicial
+        self._elementos = [] # Solo utilizado en la creación inicial
+        self._archivoEmpleados = None
+        self._archivoElementos = None
         self._seleccion ={
-        "1":self.crearDatosFicticios,
-        "2":self.cargarDatosDesdeTexto,
-        "3":self.gardarDatosEnTexto,
-        "4":self.ingresarAlSistema,
-        "5":self.salir
+        "1":self.ingresarAlSistema,
+        "2":self.consultarInventario,
+        "3":self.salir,
         }
 
+    # >>>>>>>  Inicio primera revisión
     def getEmpleados(self):
         return self._empleados
+
 
     def setEmpleado(self, empleado):
         self._empleados.append(empleado)
 
+
     def getElementos(self):
         return self._elementos
+
 
     def setElemento(self, elemento):
         self._elementos.append(elemento)
 
-    def crearDatosFicticios(self):
 
-        # Se crean empleados y elementos para pruebas
+    def getArchivoEmpleados(self):
+        return self._archivoEmpleados
 
-        # Se crean empleados con diferentes roles y se agregan a la lista _empleados
-        empleadosFicticios(self.getEmpleados())
 
-        # Se crean varios elementos y se agregan a la lista _elementos
-        elementosFicticios(self.getElementos())
+    def setArchivoEmpleados(self, empleado):
+        pass
 
-       
-        os.system("cls")
-        os.system("color 0A")
-        Mensaje.mostrarMensajes('LecturaDatosExitosa1')
+
+    def getArchivoElementos(self):
+        return self._archivoElementos
+
+
+    def setArchivoElementos(self, elemento):
+        pass
+    
 
     def cargarDatosDesdeTexto(self):
+        cargarDatosEmpleados(self.getEmpleados())
 
-
-        """
-        Archivo = open("elementos.txt", "r")
-        lineas = Archivo.readlines()
-        for i in lineas:
-            tmp = i.strip('\n').split(';')
-            e = Elemento()
-            e = Elemento()
-            e.setCodigo(int(tmp[0]))
-            e.setNombre(tmp[1])
-            e.setUbicacion(tmp[2])
-            e.setFechaPrestamo(None)
-            e.setValor(int(tmp[3]))
-            e.setEstadoActual(Elemento().estados['1'])
-            self._elementos.append(e)
-        Mensaje.mostrarMensajes('LecturaDatosExitosa1')
-        Archivo.close()"""
-    
+        
     def gardarDatosEnTexto(self):
-        #Guarda datos en archivo de texto (csv)
-        guardarDatos(self.getEmpleados())
-        #Elemento().guardarDatosEntxt(self)
+        guardarDatosEmpleados(self.getEmpleados())
+        guardarDatosElementos(self.getElementos())
 
+
+    def consultarInventario(self):
+        Elemento().inventarioElementos(self.getElementos())
+    # >>>>>>>  Final primera revisión.
+
+    # >>>>>>>  Inicio Tercera Revision
     def ingresarAlSistema(self):
         salir = False
-        os.system("cls")
-        os.system("color 0A")
+        system("cls")
+        system("color 0A")
         while(salir == False):
+            correo = False
+            print()
+            while correo == False:
+                print()
+                email = input(Mensaje.obtenerMensaje('emailIn'))
+                if comprobarCorreoValido(email):
+                    correo = True
+                    break
+                else:
+                    system("cls")
+                    print()
+                    print()
+                    Mensaje.mostrarMensajes('correoInvalido')
+                    Mensaje.mostrarMensajes('intentarNuevo')
             
-            email = input(Mensaje.obtenerMensaje('emailIn'))
             cc = int(input(Mensaje.obtenerMensaje('documentIn')))
             emp = Empleado().buscarEmpleadoPorId(self._empleados, cc)
             if emp != None and emp.getEmail() == email:
                 if isinstance(emp,AdministradorAlmacen):
-                    salir2 = False
-                    while(salir2 == False):
-                        os.system("cls")
+                    salirAdmin = False
+                    system("cls")
+                    print()
+                    while(salirAdmin == False):
+                        print()
                         Mensaje.mostrarMensajes('SelectRollAdmin')
-                        opt = int(input(Mensaje.obtenerMensaje('optIn')))
+                        print()
+                        try:
+                            opt = int(input(Mensaje.obtenerMensaje('optIn')))
+                        except ValueError:
+                            system("cls")
+                            Mensaje.mostrarMensajes('optInvalid')
+                            continue
                         if opt == 1:
                             self.autenticacionAdministradorAlmacen(emp)
                         elif opt == 2:
                             self.menuEmpleado(emp)
                             salir = True
-                            salir2 = True
+                            salirAdmin = True
                         elif opt == 3:
                             salir = True
-                            salir2 = True
-                            os.system("cls")
+                            salirAdmin = True
+                            system("cls")
                         else:
+                            system("cls")
                             Mensaje.mostrarMensajes('optInvalid')
                 else: 
                     self.menuEmpleado(emp)
-                    op=input(Mensaje.obtenerMensaje('salirSoN'))
-                    if op=="S":
-                        salir=True
-                    elif op=="N":
+                    op = input(Mensaje.obtenerMensaje('salirSoN'))
+                    if op == "S":
+                        salir = True
+                    elif op == "N":
                         pass
             else:
-                os.system("cls")
-                Mensaje.mostrarMensajes('emailDocumentInvalid')
-     
+
+                 
+                volverMenu = False
+                system("cls")
+                while volverMenu == False:
+                    print()
+                    print()
+                    Mensaje.mostrarMensajes('emailDocumentInvalid')
+                    Mensaje.mostrarMensajes('volverAnterior')
+                    volver = input(Mensaje.obtenerMensaje('optIn'))
+                    if volver == 'S' or volver == 's':
+                        salir = True
+                        break
+                    elif volver == 'N' or volver == 'n':
+                        volverMenu = True
+                    else:
+                        Mensaje.mostrarMensajes('optInvalid')
+
     def autenticacionAdministradorAlmacen(self, admin):
-        os.system("cls")
-        os.system("color 0A")
+        system("cls")
+        system("color 0A")
+        print()
+        print()
         Mensaje.mostrarBienvenidaPersonalizada('bienvenida', admin)
-        Mensaje.mostrarMensajes('infoAdmin1')
+        print()
+        Mensaje.mostrarMensajes('infoAdmin1') # Acá voy revisando
         user = input(Mensaje.obtenerMensaje('userIn'))
         paswd = input(Mensaje.obtenerMensaje('passwdIn'))
 
@@ -131,12 +167,12 @@ class Almacen:
         else:
             Mensaje.mostrarMensajes('userPassInvalid')
             input(Mensaje.obtenerMensaje('continuar'))
-
+    
 
     def menuAdministradorAlmacen(self, admin):
         salir = False
-        os.system("cls")
-        os.system("color 0A")
+        system("cls")
+        system("color 0A")
         while(salir == False):
             Mensaje.mostrarMensajes('menuPpalAdmin')
             op = input(Mensaje.obtenerMensaje('optIn'))
@@ -149,96 +185,98 @@ class Almacen:
             elif op == "4":
                 salir = True
             else:
-                os.system("cls")
+                system("cls")
                 Mensaje.mostrarMensajes('optInvalid')
 
 
     def menuEmpleado(self, admin):
         salir = False
-        os.system("cls")
-        os.system("color 0A")
+        system("cls")
+        system("color 0A")
+        print()
         Mensaje.mostrarBienvenidaPersonalizada('bienvenida', admin)
         while salir == False:
+            print()
             Mensaje.mostrarMensajes('menuEmpleado')
 
             op = input(Mensaje.obtenerMensaje('optIn'))
             if op == "1":
-                os.system("cls")
+                system("cls")
                 Elemento().elementosDisponibles(self._elementos)
             elif(op =="2"):
-                os.system("cls")
+                system("cls")
                 Elemento().elementosPrestados(admin._elementos)
             elif(op == "3"):
-                os.system("cls")
+                system("cls")
                 Elemento().reservarElementos(self._elementos, admin)
             elif(op == "4"):
-                os.system("cls")
+                system("cls")
                 Elemento().modificarReserva(admin._elementos, admin)
             elif(op == "5"):
-                os.system("cls")
+                system("cls")
                 salir = True
             else:
-                os.system("cls")
+                system("cls")
                 Mensaje.mostrarMensajes('optInvalid')
-            
+    # >>>>>>> Final tercera Revision      
 
     def menu1AdministradorAlmacen(self):
         salir = False
-        os.system("cls")
-        os.system("color 0A")
+        system("cls")
+        system("color 0A")
         while(salir == False):
             Mensaje.mostrarMensajes('menu1Admin')
             op = int(input(Mensaje.obtenerMensaje('optIn')))
         
             if(op == 1):
-                os.system("cls")
+                system("cls")
                 Elemento().inventarioElementos(self._elementos)
             elif(op == 2):
-                os.system("cls")
+                system("cls")
                 Empleado().listadoEmpleados(self._empleados)
             elif(op == 3):
-                os.system("cls")
+                system("cls")
                 Elemento().masPrestado(self._elementos)
             elif(op == 4):
-                os.system("cls")
+                system("cls")
                 Elemento().cincoMasPrestados(self._elementos)
             elif(op == 5):
-                os.system("cls")
+                system("cls")
                 Empleado().masElemPrestados(self._empleados)
             elif(op == 6):
-                os.system("cls")
+                system("cls")
                 Empleado().masValorPrestado(self._empleados)
             elif(op == 7):
-                os.system("cls")
+                system("cls")
                 Empleado().masHaPrestado(self._empleados)
             elif(op == 8):
-                os.system("cls")
+                system("cls")
                 Empleado().rollEstrella(self._empleados)
             elif(op == 9):
-                os.system("cls")
+                system("cls")
                 salir = True
             else:
-                os.system("cls")
+                system("cls")
                 Mensaje.mostrarMensajes('optInvalid')
 
 
     def menu2AdministradorAlmacen(self):
         salir = False
-        os.system("color 0A")
-        os.system("cls")
+        system("color 0A")
+        system("cls")
         while salir == False :
 
             Mensaje.mostrarMensajes('menu2Admin')
             op = input(Mensaje.obtenerMensaje('optIn'))
             if op == "1":
-                os.system("cls")
+                system("cls")
                 self.menuRegistrarEmpleado()
             elif op == "2":
-                os.system("cls")
+                system("cls")
                 Elemento().registrarElemento(self)
         
             elif op == "3":
-                    os.system("cls")
+                    system("cls")
                     salir = False
                     while salir == False:    
                    
@@ -266,8 +304,8 @@ class Almacen:
            
 
             elif op == "4":        
-                    os.system("cls")
-                    os.system("color 0A")
+                    system("cls")
+                    system("color 0A")
                     salir = False
                     while salir == False:   
                         i = int(input("Ingrese el codigo  del elemento: "))
@@ -322,13 +360,13 @@ class Almacen:
 
     def menu3AdministradorAlmacen(self):
         salir = False
-        os.system("cls")
+        system("cls")
         while salir == False:
             Mensaje.mostrarMensajes('menu3Admin')
             op = input(Mensaje.obtenerMensaje('optIn'))
 
             if op == "1":
-                os.system("cls")
+                system("cls")
                 i = int(input(Mensaje.obtenerMensaje('idIn')))
                 emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
                 if emp != None:
@@ -341,7 +379,7 @@ class Almacen:
                             while salir2 == False:
                                 if op2 == "1":
                                     Elemento().asentarReserva(emp.getElementos(), emp)
-                                    os.system("cls")
+                                    system("cls")
                                     Mensaje.mostrarMensajes('reserv1Ok')
                                     salir2 = True
                                 elif op2 == "2":
@@ -349,66 +387,87 @@ class Almacen:
                                     Elemento().prestarElementos(self._elementos, emp)
                                     salir2 = True
                                 elif op2 == "3":
-                                    os.system("cls")
+                                    system("cls")
                                     salir2 = True
                                 else:
-                                    os.system("cls")
+                                    system("cls")
                                     Mensaje.mostrarMensajes('optInvalid')
                         else:
                             Elemento().elementosDisponibles(self._elementos)
                             Elemento().prestarElementos(self._elementos, emp)
                     else:
-                        os.system("cls")
+                        system("cls")
                         Mensaje.mostrarMensajes('elementNoDisponInventario')    
                 else:
-                    os.system("cls")
+                    system("cls")
                     Mensaje.mostrarMensajes('empNoRegistrado')
                     
                     
             elif op == "2":
-                os.system("cls")
+                system("cls")
                 i = int(input(Mensaje.obtenerMensaje('idIn')))
                 emp = Empleado().buscarEmpleadoPorId(self._empleados, i)
                 if emp != None:
-                    os.system("cls")
+                    system("cls")
                     if Elemento.verificarPrestamo(emp.getElementos()): ## OJO ACA
                         Elemento().recibirElementos(emp)
                     else:
                         Mensaje.mostrarMensajes('noElementPrest')
                 else:
-                    os.system("cls")
+                    system("cls")
                     Mensaje.mostrarMensajes('empNoRegistrado')
             elif op == "3":
                 if len(HistorialPrestamo().historial) > 0:
-                    os.system("cls")
+                    system("cls")
                     Mensaje.mostrarMensajes('impHistorial1')
                     HistorialPrestamo().mostrarHistorial()
                 else:
                     os.system("cls")
                     Mensaje.mostrarMensajes('hoHayHistorial')
             elif op == "4":
-                os.system("cls")
+                system("cls")
                 salir = True
             else:
-                os.system("cls")
+                system("cls")
                 Mensaje.mostrarMensajes('optInvalid')
     
 
     def salir(self):
-        os.system("color 0A")
-        os.system("cls")
+        system("color 0A")
+        system("cls")
         Bienvenida().imprimirDespedida()
         input(Mensaje.obtenerMensaje('finalizar'))
-        sys.exit(0)
+        exit(0)
 
 
-    # Primer menu
+    # >>>>>>>  Inicio segunda revisión
     def menu(self):
         break_while = 1
+        ejecucionEmp = 0
+        ejecucionElem = 0
         while break_while == 1:
+
+            if not comprobarArchivo("Datos", "Empleados.csv"):
+                empleadosFicticios(self.getEmpleados())
+                guardarDatosEmpleados(self.getEmpleados())
+                ejecucionEmp = 1
+            elif ejecucionEmp == 0:
+                cargarDatosEmpleados(self.getEmpleados())
+                ejecucionEmp = 1
+
+            if not comprobarArchivo("Datos", "Elementos.csv"):
+                elementosFicticios(self.getElementos())
+                guardarDatosElementos(self.getElementos())
+                ejecucionElem = 1
+            elif ejecucionElem == 0:
+                cargarDatosElementos(self.getElementos())
+                ejecucionElem = 1
+            
             print()
-            print()
+            system("cls")
+            Bienvenida().imprimirBienvenida4()
             Mensaje.mostrarMensajes('menuPpal')
+            print()
             print()
             op = input(Mensaje.obtenerMensaje('optIn'))
             accion = self._seleccion.get(op)
@@ -416,9 +475,9 @@ class Almacen:
                 accion()
             else:
                 Mensaje.mostrarMensajes('optInvalid')
-
+    # >>>>>>>  Final segunda revisión
 
 if __name__ == "__main__":
     a = Almacen()
-    Bienvenida().imprimirBienvenida4()
+    #Bienvenida().imprimirBienvenida4()
     a.menu()

@@ -30,11 +30,11 @@ class Elemento:
     def setCodigo(self, codigo):
         self._codigo = codigo
 
-    def getNombre (self):
-        return self._nombre
+    def getDescripcion (self):
+        return self._descripcion
 
-    def setNombre (self, nombre):
-        self._nombre = nombre
+    def setDescripcion (self, descripcion):
+        self._descripcion = descripcion
 
     def getModelo(self):
         return self._modelo
@@ -85,14 +85,15 @@ class Elemento:
 
     def __str__(self):
         return ("Codigo del Elemento: " + str(self.getCodigo()) + 
-            "\n Nombre del Elemento: " + self.getNombre() + "\n La ubicacion del Elemento es:  " + self.getUbicacion() +
+            "\n Nombre del Elemento: " + self.getDescripcion() + "\n La ubicacion del Elemento es:  " + self.getUbicacion() +
             "\n Fecha de prestamo: " + self.getFechaPrestamo() +  "\n Cantidad de veces prestado: " + str(self.getContador()) + 
             "\n Estado del Elemento: " + self.getEstadoActual())
 
     
     def str_Inventario(self):
-        return ("\n Nombre del Elemento: " + str(self.getNombre())+ "\n Codigo del Elemento: " + 
-            str(self.getCodigo())+ "\n La ubicacion del Elemento es:  " + str(self.getUbicacion()) + 
+        return ("\n Código del Elemento: " + str(self.getCodigo()) + "\n Descripción: " + 
+            str(self.getDescripcion()) + "\n Marca: " + str(self.getMarca()) + 
+            " \n Modelo: " + str(self.getModelo()) + "\n La ubicacion del Elemento es:  " + str(self.getUbicacion()) + 
             "\n Estado del Elemento: " + str(self.getEstadoActual())+'\n')
 
 
@@ -118,29 +119,7 @@ class Elemento:
             if(element.getEstadoActual() == Elemento().estados['2']):
                 return True
         return False
-    """
-    @staticmethod
-    def guardarDatosEntxt(self):
-        Archivo = open("elementos.txt", "a")
-        m = int(input(Mensaje.obtenerMensaje('elementToWrite')))
-        M = []
-        for i in range(m):
-            M.append([0]*4)
-
-        for i in range(m):
-            print("\nIngrese el elemento :" , (i + 1), "\n")
-            for j in range(4):
-                 
-                M[i][j] = str(input(("Escriba el campo " , j + 1 )))
-
-            
-        for i in M:
-            tmp = ';'.join(i)
-            
-            Archivo.write(tmp+'\n')
-            
-        Archivo.close()
-    """
+    
 
     @staticmethod
     def prestarElementos(listado, e):
@@ -193,6 +172,7 @@ class Elemento:
                 os.system("cls")
                 Mensaje.mostrarMensajes('elementNoDisponInventario')
 
+
     @staticmethod
     def recibirElementos(emp):
         seguirEntregando = True
@@ -222,6 +202,7 @@ class Elemento:
                 Mensaje.mostrarMensajes('noElementPrest')
                 seguirEntregando = False
 
+
     @staticmethod
     def asentarReserva(listElementEmp, emp):
         for element in listElementEmp:
@@ -241,6 +222,7 @@ class Elemento:
                 return element
         return None
 
+
     @staticmethod
     def verificarDisponibles(listado): 
         for element in listado:
@@ -256,8 +238,10 @@ class Elemento:
             if(str(e.getEstadoActual()) == Elemento().estados['1']):
                 print(e.str_Inventario())
 
+
     @staticmethod
     def inventarioElementos(listado):
+        print()
         Mensaje.mostrarMensajes('inventElement')
         for e in listado:
             print(e.str_Inventario())
@@ -285,7 +269,7 @@ class Elemento:
                     Mensaje.mostrarMensajes('elementYaExite')
                     elemento.setCodigo(int(input(Mensaje.obtenerMensaje('codElementRegist'))))
                 
-                elemento.setNombre(str(input(Mensaje.obtenerMensaje('setNomElement'))))
+                elemento.setDescripcion(str(input(Mensaje.obtenerMensaje('setNomElement'))))
                 elemento.setUbicacion(str(input(Mensaje.obtenerMensaje('setUbiElement'))))
                 elemento.setValor(int(input(Mensaje.obtenerMensaje('setValorElement'))))
                 elemento.setEstadoActual(Elemento().estados['1'])
@@ -374,7 +358,7 @@ class Elemento:
                 elem=e
         if(elem!=""):
             Mensaje.mostrarMensajes('elmentMasPrest')
-            print ("\n"+str(elem.getNombre())+" >> "+"N° veces prestado: "+str(elem.getContador()))
+            print ("\n"+str(elem.getDescripcion())+" >> "+"N° veces prestado: "+str(elem.getContador()))
         else:
             Mensaje.mostrarMensajes('ningunElementPrest')
 
@@ -399,6 +383,6 @@ class Elemento:
         if (c!=0):
             Mensaje.mostrarMensajes('5MasPrest')
             for j in lista:
-                print("\n"+str(j.getNombre())+" >> "+"N° veces prestado: "+str(j.getContador()))
+                print("\n"+str(j.getDescripcion())+" >> "+"N° veces prestado: "+str(j.getContador()))
         else:
             Mensaje.mostrarMensajes('ningunElementPrest2')

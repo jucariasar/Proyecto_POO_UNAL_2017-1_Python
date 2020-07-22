@@ -25,7 +25,8 @@ class Almacen:
         self._seleccion ={
         "1":self.ingresarAlSistema,
         "2":self.consultarInventario,
-        "3":self.salir,
+        "3":self.ingresarSuperUsuario,
+        "4":self.salir
         }
 
     # >>>>>>>  Inicio primera revisión
@@ -74,6 +75,9 @@ class Almacen:
         Elemento().inventarioElementos(self.getElementos())
     # >>>>>>>  Final primera revisión.
 
+    def ingresarSuperUsuario(self):
+        pass
+
     # >>>>>>>  Inicio Tercera Revision
     def ingresarAlSistema(self):
         salir = False
@@ -81,31 +85,24 @@ class Almacen:
         system("color 0A")
         while(salir == False):
             correo = False
-            print()
             while correo == False:
-                print()
                 email = input(Mensaje.obtenerMensaje('emailIn'))
                 if comprobarCorreoValido(email):
                     correo = True
                     break
                 else:
                     system("cls")
-                    print()
-                    print()
                     Mensaje.mostrarMensajes('correoInvalido')
                     Mensaje.mostrarMensajes('intentarNuevo')
             
             cc = int(input(Mensaje.obtenerMensaje('documentIn')))
-            emp = Empleado().buscarEmpleadoPorId(self._empleados, cc)
+            emp = Empleado().buscarEmpleadoPorId(self.getEmpleados(), cc)
             if emp != None and emp.getEmail() == email:
-                if isinstance(emp,AdministradorAlmacen):
+                if isinstance(emp, AdministradorAlmacen):
                     salirAdmin = False
-                    system("cls")
-                    print()
                     while(salirAdmin == False):
-                        print()
+                        system("cls")
                         Mensaje.mostrarMensajes('SelectRollAdmin')
-                        print()
                         try:
                             opt = int(input(Mensaje.obtenerMensaje('optIn')))
                         except ValueError:
@@ -137,9 +134,7 @@ class Almacen:
                  
                 volverMenu = False
                 system("cls")
-                while volverMenu == False:
-                    print()
-                    print()
+                while volverMenu == False: 
                     Mensaje.mostrarMensajes('emailDocumentInvalid')
                     Mensaje.mostrarMensajes('volverAnterior')
                     volver = input(Mensaje.obtenerMensaje('optIn'))
@@ -148,17 +143,15 @@ class Almacen:
                         break
                     elif volver == 'N' or volver == 'n':
                         volverMenu = True
+                        system("cls")
                     else:
                         Mensaje.mostrarMensajes('optInvalid')
 
     def autenticacionAdministradorAlmacen(self, admin):
         system("cls")
         system("color 0A")
-        print()
-        print()
         Mensaje.mostrarBienvenidaPersonalizada('bienvenida', admin)
-        print()
-        Mensaje.mostrarMensajes('infoAdmin1') # Acá voy revisando
+        Mensaje.mostrarMensajes('infoAdmin1')
         user = input(Mensaje.obtenerMensaje('userIn'))
         paswd = input(Mensaje.obtenerMensaje('passwdIn'))
 
@@ -171,11 +164,11 @@ class Almacen:
 
     def menuAdministradorAlmacen(self, admin):
         salir = False
-        system("cls")
         system("color 0A")
         while(salir == False):
+            system("cls")
             Mensaje.mostrarMensajes('menuPpalAdmin')
-            op = input(Mensaje.obtenerMensaje('optIn'))
+            op = input(Mensaje.obtenerMensaje('optIn')) # Acá voy revisando
             if op == "1":
                 self.menu1AdministradorAlmacen()
             elif op == "2":
@@ -463,12 +456,10 @@ class Almacen:
                 cargarDatosElementos(self.getElementos())
                 ejecucionElem = 1
             
+            #system("cls")
             print()
-            system("cls")
             Bienvenida().imprimirBienvenida4()
             Mensaje.mostrarMensajes('menuPpal')
-            print()
-            print()
             op = input(Mensaje.obtenerMensaje('optIn'))
             accion = self._seleccion.get(op)
             if(accion):

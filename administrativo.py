@@ -1,4 +1,4 @@
-from empleado import Empleado
+from empleado import Empleado, system, path
 from mensajes import Mensaje
 
 class Administrativo(Empleado):

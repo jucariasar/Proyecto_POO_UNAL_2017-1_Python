@@ -1,4 +1,5 @@
 from mensajes import Mensaje
+from os import system, path
 
 class Empleado:
     tiposEmpleado = {'1':'Administrador Almacen','2':'Administrativo', 

@@ -7,7 +7,7 @@ from historialprestamo import HistorialPrestamo
 from mensajes import Mensaje
 from datetime import datetime, date, time, timedelta
 import calendar
-import os
+#import os
 
 class Elemento:
     estados = {'1':'Disponible',      

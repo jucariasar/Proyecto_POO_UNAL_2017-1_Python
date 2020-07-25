@@ -1,4 +1,4 @@
-from empleado import Empleado
+from empleado import Empleado, system, path
 from administrativo import Administrativo
 from ingenierotecnico import IngenieroTecnico
 from operario import Operario
@@ -12,7 +12,8 @@ from datosaplicacion import guardarDatosEmpleados, guardarDatosElementos, cargar
 from sys import exit
 from funcionesvalidacion import comprobarCorreoValido
 import time
-from os import system, path
+#from os import system, path
+#from menusadminalmacen import menu1AdministradorAlmacen
 
 ## Comentario para probar
 class Almacen:
@@ -100,8 +101,8 @@ class Almacen:
             if emp != None and emp.getEmail() == email:
                 if isinstance(emp, AdministradorAlmacen):
                     salirAdmin = False
+                    system("cls")
                     while(salirAdmin == False):
-                        system("cls")
                         Mensaje.mostrarMensajes('SelectRollAdmin')
                         try:
                             opt = int(input(Mensaje.obtenerMensaje('optIn')))
@@ -129,9 +130,7 @@ class Almacen:
                         salir = True
                     elif op == "N":
                         pass
-            else:
-
-                 
+            else: 
                 volverMenu = False
                 system("cls")
                 while volverMenu == False: 
@@ -156,31 +155,11 @@ class Almacen:
         paswd = input(Mensaje.obtenerMensaje('passwdIn'))
 
         if admin.getUsuario() == user and admin.getPassword() == paswd:
-            self.menuAdministradorAlmacen(admin)
+            AdministradorAlmacen().menuAdministradorAlmacen(self.getEmpleados(), self.getElementos())
         else:
             Mensaje.mostrarMensajes('userPassInvalid')
             input(Mensaje.obtenerMensaje('continuar'))
     
-
-    def menuAdministradorAlmacen(self, admin):
-        salir = False
-        system("color 0A")
-        while(salir == False):
-            system("cls")
-            Mensaje.mostrarMensajes('menuPpalAdmin')
-            op = input(Mensaje.obtenerMensaje('optIn')) # Acá voy revisando
-            if op == "1":
-                self.menu1AdministradorAlmacen()
-            elif op == "2":
-                self.menu2AdministradorAlmacen()
-            elif op == "3":
-                self.menu3AdministradorAlmacen()
-            elif op == "4":
-                salir = True
-            else:
-                system("cls")
-                Mensaje.mostrarMensajes('optInvalid')
-
 
     def menuEmpleado(self, admin):
         salir = False
@@ -213,46 +192,7 @@ class Almacen:
                 Mensaje.mostrarMensajes('optInvalid')
     # >>>>>>> Final tercera Revision      
 
-    def menu1AdministradorAlmacen(self):
-        salir = False
-        system("cls")
-        system("color 0A")
-        while(salir == False):
-            Mensaje.mostrarMensajes('menu1Admin')
-            op = int(input(Mensaje.obtenerMensaje('optIn')))
-        
-            if(op == 1):
-                system("cls")
-                Elemento().inventarioElementos(self._elementos)
-            elif(op == 2):
-                system("cls")
-                Empleado().listadoEmpleados(self._empleados)
-            elif(op == 3):
-                system("cls")
-                Elemento().masPrestado(self._elementos)
-            elif(op == 4):
-                system("cls")
-                Elemento().cincoMasPrestados(self._elementos)
-            elif(op == 5):
-                system("cls")
-                Empleado().masElemPrestados(self._empleados)
-            elif(op == 6):
-                system("cls")
-                Empleado().masValorPrestado(self._empleados)
-            elif(op == 7):
-                system("cls")
-                Empleado().masHaPrestado(self._empleados)
-            elif(op == 8):
-                system("cls")
-                Empleado().rollEstrella(self._empleados)
-            elif(op == 9):
-                system("cls")
-                salir = True
-            else:
-                system("cls")
-                Mensaje.mostrarMensajes('optInvalid')
-
-
+    """
     def menu2AdministradorAlmacen(self):
         salir = False
         system("color 0A")
@@ -326,7 +266,7 @@ class Almacen:
             else:
                 Mensaje.mostrarMensajes('optInvalid')                                           
 
-
+    
     def menuRegistrarEmpleado(self):
         salir = False
         while salir == False:
@@ -349,7 +289,7 @@ class Almacen:
                     respuesta = input(Mensaje.obtenerMensaje('seguirRegistEmp')) 
                     if(respuesta == 'n') :
                        salir = True
-
+        """
 
     def menu3AdministradorAlmacen(self):
         salir = False

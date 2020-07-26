@@ -1,5 +1,6 @@
 from mensajes import Mensaje
 from os import system, path
+#from funcionesvalidacion import comprobarCorreoValido, comprobarExistenciaCorreo, generarUsuario
 
 class Empleado:
     tiposEmpleado = {'1':'Administrador Almacen','2':'Administrativo', 
@@ -11,7 +12,7 @@ class Empleado:
         self._numElementPrest = numElementPrest
         self._numRestriccion = 0
         self._roll = roll 
-        self._contador = 0
+        self._contador = 0 # Para saber el número de elementos prestados al parecer
         self._email = email
         self._elementos = []
 

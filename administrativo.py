@@ -1,5 +1,5 @@
-from empleado import Empleado, system, path
-from mensajes import Mensaje
+from empleado import Empleado, Mensaje, system, path
+#from mensajes import Mensaje
 
 class Administrativo(Empleado):
 	MAX_AD = 2

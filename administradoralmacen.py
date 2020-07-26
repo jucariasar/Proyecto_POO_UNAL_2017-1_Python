@@ -1,11 +1,15 @@
-from administrativo import Administrativo, Empleado, system, path
-from elemento import Elemento
+from funcionesvalidacion import comprobarCorreoValido
+from administrativo import Administrativo, Empleado, Mensaje, system, path
+from random import randint
+#from importacion1 import Administrativo, Empleado, Mensaje, system, path, comprobarCorreoValido, comprobarExistenciaCorreo, generarUsuario
+#comprobarCorreoValido, comprobarExistenciaCorreo, generarUsuario
+#from elemento import Elemento
 #from empleado import Empleado, system, path
-from mensajes import Mensaje
+#from mensajes import Mensaje
 
 class AdministradorAlmacen(Administrativo):
-    def __init__(self, ident=0, nombre="", apellido="", numElementPrest=0, roll="", email="", grado=0, 
-    usuario="", password=""):
+    def __init__(self, ident = 0, nombre = "", apellido = "", numElementPrest = 0, roll = "", email = "", grado = 0, 
+    usuario = "", password = ""):
         super().__init__(ident, nombre, apellido, numElementPrest, roll, email, grado)
         self._usuario = usuario
         self._password = password
@@ -36,36 +40,83 @@ class AdministradorAlmacen(Administrativo):
         salir = False
         quePaso = 0
         while salir == False:
-            system("cls")
+            #system("cls")
             Mensaje.mostrarMensajes('registAdminAlmacen')
             op = input(Mensaje.obtenerMensaje('optIn'))
+            #empleado = None
             system("cls")
             if op == '1':
                 empleado = AdministradorAlmacen()
-                empleado.setUsuario(str(input(Mensaje.obtenerMensaje('setUser'))))
+                correo = False
+                while correo == False:
+                    email = input(Mensaje.obtenerMensaje('emailIn'))
+                    if comprobarCorreoValido(email):
+                        if AdministradorAlmacen().comprobarExistenciaCorreo(listEmpleados, email):
+                            Mensaje.mostrarMensajes('replayEmail')
+                            continue
+                        else:
+                            user = AdministradorAlmacen().generarUsuario(listEmpleados, email)
+                            empleado.setEmail(email.lower())
+                            empleado.setUsuario(user)
+                            Mensaje.mostrarEmail('emailAsign', empleado.getEmail())
+                            Mensaje.mostrarUsuarioAsignado('userAsign', empleado.getUsuario())
+                            correo = True
+                    else:
+                        system("cls")
+                        Mensaje.mostrarMensajes('correoInvalido')
+                        Mensaje.mostrarMensajes('intentarNuevo')
+
+                
                 empleado.setPassword(str(input(Mensaje.obtenerMensaje('setPassd'))))
                 empleado.setRoll(Empleado().tiposEmpleado['1'])
             elif op == '2':
                 empleado = Administrativo()
                 empleado.setRoll('Administrativo')
             elif op == '3':
-                return 0
+                return None
             else:
                 Mensaje.mostrarMensajes('optInvalid')
                 continue
-            # Colocar manejo de excepciones en la linea siguiente
-            empleado.setIdent(int(input(Mensaje.obtenerMensaje('setIdAdmin'))))
-        
-            while Empleado().buscarEmpleadoPorId(listEmpleados, empleado.getIdent()) != None:
-                Mensaje.mostrarMensajes('yaExistEmp')
-                empleado.setIdent(int(input(Mensaje.obtenerMensaje('setIdAdmin'))))
+            
+            validIdent = False
+            while validIdent == False:
+                try:
+                    empleado.setIdent(int(input(Mensaje.obtenerMensaje('setIdAdmin'))))
+                except ValueError:
+                    #system("cls")
+                    Mensaje.mostrarMensajes('optInvalid')
+                    continue
+                
+                if Empleado().buscarEmpleadoPorId(listEmpleados, empleado.getIdent()) != None:
+                    Mensaje.mostrarMensajes('yaExistEmp')
+                    #empleado.setIdent(int(input(Mensaje.obtenerMensaje('setIdAdmin'))))
+                else:
+                    validIdent = True
                 # Implementar una forma de salir si se quiere.
         
+            if(isinstance(empleado, AdministradorAlmacen)):
+                pass
+            else:
+                while correo == False:
+                    email = input(Mensaje.obtenerMensaje('emailIn'))
+                    if comprobarCorreoValido(email):
+                        if comprobarExistenciaCorreo(listEmpleados, email):
+                            Mensaje.mostrarMensajes('replayEmail')
+                            continue
+                        else:
+                            empleado.setEmail(email)
+                            Mensaje.mostrarEmail('emailAsign', empleado.getEmail())
+                            correo = True
+                    else:
+                        system("cls")
+                        Mensaje.mostrarMensajes('correoInvalido')
+                        Mensaje.mostrarMensajes('intentarNuevo')
 
-            empleado.setNombre(str(input(Mensaje.obtenerMensaje('setNomAdmin')))) 
-            empleado.setApellido(str(input(Mensaje.obtenerMensaje('setApellAdmin'))))
+
+            empleado.setNombre(str(input(Mensaje.obtenerMensaje('setNomAdmin'))).lower()) 
+            empleado.setApellido(str(input(Mensaje.obtenerMensaje('setApellAdmin'))).lower())
             # Verificar email valido
-            empleado.setEmail(str(input(Mensaje.obtenerMensaje('setEmailAdmin'))))
+            #empleado.setEmail(str(input(Mensaje.obtenerMensaje('setEmailAdmin'))))
             # Verificar grado. (Crear lista de gados)
             empleado.setGrado(str(input(Mensaje.obtenerMensaje('setGradAdmin'))))
             listEmpleados.append(empleado)
@@ -242,11 +293,41 @@ class AdministradorAlmacen(Administrativo):
             else:
                 Mensaje.mostrarMensajes('optInvalid')
 
-            if quePaso == 1:
+            if quePaso != None:
                 Mensaje.mostrarMensajes('registroEmpOk')
                 respuesta = input(Mensaje.obtenerMensaje('seguirRegistEmp')) 
                 if(respuesta == 'n') :
                     system("cls")
                     salir = True
 
+
+    @staticmethod
+    def comprobarExistenciaCorreo(empleados, email):
+        for emp in empleados:
+            if emp.getEmail() == email:
+                return True
+        return False
+
+    @staticmethod
+    def generarUsuario(empleados, email):
+        correo1 = email.lower()
+        separacion = correo1.split('@')
+        usuario = separacion[0]
     
+        while AdministradorAlmacen().verificarUsuario(empleados, usuario):
+            usuario = AdministradorAlmacen().generarNuevoUsuario(usuario)
+        return usuario
+
+    @staticmethod
+    def verificarUsuario(empleados, usuario):
+        for emp in empleados:
+            if isinstance(emp, AdministradorAlmacen):
+                if emp.getUsuario() == usuario:
+                    return True
+        return False
+
+    @staticmethod
+    def generarNuevoUsuario(usuario):
+        complemento = str(randint(1, 800))
+        user = usuario + complemento
+        return user

@@ -1,8 +1,6 @@
-from empleado import Empleado, system, path
-from administrativo import Administrativo
+from administradoralmacen import AdministradorAlmacen, Administrativo, Empleado, system, path
 from ingenierotecnico import IngenieroTecnico
 from operario import Operario
-from administradoralmacen import AdministradorAlmacen
 from elemento import Elemento
 from historialprestamo import HistorialPrestamo
 from bienvenida import Bienvenida

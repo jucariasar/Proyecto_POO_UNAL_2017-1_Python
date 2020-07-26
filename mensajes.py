@@ -32,6 +32,9 @@ class Mensaje():
 	'setApellAdmin':' Ingrese el apellido del Admnistrador: ',
 	'setEmailAdmin':' Ingrese el correo del Administrador:',
 	'setGradAdmin':' Establezca el grado del Administrador: ', # Mensajes
+	'replayEmail':' Email en uso por otro usuario.',
+	'emailAsign':' Email asignado: ',
+	'userAsign':' Usuario asignado: ',
 	'menu3Admin':'\n\n ¿Que desea hacer?:\n\n 1. Prestar Elementos.\n 2. Recibir Elementos.\n 3. Mostrar Historial.\n 4. Volver al Menu Anterior.',
 	'menu3Opt1':'\n El usuario actualmente tiene elemento(s) reservado(s): \n\n ¿Que Desea Hacer?:\n\n 1. Asentar la reserva.\n 2. Prestar nuevos elementos.\n 3. Volver.',
 	'empNoPuedeSerEliminado1':'\n El empleado tiene elementos prestados. No puede ser eliminado\n',
@@ -119,3 +122,12 @@ class Mensaje():
 	@staticmethod
 	def obtenerMensaje(msj):
 		return Mensaje().mensaje[msj]
+
+	@staticmethod
+	def mostrarEmail(msj, email):
+		print(Mensaje().mensaje[msj] + email)
+
+
+	@staticmethod
+	def mostrarUsuarioAsignado(msj, usuario):
+		print(Mensaje().mensaje[msj] + usuario)

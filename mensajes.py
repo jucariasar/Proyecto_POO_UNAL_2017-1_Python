@@ -4,7 +4,7 @@ class Mensaje():
 	mensaje = {
 	'menuPpal':' 1. Ingresar al Sistema.\n 2. Consultar Inventario de Elementos.\n 3. Ingresar Como Super Usuario.\n 4. Salir.',
 	'optIn':'\n Ingrese su Opcion: ',
-	'optInvalid':'\n\t¡¡¡ Opcion Invalida !!!',
+	'optInvalid':'\n\n\t¡¡¡ Opcion Invalida !!!',
 	'inventElement':'El inventario actual de elementos es: ',
 	'correoInvalido':'\n\n\t¡¡¡ Formato de Correo Invalido !!!', 
 	'intentarNuevo':'\n Por Favor Intente Nuevamente',
@@ -35,6 +35,7 @@ class Mensaje():
 	'replayEmail':' Email en uso por otro usuario.',
 	'emailAsign':' Email asignado: ',
 	'userAsign':' Usuario asignado: ',
+	'invalidDocument':' El documento debe ser un dato numerico',
 	'menu3Admin':'\n\n ¿Que desea hacer?:\n\n 1. Prestar Elementos.\n 2. Recibir Elementos.\n 3. Mostrar Historial.\n 4. Volver al Menu Anterior.',
 	'menu3Opt1':'\n El usuario actualmente tiene elemento(s) reservado(s): \n\n ¿Que Desea Hacer?:\n\n 1. Asentar la reserva.\n 2. Prestar nuevos elementos.\n 3. Volver.',
 	'empNoPuedeSerEliminado1':'\n El empleado tiene elementos prestados. No puede ser eliminado\n',

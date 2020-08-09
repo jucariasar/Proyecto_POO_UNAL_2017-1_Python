@@ -9,7 +9,7 @@ from os import path
 def guardarDatosEmpleados(empleados):
 
     archivo_empleados = path.join("Datos", "empleados.csv") #Para Linux o Windows
-    if path.isfile(archivo_empleados): #Si el archivo existe
+    if path.isfile(archivo_adoemples): #Si el archivo existe
         archivo = open(archivo_empleados, 'a')
     else: # Si el archivo no exite
         archivo = open(archivo_empleados, 'w')
@@ -51,6 +51,43 @@ def guardarDatosEmpleados(empleados):
 
     archivo.close()
 
+"""
+def guardarEmpleadoEnArchivo(empleado):
+    archivo_empleados = path.join("Datos", "empleados.csv") #Para Linux o Windows
+    archivo = open(archivo_empleados, 'a')
+    archivo.write(str(empleado.getIdent())+",")
+    archivo.write(empleado.getNombre()+",")
+    archivo.write(empleado.getApellido()+",")
+    archivo.write(str(empleado.getNumElementPres())+",")
+    archivo.write(empleado.getRoll()+",")
+    archivo.write(empleado.getEmail()+",")
+    if isinstance(empleado, AdministradorAlmacen):
+        archivo.write(str(empleado.getGrado())+",")
+        archivo.write(empleado.getUsuario()+",")
+        archivo.write(empleado.getPassword()+",")
+        archivo.write("Null,")
+        archivo.write("Null\n",)
+    elif isinstance(empleado, Administrativo):
+        archivo.write(str(empleado.getGrado())+",")
+        archivo.write("Null,")
+        archivo.write("Null,")
+        archivo.write("Null,")
+        archivo.write("Null\n",)
+    elif isinstance(empleado, IngenieroTecnico):
+        archivo.write("Null,")
+        archivo.write("Null,")
+        archivo.write("Null,")
+        archivo.write(empleado.getArea()+",")
+        archivo.write("Null\n",)
+    else:
+        archivo.write("Null,")
+        archivo.write("Null,")
+        archivo.write("Null,")
+        archivo.write("Null,")
+        archivo.write(empleado.getTipo()+"\n")
+
+    archivo.close()
+"""
 
 def guardarDatosElementos(elementos):
     archivo_elementos = path.join("Datos", "elementos.csv") #Para Linux o Windows

@@ -85,7 +85,7 @@ class Almacen:
         while(salir == False):
             correo = False
             while correo == False:
-                email = input(Mensaje.obtenerMensaje('emailIn'))
+                email = input(Mensaje.obtenerMensaje('emailIn')).lower()
                 if comprobarCorreoValido(email):
                     correo = True
                     break
@@ -93,8 +93,13 @@ class Almacen:
                     system("cls")
                     Mensaje.mostrarMensajes('correoInvalido')
                     Mensaje.mostrarMensajes('intentarNuevo')
-            
-            cc = int(input(Mensaje.obtenerMensaje('documentIn')))
+            seguir = False
+            while seguir == False:
+                try:
+                    cc = int(input(Mensaje.obtenerMensaje('documentIn')))
+                    seguir = True
+                except ValueError:
+                    Mensaje.mostrarMensajes('invalidDocument')
             emp = Empleado().buscarEmpleadoPorId(self.getEmpleados(), cc)
             if emp != None and emp.getEmail() == email:
                 if isinstance(emp, AdministradorAlmacen):
@@ -149,7 +154,7 @@ class Almacen:
         system("color 0A")
         Mensaje.mostrarBienvenidaPersonalizada('bienvenida', admin)
         Mensaje.mostrarMensajes('infoAdmin1')
-        user = input(Mensaje.obtenerMensaje('userIn'))
+        user = input(Mensaje.obtenerMensaje('userIn')).lower()
         paswd = input(Mensaje.obtenerMensaje('passwdIn'))
 
         if admin.getUsuario() == user and admin.getPassword() == paswd:

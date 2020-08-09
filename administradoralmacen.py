@@ -49,7 +49,8 @@ class AdministradorAlmacen(Administrativo):
                 empleado = AdministradorAlmacen()
                 correo = False
                 while correo == False:
-                    email = input(Mensaje.obtenerMensaje('emailIn'))
+                    email = input(Mensaje.obtenerMensaje('emailIn')).strip()
+                    # el método strip elimina espacios al inicio y al final de la cadena.
                     if comprobarCorreoValido(email):
                         if AdministradorAlmacen().comprobarExistenciaCorreo(listEmpleados, email):
                             Mensaje.mostrarMensajes('replayEmail')
@@ -113,13 +114,14 @@ class AdministradorAlmacen(Administrativo):
                         Mensaje.mostrarMensajes('intentarNuevo')
 
 
-            empleado.setNombre(str(input(Mensaje.obtenerMensaje('setNomAdmin'))).lower()) 
-            empleado.setApellido(str(input(Mensaje.obtenerMensaje('setApellAdmin'))).lower())
+            empleado.setNombre(str(input(Mensaje.obtenerMensaje('setNomAdmin'))).title()) 
+            empleado.setApellido(str(input(Mensaje.obtenerMensaje('setApellAdmin'))).title())
             # Verificar email valido
             #empleado.setEmail(str(input(Mensaje.obtenerMensaje('setEmailAdmin'))))
             # Verificar grado. (Crear lista de gados)
             empleado.setGrado(str(input(Mensaje.obtenerMensaje('setGradAdmin'))))
             listEmpleados.append(empleado)
+            AdministradorAlmacen().guardarEmpleadoEnArchivo(empleado)
             return 1
 
 
@@ -127,8 +129,8 @@ class AdministradorAlmacen(Administrativo):
     def menuAdministradorAlmacen(empleados, elementos):
         salir = False
         system("color 0A")
+        system("cls")
         while(salir == False):
-            system("cls")
             Mensaje.mostrarMensajes('menuPpalAdmin')
             op = input(Mensaje.obtenerMensaje('optIn')) # Acá voy revisando
             if op == "1":
@@ -331,3 +333,40 @@ class AdministradorAlmacen(Administrativo):
         complemento = str(randint(1, 800))
         user = usuario + complemento
         return user
+
+    @staticmethod
+    def guardarEmpleadoEnArchivo(empleado):
+        archivo_empleados = path.join("Datos", "empleados.csv") #Para Linux o Windows
+        archivo = open(archivo_empleados, 'a')
+        archivo.write(str(empleado.getIdent())+",")
+        archivo.write(empleado.getNombre()+",")
+        archivo.write(empleado.getApellido()+",")
+        archivo.write(str(empleado.getNumElementPres())+",")
+        archivo.write(empleado.getRoll()+",")
+        archivo.write(empleado.getEmail()+",")
+        if isinstance(empleado, AdministradorAlmacen):
+            archivo.write(str(empleado.getGrado())+",")
+            archivo.write(empleado.getUsuario()+",")
+            archivo.write(empleado.getPassword()+",")
+            archivo.write("Null,")
+            archivo.write("Null\n",)
+        elif isinstance(empleado, Administrativo):
+            archivo.write(str(empleado.getGrado())+",")
+            archivo.write("Null,")
+            archivo.write("Null,")
+            archivo.write("Null,")
+            archivo.write("Null\n",)
+        elif isinstance(empleado, IngenieroTecnico):
+            archivo.write("Null,")
+            archivo.write("Null,")
+            archivo.write("Null,")
+            archivo.write(empleado.getArea()+",")
+            archivo.write("Null\n",)
+        else:
+            archivo.write("Null,")
+            archivo.write("Null,")
+            archivo.write("Null,")
+            archivo.write("Null,")
+            archivo.write(empleado.getTipo()+"\n")
+
+        archivo.close()
